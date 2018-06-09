@@ -7,7 +7,7 @@ using System.Web;
 
 namespace getdelays.be.Models
 {
-    public class GetAll
+    public class GetAll:IGetAll
     {
         private static string addressAPI = "https://api.irail.be/";
         private static GetAll instance;
@@ -29,7 +29,7 @@ namespace getdelays.be.Models
         public DataApiPerStations GetDelaysForStation(string station)
         {
             DateTime timenow = DateTime.Now;
-            timenow.AddHours(-1);
+            timenow=timenow.AddHours(-1);
             string date = timenow.ToString("ddMMy");
             string time = timenow.ToString("HHmm");
             string url = addressAPI + "liveboard?format=json&lang=eng&date=" + date + "&time=" + time + "&arrdep=arrival&station=" + station;
@@ -45,7 +45,7 @@ namespace getdelays.be.Models
         public DataApiPerStations GetArrival(string station)
         {
             DateTime timenow = DateTime.Now;
-            timenow.AddHours(-1);
+            timenow = timenow.AddHours(-1);
             string date = timenow.ToString("ddMMy");
             string time = timenow.ToString("HHmm");
             string url = addressAPI + "liveboard?format=json&lang=eng&date=" + date + "&time=" + time + "&arrdep=arrival&station=" + station;
@@ -56,7 +56,7 @@ namespace getdelays.be.Models
         public DataApiPerStations GetDeparture(string station)
         {
             DateTime timenow = DateTime.Now;
-            timenow.AddHours(-1);
+            timenow = timenow.AddHours(-1);
             string date = timenow.ToString("ddMMy");
             string time = timenow.ToString("HHmm");
             string url = addressAPI + "liveboard?format=json&lang=eng&date=" + date + "&time=" + time + "&arrdep=departure&station=" + station;

@@ -5,11 +5,11 @@
 }
 
 <h2>@s.stationinfo.name</h2>
-<p>Departure:</p>
+<p>Arrival:</p>
 <table>
     <thead>
         <tr>
-            <td>Arrival Station:</td>
+            <td>Departure Station:</td>
             <td>ETA:</td>
             <td>Delay:</td>
             <td>Train:</td>
@@ -20,20 +20,20 @@
         <tr>
             <td>@s.arrivals.arrival[i].station</td>
             <td>@s.arrivals.arrival[i].tForView</td>
-            <td>@s.arrivals.arrival[i].delay</td>
+            <td>@s.arrivals.arrival[i].delay minutes</td>
             <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle }, htmlAttributes: null)</td>
         </tr>
     }
 </table>
-@Html.ActionLink("See more...", "GetDeparture", "Home", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
+@Html.ActionLink("See more...", "GetArrival", "Home", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
 <br />
-<p>Arrival:</p>
+<p>Departure:</p>
 <table>
     <thead>
         <tr>
-            <td>Departure Station:</td>
+            <td>Arrival Station:</td>
             <td>ETA:</td>
-            <td>DElay:</td>
+            <td>Delay:</td>
             <td>train:</td>
         </tr>
     </thead>
@@ -42,12 +42,12 @@
     <tr>
         <td>@s.departures.departure[i].station</td>
         <td>@s.departures.departure[i].tForView</td>
-        <td>@s.departures.departure[i].delay</td>
+        <td>@s.departures.departure[i].delay minutes</td>
         <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
     </tr>
     }
 
 </table>
-@Html.ActionLink("See more...", "GetArrival", "Home", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
+@Html.ActionLink("See more...", "GetDeparture", "Home", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
 
 

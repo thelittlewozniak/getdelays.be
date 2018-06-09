@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "SearchStation";
+    List<SelectListItem> stations = ViewBag.Stations;
+}
+
+<h2>Search a Station</h2>
+@using (Html.BeginForm("GetStationsByName", "Home", "post"))
+{
+    @Html.ListBox("station", stations)
+    <input type="submit" value="Search" />
+}

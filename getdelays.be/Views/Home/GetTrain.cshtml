@@ -1,0 +1,28 @@
+﻿@using getdelays.be.Models;
+@{
+    ViewBag.Title = ViewBag.stops.vehicle;
+    DataApiTrain s = ViewBag.stops;
+}
+
+<h2>@s.vehicle</h2>
+<p>stops:</p>
+<table>
+    <thead>
+        <tr>
+            <td>Stop Station:</td>
+            <td>ETA:</td>
+            <td>Delay:</td>
+            <td>Platform:</td>
+        </tr>
+    </thead>
+    @foreach (Stop a in s.stops.stop)
+    {
+        <tr>
+            <td>@a.station</td>
+            <td>@a.tForView</td>
+            <td>@a.delay</td>
+            <td>@a.platform</td>
+        </tr>
+    }
+</table>
+<a href='javascript:history.go(-1)'>Go Back to Previous Page</a>

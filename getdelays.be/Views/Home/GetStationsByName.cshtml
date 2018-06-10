@@ -1,10 +1,51 @@
 ﻿@using getdelays.be.Models;
+@using getdelays.be.Models.APIGOOGLE;
 @{
     ViewBag.Title = "GetStationsByName";
     DataApiPerStations s = ViewBag.station;
+    DetailsPlace p = ViewBag.InfoStation;
 }
 
 <h2>@s.stationinfo.name</h2>
+<p>Rating : @p.result.rating</p>
+<p>
+    Address:
+    @foreach (ComponentAddress a in p.result.address_components)
+    {
+        @a.long_name
+    }
+</p>
+@if (p.result.opening_hours != null)
+{
+    <p>Opening Hour</p>
+    <table>
+        @foreach (string h in p.result.opening_hours.weekday_text)
+        {
+            <tr>
+                <td>@h</td>
+            </tr>
+        }
+    </table>
+
+}
+<br />
+@if (p.result.reviews != null)
+{
+    <p>Reviews</p>
+    <table>
+        @foreach (Review r in p.result.reviews)
+        {
+            <tr>
+                <td>@r.author_name</td>
+                <td>@r.rating</td>
+                <td>@r.text</td>
+            </tr>
+        }
+    </table>
+
+}
+<br />
+<br />
 <p>Arrival:</p>
 <table>
     <thead>
@@ -15,14 +56,30 @@
             <td>Train:</td>
         </tr>
     </thead>
-    @for (int i = 0; i < 15; i++)
+    @if (s.arrivals.arrival.Count <= 15)
     {
-        <tr>
-            <td>@s.arrivals.arrival[i].station</td>
-            <td>@s.arrivals.arrival[i].tForView</td>
-            <td>@s.arrivals.arrival[i].delay minutes</td>
-            <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle }, htmlAttributes: null)</td>
-        </tr>
+        for (int i = 0; i < s.arrivals.arrival.Count; i++)
+        {
+            <tr>
+                <td>@s.arrivals.arrival[i].station</td>
+                <td>@s.arrivals.arrival[i].tForView</td>
+                <td>@s.arrivals.arrival[i].delay minutes</td>
+                <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle }, htmlAttributes: null)</td>
+            </tr>
+        }
+
+    }
+    else
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            <tr>
+                <td>@s.arrivals.arrival[i].station</td>
+                <td>@s.arrivals.arrival[i].tForView</td>
+                <td>@s.arrivals.arrival[i].delay minutes</td>
+                <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle }, htmlAttributes: null)</td>
+            </tr>
+        }
     }
 </table>
 @Html.ActionLink("See more...", "GetArrival", "Home", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
@@ -37,16 +94,32 @@
             <td>train:</td>
         </tr>
     </thead>
-    @for (int i = 0; i < 15; i++)
+    @if (s.departures.departure.Count <= 15)
     {
-    <tr>
-        <td>@s.departures.departure[i].station</td>
-        <td>@s.departures.departure[i].tForView</td>
-        <td>@s.departures.departure[i].delay minutes</td>
-        <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
-    </tr>
-    }
+        for (int i = 0; i < s.departures.departure.Count; i++)
+        {
+            <tr>
+                <td>@s.departures.departure[i].station</td>
+                <td>@s.departures.departure[i].tForView</td>
+                <td>@s.departures.departure[i].delay minutes</td>
+                <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
+            </tr>
+        }
 
+    }
+    else
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            <tr>
+                <td>@s.departures.departure[i].station</td>
+                <td>@s.departures.departure[i].tForView</td>
+                <td>@s.departures.departure[i].delay minutes</td>
+                <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
+            </tr>
+        }
+
+    }
 </table>
 @Html.ActionLink("See more...", "GetDeparture", "Home", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
 

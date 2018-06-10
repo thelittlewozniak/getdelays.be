@@ -1,4 +1,5 @@
 ﻿using getdelays.be.Models;
+using getdelays.be.Models.APIGOOGLE;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace getdelays.be.Controllers
         [HttpPost]
         public ActionResult GetStationsByName(string station)
         {
+            IGetAPIGoogle googleApi = new SearchPlaceAPI();
             IGetAll newaccessapi = GetAll.Instance();
             DataApiPerStations s = newaccessapi.GetDelaysForStation(station);
             byte[] b = Encoding.Default.GetBytes(s.stationinfo.name);
@@ -56,6 +58,7 @@ namespace getdelays.be.Controllers
                 a.tForView = date.ToLongTimeString();
                 a.delay = a.delay / 60;
             }
+            ViewBag.InfoStation=googleApi.GetInfo(string.Concat(s.stationinfo.locationY + "," + s.stationinfo.locationX));
             ViewBag.station=s;
             return View();
         }

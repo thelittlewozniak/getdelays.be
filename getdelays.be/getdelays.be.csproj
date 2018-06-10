@@ -150,16 +150,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ArrDep.cs" />
-    <Compile Include="Models\ArrsDeps.cs" />
-    <Compile Include="Models\DataApi.cs" />
-    <Compile Include="Models\DataApiPerStations.cs" />
-    <Compile Include="Models\DataApiTrain.cs" />
-    <Compile Include="Models\GetAll.cs" />
-    <Compile Include="Models\IGetAll.cs" />
-    <Compile Include="Models\Station.cs" />
-    <Compile Include="Models\Stop.cs" />
-    <Compile Include="Models\Stops.cs" />
+    <Compile Include="Models\APIGOOGLE\ComponentAddress.cs" />
+    <Compile Include="Models\APIGOOGLE\DetailsPlace.cs" />
+    <Compile Include="Models\APIGOOGLE\Hours.cs" />
+    <Compile Include="Models\APIGOOGLE\Result.cs" />
+    <Compile Include="Models\APIGOOGLE\Results.cs" />
+    <Compile Include="Models\APIGOOGLE\Review.cs" />
+    <Compile Include="Models\APIGOOGLE\SearchPlaceAPI.cs" />
+    <Compile Include="Models\APISNCB\ArrDep.cs" />
+    <Compile Include="Models\APISNCB\ArrsDeps.cs" />
+    <Compile Include="Models\APISNCB\DataApi.cs" />
+    <Compile Include="Models\APISNCB\DataApiPerStations.cs" />
+    <Compile Include="Models\APISNCB\DataApiTrain.cs" />
+    <Compile Include="Models\APISNCB\GetAll.cs" />
+    <Compile Include="Models\APISNCB\IGetAll.cs" />
+    <Compile Include="Models\APISNCB\Station.cs" />
+    <Compile Include="Models\APISNCB\Stop.cs" />
+    <Compile Include="Models\APISNCB\Stops.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

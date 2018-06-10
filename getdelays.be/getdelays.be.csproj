@@ -152,6 +152,7 @@
     </Compile>
     <Compile Include="Models\APIGOOGLE\ComponentAddress.cs" />
     <Compile Include="Models\APIGOOGLE\DetailsPlace.cs" />
+    <Compile Include="Models\APIGOOGLE\IGetAPIGoogle.cs" />
     <Compile Include="Models\APIGOOGLE\Hours.cs" />
     <Compile Include="Models\APIGOOGLE\Result.cs" />
     <Compile Include="Models\APIGOOGLE\Results.cs" />

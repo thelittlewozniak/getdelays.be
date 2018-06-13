@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace getdelays.be.Models.APIGOOGLE
+namespace getdelays.be.Models
 {
     public interface IGetAPIGoogle
     {

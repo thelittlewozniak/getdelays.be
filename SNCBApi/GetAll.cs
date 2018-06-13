@@ -73,5 +73,15 @@ namespace getdelays.be.Models
             var dataAPI = JsonConvert.DeserializeObject<DataApiTrain>(json);
             return dataAPI;
         }
+        public DataApiConnection GetConnection(string dep,string arr)
+        {
+            DateTime datenow = DateTime.Now;
+            string time = datenow.ToString("HHmm");
+            string date = datenow.ToString("ddMMy");
+            string url = addressAPI + "connections/?format=json&lang=eng&date=" + date + "&from="+ dep +"&to="+ arr +"&time="+time+"&timesel=departure"+ "&typeOfTransport=trains&alerts=false&results=6";
+            var json = new WebClient().DownloadString(url);
+            var dataAPI = JsonConvert.DeserializeObject<DataApiConnection>(json);
+            return dataAPI;
+        }
     }
 }

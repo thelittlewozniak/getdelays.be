@@ -1,5 +1,4 @@
 ﻿@using getdelays.be.Models;
-@using getdelays.be.Models.APIGOOGLE;
 @{
     ViewBag.Title = "GetStationsByName";
     DataApiPerStations s = ViewBag.station;
@@ -86,7 +85,7 @@ function initMap() {
                 <td>@s.arrivals.arrival[i].station</td>
                 <td>@s.arrivals.arrival[i].tForView</td>
                 <td>@s.arrivals.arrival[i].delay minutes</td>
-                <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle }, htmlAttributes: null)</td>
+                <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrain", "Train", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle }, htmlAttributes: null)</td>
             </tr>
         }
         else
@@ -95,7 +94,7 @@ function initMap() {
                 <td>@s.arrivals.arrival[i].station</td>
                 <td>@s.arrivals.arrival[i].tForView</td>
                 <td>@s.arrivals.arrival[i].delay minutes</td>
-                <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle }, htmlAttributes: null)</td>
+                <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrain", "Train", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle }, htmlAttributes: null)</td>
             </tr>
 
         }
@@ -103,7 +102,7 @@ function initMap() {
     <tfoot>
         <tr>
             <td>
-                <a id="arr" onclick="Display('Arrival','0')">See more...</a>
+                <a href="#" id="arr" onclick="Display('Arrival','0')">See more...</a>
             </td>
         </tr>
     </tfoot>
@@ -127,7 +126,7 @@ function initMap() {
                     <td>@s.departures.departure[i].station</td>
                     <td>@s.departures.departure[i].tForView</td>
                     <td>@s.departures.departure[i].delay minutes</td>
-                    <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
+                    <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Train", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
                 </tr>
             }
             else
@@ -136,7 +135,7 @@ function initMap() {
                     <td>@s.departures.departure[i].station</td>
                     <td>@s.departures.departure[i].tForView</td>
                     <td>@s.departures.departure[i].delay minutes</td>
-                    <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
+                    <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Train", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
                 </tr>
 
             }
@@ -145,7 +144,7 @@ function initMap() {
     <tfoot>
         <tr>
             <td>
-                <a id="dep" onclick="Display('Departure','1')">See more...</a>
+                <a href="#" id="dep" onclick="Display('Departure','1')">See more...</a>
             </td>
         </tr>
     </tfoot>

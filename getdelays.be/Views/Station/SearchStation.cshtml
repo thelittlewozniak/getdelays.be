@@ -1,0 +1,17 @@
+﻿@using getdelays.be.Models;
+@{
+    ViewBag.Title = "SearchStation";
+    List<SelectListItem> stations = ViewBag.Stations;
+    List<Station> stat = ViewBag.s;
+}
+
+<h2>Search a Station</h2>
+<ul>
+    <li id="search">
+        <input type="text" id="stat" onkeydown="ListStation()" />
+    </li>
+    @foreach (Station s in stat)
+    {
+    <li class="station" style="display:none">@Html.ActionLink(s.name, "GetStationsByName", "Station", routeValues: new { station = s.name }, htmlAttributes: null)</li>
+    }
+</ul>

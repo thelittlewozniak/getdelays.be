@@ -8,6 +8,8 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <script src="~/Scripts/Visiility.js"></script>
+    <script src="~/Scripts/ListStation.js"></script>
+    <script src="~/Scripts/ListConnection.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,7 +25,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        @Html.ActionLink("See per stations", "SearchStation", "Home")
+                        @Html.ActionLink("See per stations", "SearchStation", "Station")
+                    </li>
+                    <li>
+                        @Html.ActionLink("See Connection", "SearchConnection", "Connection")
                     </li>
                 </ul>
             </div>

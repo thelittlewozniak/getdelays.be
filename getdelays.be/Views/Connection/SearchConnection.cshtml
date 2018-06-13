@@ -1,0 +1,31 @@
+﻿@using getdelays.be.Models;
+@{
+    ViewBag.Title = "SearchConection";
+    List<SelectListItem> stations = ViewBag.Stations;
+    List<Station> stat = ViewBag.s;
+}
+
+<h2>Search a connection</h2>
+@using(Html.BeginForm("GetConnection", "Connection"))
+{
+<ul>
+    <li id="searchFrom">
+        From:<input type="text" id="statFrom" name="dep" onkeydown="ListStationFrom()" />
+    </li>
+    @foreach (Station s in stat)
+    {
+        <li class="stationFrom" style="display:none" onclick="SelectStation('@s.name','from')">@s.name</li>
+    }
+</ul>
+<ul>
+    <li id="searchTo">
+        to:<input type="text" id="statTo" name="arr" onkeydown="ListStationTo()" />
+    </li>
+    @foreach (Station s in stat)
+    {
+        <li class="stationTo" style="display:none" onclick="SelectStation('@s.name','to')">@s.name</li>
+    }
+</ul>
+<input type="submit" value="submit" />
+}
+

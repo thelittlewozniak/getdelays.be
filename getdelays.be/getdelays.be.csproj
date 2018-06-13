@@ -112,6 +112,8 @@
     <None Include="Properties\PublishProfiles\GetDelays - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\GetDelays - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\ListConnection.js" />
+    <Content Include="Scripts\ListStation.js" />
     <Content Include="Scripts\Visiility.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -121,11 +123,11 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Web.config" />
-    <Content Include="Views\Home\SearchStation.cshtml" />
-    <Content Include="Views\Home\GetStationsByName.cshtml" />
-    <Content Include="Views\Home\GetArrival.cshtml" />
-    <Content Include="Views\Home\GetDeparture.cshtml" />
-    <Content Include="Views\Home\GetTrain.cshtml" />
+    <Content Include="Views\Station\SearchStation.cshtml" />
+    <Content Include="Views\Station\GetStationsByName.cshtml" />
+    <Content Include="Views\Station\GetArrival.cshtml" />
+    <Content Include="Views\Station\GetDeparture.cshtml" />
+    <Content Include="Views\Train\GetTrain.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -133,7 +135,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ConnectionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StationController.cs" />
+    <Compile Include="Controllers\TrainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -147,6 +152,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\error.cshtml" />
+    <Content Include="Views\Connection\SearchConnection.cshtml" />
+    <Content Include="Views\Connection\GetConnection.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -165,6 +172,10 @@
     <ProjectReference Include="..\GoogleApi\GoogleApi.csproj">
       <Project>{b252b352-b9ef-45f8-bbd9-a30a388eec0f}</Project>
       <Name>GoogleApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SNCBApi\SNCBApi.csproj">
+      <Project>{B6B7EF2D-9F49-46E0-A3B9-F1DC8F3349B1}</Project>
+      <Name>SNCBApi</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

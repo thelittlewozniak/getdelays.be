@@ -13,5 +13,6 @@ namespace getdelays.be.Models
         DataApiPerStations GetArrival(string station);
         DataApiPerStations GetDeparture(string station);
         DataApiTrain GetTrain(string idTrain);
+        DataApiConnection GetConnection(string dep, string arr);
     }
 }

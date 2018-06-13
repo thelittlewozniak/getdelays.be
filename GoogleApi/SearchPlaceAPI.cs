@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 
-namespace getdelays.be.Models.APIGOOGLE
+namespace getdelays.be.Models
 {
     public class SearchPlaceAPI:IGetAPIGoogle
     {

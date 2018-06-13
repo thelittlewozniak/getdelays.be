@@ -1,0 +1,52 @@
+﻿@using getdelays.be.Models;
+@{
+    DataApiConnection s = ViewBag.Connection;
+}
+
+<h2> From @s.connection.First().departure.station to @s.connection.First().arrival.station</h2>
+<p>Connections:</p>
+<div>
+    <table class="tableco">
+        <thead>
+            <tr>
+                <td>Station</td>
+                <td>Time</td>
+                <td>Delay</td>
+                <td>Number of changes</td>
+                <td>Platform</td>
+                <td>Train</td>
+            </tr>
+        </thead>
+        @foreach (Connection c in s.connection)
+        {
+            int nbr;
+            if (c.vias == null)
+            {
+                nbr = 0;
+            }
+            else
+            {
+                nbr = c.vias.via.Count();
+            }
+            <tbody>
+                <tr>
+                    <td>From: @Html.ActionLink(c.departure.station, "GetStationsByName", "Station", routeValues: new { station = c.departure.station }, htmlAttributes: null)</td>
+                    <td>@c.departure.tForView</td>
+                    <td>@c.departure.delay minutes</td>
+                    <td rowspan="2">@nbr</td>
+                    <td>@c.departure.platform</td>
+                    <td>@Html.ActionLink(c.departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = c.departure.vehicle }, htmlAttributes: null)</td>
+                </tr>
+                <tr>
+                    <td>To: @Html.ActionLink(c.arrival.station, "GetStationsByName", "Station", routeValues: new { station = c.arrival.station }, htmlAttributes: null)</td>
+                    <td>@c.arrival.tForView</td>
+                    <td>@c.arrival.delay minutes</td>
+                    <td>@c.arrival.platform</td>
+                    <td>@Html.ActionLink(c.arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = c.arrival.vehicle }, htmlAttributes: null)</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+<br />
+<a href='javascript:history.go(-1)'>Go Back to Previous Page</a>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace getdelays.be.Models
 {
-    interface IGetAll
+    public interface IGetAll
     {
         List<Station> GetStations();
         DataApiPerStations GetDelaysForStation(string station);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace getdelays.be.Models.APIGOOGLE
 {
-    interface IGetAPIGoogle
+    public interface IGetAPIGoogle
     {
         DetailsPlace GetInfo(string location);
     }

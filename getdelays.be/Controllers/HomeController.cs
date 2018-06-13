@@ -114,5 +114,9 @@ namespace getdelays.be.Controllers
             ViewBag.stops = s;
             return View();
         }
+        public ActionResult error()
+        {
+            return View();
+        }
     }
 }

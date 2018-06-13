@@ -15,4 +15,34 @@ select,
 textarea {
     max-width: 280px;
 }
-
+#InfoStation {
+    visibility: hidden;
+    height:0;
+}
+#map {
+    height: 400px;
+    width: 100%;
+}
+#ArrivalTable {
+    display: inline;
+    width:50%;
+    height:auto;
+}
+#ArrivalTable > tbody > tr:nth-child(2n) {
+    background-color: lightgrey;
+    display: table-row;
+}
+#DepartureTable {
+    display: inline;
+    width: 50%;
+}
+#DepartureTable>tbody>tr:nth-child(2n) {
+    background-color:lightgrey;
+    display:table-row;
+}
+#linkInfo {
+    display:block;
+}
+#Reviews > tbody > tr:nth-child(1), #Reviews > tbody > tr:nth-child(2), #Reviews > tbody > tr:nth-child(5), #Reviews > tbody > tr:nth-child(6), #Reviews > tbody > tr:nth-child(9), #Reviews > tbody > tr:nth-child(10) {
+    background-color: lightgrey;
+}

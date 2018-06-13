@@ -5,12 +5,6 @@
     DataApiPerStations s = ViewBag.station;
     DetailsPlace p = ViewBag.InfoStation;
 }
-<style>
-    #map {
-        height: 400px; 
-        width: 100%;
-    }
-</style>
 <h2>@s.stationinfo.name</h2>
 <p>Rating : @p.result.rating</p>
 <div id="map"></div>
@@ -32,39 +26,50 @@ function initMap() {
         @a.long_name
     }
 </p>
-@if (p.result.opening_hours != null)
-{
-    <p>Opening Hour</p>
-    <table>
-        @foreach (string h in p.result.opening_hours.weekday_text)
-        {
-            <tr>
-                <td>@h</td>
-            </tr>
-        }
-    </table>
-
-}
-<br />
-@if (p.result.reviews != null)
-{
-    <p>Reviews</p>
-    <table>
-        @foreach (Review r in p.result.reviews)
-        {
-            <tr>
-                <td>@r.author_name</td>
-                <td>@r.rating</td>
-                <td>@r.text</td>
-            </tr>
-        }
-    </table>
-
-}
-<br />
-<br />
-<p>Arrival:</p>
-<table>
+<a id="linkInfo" href="#" onclick="ChangeVisibility('InfoStation')">See more...</a>
+<div id="InfoStation">
+    @if (p.result.opening_hours != null)
+    {
+        <table>
+            <caption>
+                <p>Opening Hour</p>
+            </caption>
+            @foreach (string h in p.result.opening_hours.weekday_text)
+            {
+                <tr>
+                    <td>@h</td>
+                </tr>
+            }
+        </table>
+    }
+    @if (p.result.reviews != null)
+    {
+        <table id="Reviews">
+            <caption>
+                <p>Reviews</p>
+            </caption>
+            <tbody>
+                @foreach (Review r in p.result.reviews)
+                {
+                    <tr>
+                        <td>Author:</td>
+                        <td colspan="2">@r.author_name</td>
+                        <td style="text-align:right">Rating:</td>
+                        <td>@r.rating</td>
+                    </tr>
+                    <tr>
+                        <td>Description:</td>
+                        <td colspan="4">@r.text</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <br />
+    <br />
+</div>
+<table id="ArrivalTable">
+    <caption>Arrival</caption>
     <thead>
         <tr>
             <td>Departure Station:</td>
@@ -73,36 +78,38 @@ function initMap() {
             <td>Train:</td>
         </tr>
     </thead>
-    @if (s.arrivals.arrival.Count <= 15)
+    @for (int i = 0; i < s.arrivals.arrival.Count; i++)
     {
-        for (int i = 0; i < s.arrivals.arrival.Count; i++)
+        if (i < 35)
         {
-            <tr>
+            <tr class="Arrival" style="display:none">
                 <td>@s.arrivals.arrival[i].station</td>
                 <td>@s.arrivals.arrival[i].tForView</td>
                 <td>@s.arrivals.arrival[i].delay minutes</td>
                 <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle }, htmlAttributes: null)</td>
             </tr>
         }
+        else
+        {
+            <tr class="Arrival">
+                <td>@s.arrivals.arrival[i].station</td>
+                <td>@s.arrivals.arrival[i].tForView</td>
+                <td>@s.arrivals.arrival[i].delay minutes</td>
+                <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle }, htmlAttributes: null)</td>
+            </tr>
 
-    }
-    else
-    {
-        for (int i = 0; i < 15; i++)
-        {
-            <tr>
-                <td>@s.arrivals.arrival[i].station</td>
-                <td>@s.arrivals.arrival[i].tForView</td>
-                <td>@s.arrivals.arrival[i].delay minutes</td>
-                <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle }, htmlAttributes: null)</td>
-            </tr>
         }
     }
+    <tfoot>
+        <tr>
+            <td>
+                <a id="arr" onclick="Display('Arrival','0')">See more...</a>
+            </td>
+        </tr>
+    </tfoot>
 </table>
-@Html.ActionLink("See more...", "GetArrival", "Home", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
-<br />
-<p>Departure:</p>
-<table>
+<table id="DepartureTable">
+    <caption> Departure</caption>
     <thead>
         <tr>
             <td>Arrival Station:</td>
@@ -111,33 +118,37 @@ function initMap() {
             <td>train:</td>
         </tr>
     </thead>
-    @if (s.departures.departure.Count <= 15)
-    {
-        for (int i = 0; i < s.departures.departure.Count; i++)
+    <tbody>
+        @for (int i = 0; i < s.departures.departure.Count; i++)
         {
-            <tr>
-                <td>@s.departures.departure[i].station</td>
-                <td>@s.departures.departure[i].tForView</td>
-                <td>@s.departures.departure[i].delay minutes</td>
-                <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
-            </tr>
-        }
+            if (i < 35)
+            {
+                <tr class="Departure" style="display:none">
+                    <td>@s.departures.departure[i].station</td>
+                    <td>@s.departures.departure[i].tForView</td>
+                    <td>@s.departures.departure[i].delay minutes</td>
+                    <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
+                </tr>
+            }
+            else
+            {
+                <tr class="Departure">
+                    <td>@s.departures.departure[i].station</td>
+                    <td>@s.departures.departure[i].tForView</td>
+                    <td>@s.departures.departure[i].delay minutes</td>
+                    <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
+                </tr>
 
-    }
-    else
-    {
-        for (int i = 0; i < 15; i++)
-        {
-            <tr>
-                <td>@s.departures.departure[i].station</td>
-                <td>@s.departures.departure[i].tForView</td>
-                <td>@s.departures.departure[i].delay minutes</td>
-                <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Home", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
-            </tr>
+            }
         }
-
-    }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                <a id="dep" onclick="Display('Departure','1')">See more...</a>
+            </td>
+        </tr>
+    </tfoot>
 </table>
-@Html.ActionLink("See more...", "GetDeparture", "Home", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
 
 

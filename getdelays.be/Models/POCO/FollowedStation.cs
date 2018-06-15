@@ -7,7 +7,7 @@ namespace getdelays.be.Models.POCO
 {
     public class FollowedStation
     {
-        public int idFollowedStation { get; set; }
+        public int Id { get; set; }
         public string stationName { get; set; }
         public int MyProperty { get; set; }
         public int idUser { get; set; }

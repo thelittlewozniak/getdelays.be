@@ -149,6 +149,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806152323103_Confiuration.cs" />
+    <Compile Include="Migrations\201806152323103_Confiuration.Designer.cs">
+      <DependentUpon>201806152323103_Confiuration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Context.cs" />
     <Compile Include="Models\POCO\FollowedConnection.cs" />
@@ -189,6 +193,11 @@
       <Project>{B6B7EF2D-9F49-46E0-A3B9-F1DC8F3349B1}</Project>
       <Name>SNCBApi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806152323103_Confiuration.resx">
+      <DependentUpon>201806152323103_Confiuration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

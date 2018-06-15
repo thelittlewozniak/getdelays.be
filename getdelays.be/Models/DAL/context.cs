@@ -12,9 +12,9 @@ namespace getdelays.be.Models.DAL
         public DbSet<User> Users { get; set; }
         public DbSet<FollowedStation> FollowedStations { get; set; }
         public DbSet<FollowedConnection> FollowedConnections { get; set; }
-        private Context instance;
-        private Context() { }
-        public Context Instance()
+        private static Context instance;
+        public Context() { }
+        public static Context Instance()
         {
             if(instance==null)
             {

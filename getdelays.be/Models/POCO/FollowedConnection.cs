@@ -7,7 +7,7 @@ namespace getdelays.be.Models.POCO
 {
     public class FollowedConnection
     {
-        public int idFollowedConnection { get; set; }
+        public int Id { get; set; }
         public string departure { get; set; }
         public string arrival { get; set; }
         public DateTime DateTime { get; set; }

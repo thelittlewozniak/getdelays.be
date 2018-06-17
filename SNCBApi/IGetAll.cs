@@ -10,9 +10,8 @@ namespace getdelays.be.Models
     {
         List<Station> GetStations();
         DataApiPerStations GetDelaysForStation(string station);
-        DataApiPerStations GetArrival(string station);
-        DataApiPerStations GetDeparture(string station);
         DataApiTrain GetTrain(string idTrain);
+        DataApiTrain GetTrain(string idTrain, string StationName);
         DataApiConnection GetConnection(string dep, string arr);
     }
 }

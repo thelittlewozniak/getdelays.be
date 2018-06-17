@@ -12,6 +12,7 @@ namespace getdelays.be.Models.DAL
         List<User> GetUsers();
         User GetUser(int idUser);
         User GetUser(string email);
+        User Login(string email, string password);
         void AddUser(User u);
         void DeleteUser(User u);
         void UpdateUser(User u, User newu);

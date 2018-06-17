@@ -17,9 +17,9 @@ namespace getdelays.be.Models.DAL
         {
             return context.Days.ToList();
         }
-        public Day GetDay(int Id)
+        public Day GetDay(string dayname)
         {
-            var d = (from Day day in context.Days where day.Id == Id select day).First();
+            var d = (from Day day in context.Days where day.dayName == dayname select day).FirstOrDefault();
             return d;
         }
     }

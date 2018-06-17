@@ -19,12 +19,12 @@ namespace getdelays.be.Models.DAL
         }
         public List<FollowedConnection> GetFollowedConnections(User u)
         {
-            var f = (from FollowedConnection fo in context.FollowedConnections where fo.user == u select fo).ToList();
+            var f = (from FollowedConnection fo in context.FollowedConnections where fo.user.Id == u.Id select fo).ToList();
             return f;
         }
         public FollowedConnection GetFollowedConnection(int idFollowedConnection)
         {
-            var f = (from FollowedConnection fo in context.FollowedConnections where fo.Id == idFollowedConnection select fo).First();
+            var f = (from FollowedConnection fo in context.FollowedConnections where fo.Id == idFollowedConnection select fo).FirstOrDefault();
             return f;
         }
         public void AddFollowedConnection(FollowedConnection c)
@@ -39,7 +39,7 @@ namespace getdelays.be.Models.DAL
         }
         public void UpdateFollowedConnection(FollowedConnection OldConnection,FollowedConnection newConnection)
         {
-            var c = (from FollowedConnection fo in context.FollowedConnections where fo == OldConnection select fo).First();
+            var c = (from FollowedConnection fo in context.FollowedConnections where fo == OldConnection select fo).FirstOrDefault();
             c = newConnection;
             context.SaveChanges();
         }

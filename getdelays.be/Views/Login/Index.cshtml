@@ -1,0 +1,19 @@
+﻿@using getdelays.be.Models;
+@{
+    ViewBag.Title = "Login";
+    string error = ViewBag.error;
+}
+
+<h2>Login</h2>
+<p>@error</p>
+@using (Html.BeginForm("Login","Login",FormMethod.Get))
+{
+<p>
+    Email:<input type="text" id="email" name="email" onkeydown="ListStationFrom()" />
+    Password:<input type="password" id="password" name="password" onkeydown="ListStationTo()" />
+    <input type="submit" value="submit" />
+    @Html.ActionLink("Not yet an account? Create one", "CreateAccount", "Login")
+</p>
+}
+
+

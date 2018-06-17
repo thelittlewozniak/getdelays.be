@@ -14,7 +14,7 @@ namespace getdelays.be.Models.DAL
         public DbSet<FollowedConnection> FollowedConnections { get; set; }
         public DbSet<Day> Days { get; set; }
         private static Context instance;
-        private Context() { }
+        public Context() { }
         public static Context Instance()
         {
             if(instance==null)

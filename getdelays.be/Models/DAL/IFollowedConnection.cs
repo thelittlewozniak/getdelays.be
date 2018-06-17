@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace getdelays.be.Models.DAL
 {
-    interface IFollowedConnection:IDAL
+    interface IFollowedConnection
     {
         List<FollowedConnection> GetFollowedConnections();
         List<FollowedConnection> GetFollowedConnections(User u);

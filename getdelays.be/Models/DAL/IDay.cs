@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace getdelays.be.Models.DAL
 {
-    interface IDay:IDAL
+    interface IDay
     {
         List<Day> GetDays();
-        Day GetDay(int Id);
+        Day GetDay(string dayName);
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace getdelays.be.Models.DAL
 {
@@ -24,7 +25,7 @@ namespace getdelays.be.Models.DAL
         }
         public FollowedConnection GetFollowedConnection(int id)
         {
-            var fo = (from FollowedConnection f in context.FollowedConnections where f.Id == id select f).First();
+            var fo = (from FollowedConnection f in context.FollowedConnections where f.Id == id select f).FirstOrDefault();
             return fo;
         }
         public void AddFollowedConnection(FollowedConnection followedConnection)
@@ -39,7 +40,7 @@ namespace getdelays.be.Models.DAL
         }
         public void UpdateFollowedConnection(FollowedConnection oldFollowedConnection, FollowedConnection newFollowedConnection)
         {
-            var fo = (from FollowedConnection f in context.FollowedConnections where f == oldFollowedConnection select f).First();
+            var fo = (from FollowedConnection f in context.FollowedConnections where f == oldFollowedConnection select f).FirstOrDefault();
             fo = newFollowedConnection;
             context.SaveChanges();
         }

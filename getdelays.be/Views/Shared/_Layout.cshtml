@@ -30,6 +30,17 @@
                     <li>
                         @Html.ActionLink("See Connection", "SearchConnection", "Connection")
                     </li>
+                    <li>
+                        @if (Session["user"] == null)
+                        {
+                            @Html.ActionLink("Connect you", "Index", "Login")
+
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Profile", "Profil", "Login")
+                        }
+                    </li>
                 </ul>
             </div>
         </div>

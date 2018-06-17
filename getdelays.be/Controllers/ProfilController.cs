@@ -25,5 +25,20 @@ namespace getdelays.be.Controllers
                 return View();
             }
         }
+        public ActionResult DeleteUser()
+        {
+            IUser userDAL = new DALUser();
+            User user = (User)Session["user"];
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                userDAL.DeleteUser(user);
+                return RedirectToAction("Index", "Home");
+            }
+
+        }
     }
 }

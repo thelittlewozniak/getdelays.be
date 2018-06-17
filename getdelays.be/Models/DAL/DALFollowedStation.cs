@@ -6,10 +6,10 @@ using System.Web;
 
 namespace getdelays.be.Models.DAL
 {
-    public class DALFollowedStations
+    public class DALFollowedStation:IFollowedStation
     {
         private Context context;
-        public DALFollowedStations()
+        public DALFollowedStation()
         {
             context = Context.Instance();
         }

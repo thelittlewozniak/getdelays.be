@@ -6,7 +6,7 @@ using System.Web;
 
 namespace getdelays.be.Models.DAL
 {
-    public class DALFollowedConnection
+    public class DALFollowedConnection:IFollowedConnection
     {
         private Context context;
         public DALFollowedConnection()

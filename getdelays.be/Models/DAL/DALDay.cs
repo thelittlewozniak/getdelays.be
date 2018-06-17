@@ -6,7 +6,7 @@ using System.Web;
 
 namespace getdelays.be.Models.DAL
 {
-    public class DALDay
+    public class DALDay:IDay
     {
         private Context context;
         public DALDay()

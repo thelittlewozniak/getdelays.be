@@ -165,8 +165,12 @@
     <Compile Include="Models\DAL\Context.cs" />
     <Compile Include="Models\DAL\DALDay.cs" />
     <Compile Include="Models\DAL\DALFollowedConnection.cs" />
-    <Compile Include="Models\DAL\DALFollowedStations.cs" />
+    <Compile Include="Models\DAL\DALFollowedStation.cs" />
     <Compile Include="Models\DAL\DALUser.cs" />
+    <Compile Include="Models\DAL\IDay.cs" />
+    <Compile Include="Models\DAL\IFollowedConnection.cs" />
+    <Compile Include="Models\DAL\IFollowedStation.cs" />
+    <Compile Include="Models\DAL\IUser.cs" />
     <Compile Include="Models\POCO\Day.cs" />
     <Compile Include="Models\POCO\FollowedConnection.cs" />
     <Compile Include="Models\POCO\FollowedStation.cs" />

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace getdelays.be.Models.DAL
 {
-    public class DALUser
+    public class DALUser:IUser
     {
         private Context context;
         public DALUser()

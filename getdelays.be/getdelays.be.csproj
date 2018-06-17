@@ -153,8 +153,21 @@
     <Compile Include="Migrations\201806152323103_Confiuration.Designer.cs">
       <DependentUpon>201806152323103_Confiuration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806162118585_updatedb.cs" />
+    <Compile Include="Migrations\201806162118585_updatedb.Designer.cs">
+      <DependentUpon>201806162118585_updatedb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806162120327_addRepaetAttribute.cs" />
+    <Compile Include="Migrations\201806162120327_addRepaetAttribute.Designer.cs">
+      <DependentUpon>201806162120327_addRepaetAttribute.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Context.cs" />
+    <Compile Include="Models\DAL\DALDay.cs" />
+    <Compile Include="Models\DAL\DALFollowedConnection.cs" />
+    <Compile Include="Models\DAL\DALFollowedStations.cs" />
+    <Compile Include="Models\DAL\DALUser.cs" />
+    <Compile Include="Models\POCO\Day.cs" />
     <Compile Include="Models\POCO\FollowedConnection.cs" />
     <Compile Include="Models\POCO\FollowedStation.cs" />
     <Compile Include="Models\POCO\User.cs" />
@@ -197,6 +210,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201806152323103_Confiuration.resx">
       <DependentUpon>201806152323103_Confiuration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806162118585_updatedb.resx">
+      <DependentUpon>201806162118585_updatedb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806162120327_addRepaetAttribute.resx">
+      <DependentUpon>201806162120327_addRepaetAttribute.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

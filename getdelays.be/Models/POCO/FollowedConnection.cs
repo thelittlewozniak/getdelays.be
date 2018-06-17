@@ -13,5 +13,7 @@ namespace getdelays.be.Models.POCO
         public DateTime DateTime { get; set; }
         public int idUser { get; set; }
         public virtual User user { get; set; }
+        public bool repeat { get; set; }
+        public virtual List<Day> days { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace getdelays.be.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(getdelays.be.Models.DAL.Context context)

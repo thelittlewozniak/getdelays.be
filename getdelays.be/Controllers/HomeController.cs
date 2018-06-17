@@ -15,6 +15,7 @@ namespace getdelays.be.Controllers
         public ActionResult Index()
         {
             IGetAll newaccessapi = GetAll.Instance();
+            Context context = new Context();
             ViewBag.CountStation = newaccessapi.GetStations().Count();
             return View();
         }

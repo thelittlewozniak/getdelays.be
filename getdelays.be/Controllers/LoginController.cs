@@ -61,7 +61,7 @@ namespace getdelays.be.Controllers
             else
             {
                 ViewBag.error = "An account is already link to this email.";
-                return View("Index");
+                return View("CreateAccount");
             }
         }
     }

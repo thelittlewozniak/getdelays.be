@@ -1,17 +1,19 @@
 ﻿
 @{
     ViewBag.Title = "CreateAccount";
+    string error = ViewBag.error;
 }
 
 <h2>Create Account</h2>
+<p>@error</p><br />
 @using (Html.BeginForm("MakeAccount", "Login", FormMethod.Post))
 {
 <p>
-    Name:<input type="text" id="name" name="name" />
-    Firstname:<input type="text" id="surname" name="surname" />
-    Email:<input type="text" id="email" name="email" />
-    Password:<input type="password" id="password" name="password" />
-    Phone Number:<input type="tel" id="phoneNumber" name="phoneNumber" />
+    Name:<input type="text" id="name" name="name" /><br />
+    Firstname:<input type="text" id="surname" name="surname" /><br />
+    Email:<input type="text" id="email" name="email" /><br />
+    Password:<input type="password" id="password" name="password" /><br />
+    Phone Number:<input type="tel" id="phoneNumber" name="phoneNumber" /><br />
     <input type="submit" value="submit" />
 </p>
 }

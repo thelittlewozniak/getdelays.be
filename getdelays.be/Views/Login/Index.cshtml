@@ -5,13 +5,13 @@
 }
 
 <h2>Login</h2>
-<p>@error</p>
+<p>@error</p><br />
 @using (Html.BeginForm("Login","Login",FormMethod.Post))
 {
 <p>
-    Email:<input type="text" id="email" name="email" />
-    Password:<input type="password" id="password" name="password" />
-    <input type="submit" value="submit" />
+    Email:<input type="text" id="email" name="email" /><br />
+    Password:<input type="password" id="password" name="password" /><br />
+    <input type="submit" value="submit" /><br />
     @Html.ActionLink("Not yet an account? Create one", "CreateAccount", "Login")
 </p>
 }

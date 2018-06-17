@@ -8,10 +8,10 @@
 @using (Html.BeginForm("MakeChange", "profil", FormMethod.Post))
 {
     <p>
-        Name:<input type="text" id="name" name="name" value="@u.name" />
-        Firstname:<input type="text" id="surname" name="surname" value="@u.surname" />
-        Email:<input type="text" id="email" name="email" value="@u.email" />
-        Phone Number:<input type="tel" id="phoneNumber" name="phoneNumber" value="@u.phoneNumber" />
+        Name:<input type="text" id="name" name="name" value="@u.name" /><br />
+        Firstname:<input type="text" id="surname" name="surname" value="@u.surname" /><br />
+        Email:<input type="text" id="email" name="email" value="@u.email" /><br />
+        Phone Number:<input type="tel" id="phoneNumber" name="phoneNumber" value="@u.phoneNumber" /><br />
         <input type="submit" value="submit" />
     </p>
 }

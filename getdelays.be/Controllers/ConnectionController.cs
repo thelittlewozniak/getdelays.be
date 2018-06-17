@@ -25,12 +25,25 @@ namespace getdelays.be.Controllers
         [HttpPost]
         public ActionResult GetConnection(string dep, string arr)
         {
-            IGetAPIGoogle googleApi = new SearchPlaceAPI();
-            IGetAll newaccessapi = GetAll.Instance();
-            DataApiConnection s = newaccessapi.GetConnection(dep,arr);
-            ViewBag.Connection = s;
-            return View();
-
+            if(dep!=null && arr!=null)
+            {
+                if(dep!="" && arr!="")
+                {
+                    IGetAPIGoogle googleApi = new SearchPlaceAPI();
+                    IGetAll newaccessapi = GetAll.Instance();
+                    DataApiConnection s = newaccessapi.GetConnection(dep, arr);
+                    ViewBag.Connection = s;
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("SearchConnection", "Connection");
+                }
+            }
+            else
+            {
+                return RedirectToAction("SearchConnection", "Connection");
+            }
         }
     }
 }

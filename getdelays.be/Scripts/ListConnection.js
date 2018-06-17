@@ -1,9 +1,8 @@
 ﻿function ListStationFrom() {
     stat = document.getElementById('statFrom');
-    console.log(stat.value);
     var list = document.getElementsByClassName('stationFrom');
     for (i = 0; i < list.length; i++) {
-        if (list[i].innerHTML.indexOf(stat.value) > -1) {
+        if (list[i].innerHTML.toUpperCase().latinize().indexOf(stat.value.toUpperCase().latinize()) > -1) {
             list[i].style.display = "";
         } else {
             list[i].style.display = "none";
@@ -12,10 +11,9 @@
 }
 function ListStationTo() {
     stat = document.getElementById('statTo');
-    console.log(stat.value);
     var list = document.getElementsByClassName('stationTo');
     for (i = 0; i < list.length; i++) {
-        if (list[i].innerHTML.indexOf(stat.value) > -1) {
+        if (list[i].innerHTML.toUpperCase().latinize().indexOf(stat.value.toUpperCase().latinize()) > -1) {
             list[i].style.display = "";
         } else {
             list[i].style.display = "none";

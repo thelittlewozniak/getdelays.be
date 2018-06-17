@@ -119,6 +119,7 @@
     <None Include="Properties\PublishProfiles\GetDelays - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\GetDelays - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\latinise.js" />
     <Content Include="Scripts\ListConnection.js" />
     <Content Include="Scripts\ListStation.js" />
     <Content Include="Scripts\Visiility.js" />
@@ -132,8 +133,6 @@
     <Content Include="Web.config" />
     <Content Include="Views\Station\SearchStation.cshtml" />
     <Content Include="Views\Station\GetStationsByName.cshtml" />
-    <Content Include="Views\Station\GetArrival.cshtml" />
-    <Content Include="Views\Station\GetDeparture.cshtml" />
     <Content Include="Views\Train\GetTrain.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />

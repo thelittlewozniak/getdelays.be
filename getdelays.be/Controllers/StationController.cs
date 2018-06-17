@@ -26,13 +26,20 @@ namespace getdelays.be.Controllers
         }
         public ActionResult GetStationsByName(string station)
         {
-            IGetAPIGoogle googleApi = new SearchPlaceAPI();
-            IGetAll newaccessapi = GetAll.Instance();
-            DataApiPerStations s = newaccessapi.GetDelaysForStation(station);
-            DetailsPlace n = googleApi.GetInfo(string.Concat(s.stationinfo.locationY + "," + s.stationinfo.locationX));
-            ViewBag.InfoStation = googleApi.GetInfo(string.Concat(s.stationinfo.locationY + "," + s.stationinfo.locationX));
-            ViewBag.station = s;
-            return View();
+            if (station !=null)
+            {
+                IGetAPIGoogle googleApi = new SearchPlaceAPI();
+                IGetAll newaccessapi = GetAll.Instance();
+                DataApiPerStations s = newaccessapi.GetDelaysForStation(station);
+                DetailsPlace n = googleApi.GetInfo(string.Concat(s.stationinfo.locationY + "," + s.stationinfo.locationX));
+                ViewBag.InfoStation = googleApi.GetInfo(string.Concat(s.stationinfo.locationY + "," + s.stationinfo.locationX));
+                ViewBag.station = s;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
         public ActionResult FollowStation(string station)
         {

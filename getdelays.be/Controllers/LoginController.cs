@@ -22,7 +22,7 @@ namespace getdelays.be.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        [HttpGet]
+        [HttpPost]
         public ActionResult Login(string email,string password)
         {
             IUser user = new DALUser();
@@ -38,25 +38,16 @@ namespace getdelays.be.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        public ActionResult Profil()
+        public ActionResult Disconnect()
         {
-            IUser userDAL = new DALUser();
-            User user = (User)Session["user"];
-            if (user==null)
-            {
-                ViewBag.error = "Please connect you if you want to see that.";
-                return View("Index");
-            }
-            else
-            {
-                ViewBag.user = user;
-                return View();
-            }
+            Session["user"] = null;
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult CreateAccount()
         {
             return View();
         }
+        [HttpPost]
         public ActionResult MakeAccount(string email,string name,string surname,string password,string phoneNumber)
         {
             IUser userDAL = new DALUser();

@@ -1,0 +1,48 @@
+﻿@using getdelays.be.Models.POCO;
+@{
+    ViewBag.Title = "Profile";
+    User u = ViewBag.user;
+}
+
+<h2>Profile</h2>
+<p>Name: @u.name</p>
+<p>Firstname: @u.surname</p>
+<p>Email: @u.email</p>
+@if (u.followedStations.Count >= 1)
+{
+    <p>Followed Stations: </p>
+    <table id="ArrivalTable">
+        <thead>
+            <tr>Stations Name</tr>
+        </thead>
+        @foreach (FollowedStation fs in u.followedStations)
+        {
+            <tr>
+                <td> @Html.ActionLink(fs.stationName, "GetStationsByName", "Station", routeValues: new { station = fs.stationName }, htmlAttributes: null))</td>
+                <td></td>
+            </tr>
+        }
+    </table>
+}
+@if (u.followedConnections.Count >= 1)
+{
+    <p>Followed Connections: </p>
+    <table id="DepartureTable">
+        <thead>
+            <tr>
+                <td>Departure Station</td>
+                <td>Arrival Station</td>
+            </tr>
+        </thead>
+        @foreach (FollowedConnection fc in u.followedConnections)
+        {
+        <tr>
+            <td> @Html.ActionLink(fc.departure, "GetStationsByName", "Station", routeValues: new { station = fc.departure }, htmlAttributes: null))</td>
+            <td> @Html.ActionLink(fc.arrival, "GetStationsByName", "Station", routeValues: new { station = fc.arrival }, htmlAttributes: null))</td>
+            <td> @fc.DateTime</td>
+            <td> Edit</td>
+        </tr>
+        }
+    </table>
+}
+

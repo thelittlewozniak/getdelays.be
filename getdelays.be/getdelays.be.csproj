@@ -145,6 +145,7 @@
     <Compile Include="Controllers\ConnectionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfilController.cs" />
     <Compile Include="Controllers\StationController.cs" />
     <Compile Include="Controllers\TrainController.cs" />
     <Compile Include="Global.asax.cs">
@@ -165,6 +166,14 @@
     <Compile Include="Migrations\201806171428110_AddingUsers.cs" />
     <Compile Include="Migrations\201806171428110_AddingUsers.Designer.cs">
       <DependentUpon>201806171428110_AddingUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806171659351_ModifyDatabase.cs" />
+    <Compile Include="Migrations\201806171659351_ModifyDatabase.Designer.cs">
+      <DependentUpon>201806171659351_ModifyDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806171704274_ModifyDatabase1.cs" />
+    <Compile Include="Migrations\201806171704274_ModifyDatabase1.Designer.cs">
+      <DependentUpon>201806171704274_ModifyDatabase1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Context.cs" />
@@ -193,7 +202,8 @@
     <Content Include="Views\Connection\SearchConnection.cshtml" />
     <Content Include="Views\Connection\GetConnection.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Login\Profil.cshtml" />
+    <Content Include="Views\Login\CreateAccount.cshtml" />
+    <Content Include="Views\Profil\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -230,6 +240,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806171428110_AddingUsers.resx">
       <DependentUpon>201806171428110_AddingUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806171659351_ModifyDatabase.resx">
+      <DependentUpon>201806171659351_ModifyDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806171704274_ModifyDatabase1.resx">
+      <DependentUpon>201806171704274_ModifyDatabase1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

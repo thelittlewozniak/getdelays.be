@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "CreateAccount";
+}
+
+<h2>CreateAccount</h2>
+@using (Html.BeginForm("MakeAccount", "Login", FormMethod.Post))
+{
+<p>
+    Name:<input type="text" id="name" name="name" />
+    Firstname:<input type="text" id="surname" name="surname" />
+    Email:<input type="text" id="email" name="email" />
+    Password:<input type="password" id="password" name="password" />
+    Phone Number:<input type="tel" id="phoneNumber" name="phoneNumber" />
+    <input type="submit" value="submit" />
+</p>
+}
+

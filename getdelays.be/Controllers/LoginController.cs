@@ -56,7 +56,7 @@ namespace getdelays.be.Controllers
                 User user = new User { name = name, surname = surname, email = email, password = password, phoneNumber = Convert.ToInt32(phoneNumber) };
                 userDAL.AddUser(user);
                 Session["user"] = userDAL.GetUser(user.email);
-                return RedirectToAction("Index", "Profil");
+                return RedirectToAction("Index", "Login");
             }
             else
             {

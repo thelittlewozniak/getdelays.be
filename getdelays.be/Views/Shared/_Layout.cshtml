@@ -33,7 +33,7 @@
                         @if (Session["user"] == null)
                         {
                             <li>
-                                @Html.ActionLink("Connect you", "Index", "Login")
+                                @Html.ActionLink("Log in", "Index", "Login")
                             </li>
                         }
                         else
@@ -43,7 +43,7 @@
 
                             </li>
                             <li>
-                                @Html.ActionLink("Disconnect", "Disconnect", "Login")
+                                @Html.ActionLink("Log off", "Disconnect", "Login")
                             </li>
                         }
                     </li>

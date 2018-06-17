@@ -204,6 +204,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\CreateAccount.cshtml" />
     <Content Include="Views\Profil\Index.cshtml" />
+    <Content Include="Views\Profil\MakeChangeInformation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

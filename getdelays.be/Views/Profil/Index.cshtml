@@ -1,7 +1,7 @@
 ﻿@using getdelays.be.Models.POCO;
 @{
     ViewBag.Title = "Profile";
-    User u = ViewBag.user;
+    User u = (User)Session["user"];
 }
 
 <h2>Profile</h2>
@@ -9,7 +9,8 @@
 <p>Firstname: @u.surname</p>
 <p>Email: @u.email</p>
 <p>Phone Number: @u.phoneNumber</p>
-@if (u.followedStations.Count >= 1)
+<p>@Html.ActionLink("Edit Your Information", "MakeChangeInformation", "profil")</p>
+@if (u.followedStations != null  && u.followedStations.Count >= 1)
 {
     <p>Followed Stations: </p>
     <table id="ArrivalTable">
@@ -25,7 +26,7 @@
         }
     </table>
 }
-@if (u.followedConnections.Count >= 1)
+@if (u.followedConnections != null && u.followedConnections.Count >= 1)
 {
     <p>Followed Connections: </p>
     <table id="DepartureTable">
@@ -37,13 +38,14 @@
         </thead>
         @foreach (FollowedConnection fc in u.followedConnections)
         {
-        <tr>
-            <td> @Html.ActionLink(fc.departure, "GetStationsByName", "Station", routeValues: new { station = fc.departure }, htmlAttributes: null))</td>
-            <td> @Html.ActionLink(fc.arrival, "GetStationsByName", "Station", routeValues: new { station = fc.arrival }, htmlAttributes: null))</td>
-            <td> @fc.DateTime</td>
-            <td> Edit</td>
-        </tr>
+            <tr>
+                <td> @Html.ActionLink(fc.departure, "GetStationsByName", "Station", routeValues: new { station = fc.departure }, htmlAttributes: null))</td>
+                <td> @Html.ActionLink(fc.arrival, "GetStationsByName", "Station", routeValues: new { station = fc.arrival }, htmlAttributes: null))</td>
+                <td> @fc.DateTime</td>
+                <td> Edit</td>
+            </tr>
         }
     </table>
 }
+<p>@Html.ActionLink("Delete Your Profile", "DeleteUser", "Profil")</p>
 

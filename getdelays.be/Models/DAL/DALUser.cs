@@ -46,8 +46,10 @@ namespace getdelays.be.Models.DAL
         }
         public void UpdateUser(User u, User newu)
         {
-            var user = (from User us in context.Users where us == u select us).FirstOrDefault();
-            user = newu;
+            context.Users.SingleOrDefault(us => us.Id == u.Id).name = newu.name;
+            context.Users.SingleOrDefault(us => us.Id == u.Id).surname = newu.surname;
+            context.Users.SingleOrDefault(us => us.Id == u.Id).email = newu.email;
+            context.Users.SingleOrDefault(us => us.Id == u.Id).email = newu.email;
             context.SaveChanges();
         }
         private string EncryptPassword(string password)

@@ -23,25 +23,19 @@ namespace getdelays.be.Models.DAL
             var fo = (from FollowedStation f in context.FollowedStations where f.user == u select f).ToList();
             return fo;
         }
-        public FollowedConnection GetFollowedConnection(int id)
+        public FollowedStation GetFollowedStation(string stationName,User u)
         {
-            var fo = (from FollowedConnection f in context.FollowedConnections where f.Id == id select f).FirstOrDefault();
+            var fo = (from FollowedStation f in context.FollowedStations where f.stationName == stationName && f.user.Id==u.Id select f).FirstOrDefault();
             return fo;
         }
-        public void AddFollowedConnection(FollowedConnection followedConnection)
+        public void AddFollowedStation(FollowedStation followedStation)
         {
-            context.FollowedConnections.Add(followedConnection);
+            context.FollowedStations.Add(followedStation);
             context.SaveChanges();
         }
-        public void DeleteFollowedConnection(FollowedConnection followedConnection)
+        public void DeleteFollowedStation(FollowedStation followedStation)
         {
-            context.FollowedConnections.Remove(followedConnection);
-            context.SaveChanges();
-        }
-        public void UpdateFollowedConnection(FollowedConnection oldFollowedConnection, FollowedConnection newFollowedConnection)
-        {
-            var fo = (from FollowedConnection f in context.FollowedConnections where f == oldFollowedConnection select f).FirstOrDefault();
-            fo = newFollowedConnection;
+            context.FollowedStations.Remove(followedStation);
             context.SaveChanges();
         }
     }

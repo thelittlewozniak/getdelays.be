@@ -1,4 +1,6 @@
 ﻿using getdelays.be.Models;
+using getdelays.be.Models.DAL;
+using getdelays.be.Models.POCO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,6 +97,53 @@ namespace getdelays.be.Controllers
             ViewBag.station = s;
             return View();
         }
-
+        public ActionResult FollowStation(string station)
+        {
+            User u = (User)Session["user"];
+            IFollowedStation followedStation = new DALFollowedStation();
+            if (u != null)
+            {
+                followedStation.AddFollowedStation(new FollowedStation { stationName = station, user = u });
+                return RedirectToAction("GetStationsByName", "Station", new { station });
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+        public ActionResult DeleteFollowStationProfile(string station)
+        {
+            User u = (User)Session["user"];
+            IFollowedStation followedStation = new DALFollowedStation();
+            if (u != null)
+            {
+                FollowedStation f = followedStation.GetFollowedStation(station, u);
+                followedStation.DeleteFollowedStation(f);
+                u.followedStations.Remove(f);
+                Session["user"] = u;
+                return RedirectToAction("Index", "Profil", new { station });
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+        public ActionResult DeleteFollowStationStation(string station)
+        {
+            User u = (User)Session["user"];
+            IFollowedStation followedStation = new DALFollowedStation();
+            if (u != null)
+            {
+                FollowedStation f = followedStation.GetFollowedStation(station, u);
+                followedStation.DeleteFollowedStation(f);
+                u.followedStations.Remove(f);
+                Session["user"] = u;
+                return RedirectToAction("GetStationsByName", "Station", new { station });
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
     }
 }

@@ -9,27 +9,32 @@
 <p>Firstname: @u.surname</p>
 <p>Email: @u.email</p>
 <p>Phone Number: @u.phoneNumber</p>
-<p>@Html.ActionLink("Edit Your Information", "MakeChangeInformation", "profil")</p>
-@if (u.followedStations != null  && u.followedStations.Count >= 1)
+@if (u.followedStations != null && u.followedStations.Count >= 1)
 {
-    <p>Followed Stations: </p>
-    <table id="ArrivalTable">
+    <table>
+        <caption>Followed Stations: </caption>
         <thead>
-            <tr>Stations Name</tr>
-        </thead>
-        @foreach (FollowedStation fs in u.followedStations)
-        {
             <tr>
-                <td> @Html.ActionLink(fs.stationName, "GetStationsByName", "Station", routeValues: new { station = fs.stationName }, htmlAttributes: null))</td>
-                <td></td>
+                <td>Station Name:</td>
+                <td>Edits:</td>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (FollowedStation fs in u.followedStations)
+            {
+                <tr>
+                    <td> @Html.ActionLink(fs.stationName, "GetStationsByName", "Station", routeValues: new { station = fs.stationName }, htmlAttributes: null)</td>
+                    <td>@Html.ActionLink("Delete", "DeleteFollowStationProfile", "Station", routeValues: new { station = fs.stationName }, htmlAttributes: null)</td>
+                </tr>
+            }
+
+        </tbody>
     </table>
 }
 @if (u.followedConnections != null && u.followedConnections.Count >= 1)
 {
-    <p>Followed Connections: </p>
-    <table id="DepartureTable">
+    <table>
+        <caption>Followed Connections:</caption>
         <thead>
             <tr>
                 <td>Departure Station</td>
@@ -38,7 +43,7 @@
         </thead>
         @foreach (FollowedConnection fc in u.followedConnections)
         {
-            <tr>
+            <tr class="Arrival">
                 <td> @Html.ActionLink(fc.departure, "GetStationsByName", "Station", routeValues: new { station = fc.departure }, htmlAttributes: null))</td>
                 <td> @Html.ActionLink(fc.arrival, "GetStationsByName", "Station", routeValues: new { station = fc.arrival }, htmlAttributes: null))</td>
                 <td> @fc.DateTime</td>
@@ -47,5 +52,9 @@
         }
     </table>
 }
+<br />
+<br />
+<br />
+<p>@Html.ActionLink("Edit Your Information", "MakeChangeInformation", "profil")</p>
 <p>@Html.ActionLink("Delete Your Profile", "DeleteUser", "Profil")</p>
 

@@ -1,10 +1,38 @@
 ﻿@using getdelays.be.Models;
+@using getdelays.be.Models.POCO;
 @{
     ViewBag.Title = "GetStationsByName";
     DataApiPerStations s = ViewBag.station;
     DetailsPlace p = ViewBag.InfoStation;
+    User u = (User)Session["user"];
 }
 <h2>@s.stationinfo.name</h2>
+@if (u != null)
+{
+    if (u.followedStations != null && u.followedStations.Count>0)
+    {
+        foreach (FollowedStation fo in u.followedStations)
+        {
+            if (fo.stationName == s.stationinfo.name)
+            {
+                @Html.ActionLink("Unfollow this station", "DeleteFollowStationStation", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
+
+            }
+            else
+            {
+                @Html.ActionLink("Follow this station", "FollowStation", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
+            }
+        }
+    }
+    else
+    {
+        @Html.ActionLink("Follow this station", "FollowStation", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
+    }
+}
+else
+{
+    @Html.ActionLink("Follow this station", "FollowStation", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
+}
 <p>Rating : @p.result.rating</p>
 <div id="map"></div>
 <script>

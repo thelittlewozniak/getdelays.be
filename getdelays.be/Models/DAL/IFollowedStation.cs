@@ -10,9 +10,8 @@ namespace getdelays.be.Models.DAL
     {
         List<FollowedStation> GetFollowedStations();
         List<FollowedStation> GetFollowedStations(User u);
-        FollowedConnection GetFollowedConnection(int id);
-        void AddFollowedConnection(FollowedConnection followedConnection);
-        void DeleteFollowedConnection(FollowedConnection followedConnection);
-        void UpdateFollowedConnection(FollowedConnection oldFollowedConnection, FollowedConnection newFollowedConnection);
+        FollowedStation GetFollowedStation(string stationName,User u);
+        void AddFollowedStation(FollowedStation followedStation);
+        void DeleteFollowedStation(FollowedStation followedStation);
     }
 }

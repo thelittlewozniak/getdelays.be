@@ -1,5 +1,4 @@
-﻿using getdelays.be.Models.POCO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GetDelaysAPI
+namespace GETDELAYSAPI
 {
     public class GetAll:IAPI
     {

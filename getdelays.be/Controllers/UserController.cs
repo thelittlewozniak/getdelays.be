@@ -29,6 +29,7 @@ namespace getdelays.be.Controllers
         public ActionResult Login(string email,string password)
         {
             password = EncryptPassword(password);
+            IAPI api = new GetAll();
             User testUserInformation = IAPI.Login(email, password);
             if (testUserInformation==null)
             {

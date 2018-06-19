@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 
-namespace getdelays.be.Models
+namespace SNCBAPI
 {
     public class GetAll:IGetAll
     {

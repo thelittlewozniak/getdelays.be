@@ -1,10 +1,9 @@
-﻿using getdelays.be.Models.DAL;
-using getdelays.be.Models.POCO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GETDELAYSAPI;
 
 namespace getdelays.be.Controllers
 {
@@ -29,8 +28,8 @@ namespace getdelays.be.Controllers
         [HttpPost]
         public ActionResult Login(string email,string password)
         {
-            IUser user = new DALUser();
-            User testUserInformation = user.Login(email, password);
+            password = EncryptPassword(password);
+            User testUserInformation = IAPI.Login(email, password);
             if (testUserInformation==null)
             {
                 ViewBag.error = "Email or password incorrect.";
@@ -55,7 +54,8 @@ namespace getdelays.be.Controllers
         public ActionResult MakeAccount(string email,string name,string surname,string password,string phoneNumber)
         {
             IUser userDAL = new DALUser();
-            if(userDAL.GetUser(email)==null)
+            password = EncryptPassword(password);
+            if (userDAL.GetUser(email)==null)
             {
                 User user = new User { name = name, surname = surname, email = email, password = password, phoneNumber = Convert.ToInt32(phoneNumber) };
                 userDAL.AddUser(user);
@@ -111,6 +111,12 @@ namespace getdelays.be.Controllers
                 userDAL.UpdateUser(user, newUser);
                 return View("Index");
             }
+        }
+        private string EncryptPassword(string password)
+        {
+            byte[] bytePassword = System.Text.Encoding.ASCII.GetBytes(password);
+            bytePassword = new System.Security.Cryptography.SHA256Managed().ComputeHash(bytePassword);
+            return System.Text.Encoding.ASCII.GetString(bytePassword);
         }
 
     }

@@ -1,5 +1,7 @@
-﻿@using getdelays.be.Models;
-@using getdelays.be.Models.POCO;
+﻿@using GoogleAPI;
+@using SNCBAPI;
+@using GETDELAYSAPI;
+
 @{
     ViewBag.Title = "GetStationsByName";
     DataApiPerStations s = ViewBag.station;
@@ -9,7 +11,7 @@
 <h2>@s.stationinfo.name</h2>
 @if (u != null)
 {
-    if (u.followedStations != null && u.followedStations.Count>0)
+    if (u.followedStations != null && u.followedStations.Count > 0)
     {
         foreach (FollowedStation fo in u.followedStations)
         {
@@ -122,7 +124,7 @@ function initMap() {
                 <td>@s.arrivals.arrival[i].station</td>
                 <td>@s.arrivals.arrival[i].tForView</td>
                 <td>@s.arrivals.arrival[i].delay minutes</td>
-                <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrainFromStation", "Train", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle,StationName=s.stationinfo.name }, htmlAttributes: null)</td>
+                <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrainFromStation", "Train", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle, StationName = s.stationinfo.name }, htmlAttributes: null)</td>
             </tr>
 
         }

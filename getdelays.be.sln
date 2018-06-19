@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SNCBApi", "SNCBApi\SNCBApi.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailService", "MailService\MailService.csproj", "{CC8EBA70-C7B8-4A20-B40E-27072489B017}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIDelays", "APIDelays\APIDelays.csproj", "{AD63097A-836B-43AB-AA58-B18D98AEE37E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetDelaysAPI", "GetDelaysAPI\GetDelaysAPI.csproj", "{0E992C2B-9B38-4363-A3C5-1F471D1C4609}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{CC8EBA70-C7B8-4A20-B40E-27072489B017}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC8EBA70-C7B8-4A20-B40E-27072489B017}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC8EBA70-C7B8-4A20-B40E-27072489B017}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD63097A-836B-43AB-AA58-B18D98AEE37E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD63097A-836B-43AB-AA58-B18D98AEE37E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD63097A-836B-43AB-AA58-B18D98AEE37E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD63097A-836B-43AB-AA58-B18D98AEE37E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E992C2B-9B38-4363-A3C5-1F471D1C4609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E992C2B-9B38-4363-A3C5-1F471D1C4609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E992C2B-9B38-4363-A3C5-1F471D1C4609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E992C2B-9B38-4363-A3C5-1F471D1C4609}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

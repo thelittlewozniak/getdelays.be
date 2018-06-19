@@ -1,7 +1,7 @@
-﻿using getdelays.be.Models;
-using getdelays.be.Models.DAL;
-using getdelays.be.Models.POCO;
+﻿using GoogleAPI;
+using SNCBAPI;
 using System;
+using GETDELAYSAPI;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

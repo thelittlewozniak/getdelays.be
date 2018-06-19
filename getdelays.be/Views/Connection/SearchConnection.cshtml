@@ -1,4 +1,7 @@
-﻿@using getdelays.be.Models;
+﻿@using GoogleAPI;
+@using SNCBAPI;
+@using GETDELAYSAPI;
+
 @{
     ViewBag.Title = "SearchConection";
     List<SelectListItem> stations = ViewBag.Stations;
@@ -6,26 +9,26 @@
 }
 
 <h2>Search a connection</h2>
-@using(Html.BeginForm("GetConnection", "Connection"))
+@using (Html.BeginForm("GetConnection", "Connection"))
 {
-<ul>
-    <li id="searchFrom">
-        From:<input type="text" id="statFrom" name="dep" onkeydown="ListStationFrom()" />
-    </li>
-    @foreach (Station s in stat)
-    {
-        <li class="stationFrom" style="display:none" onclick="SelectStation('@s.name','from')"><a href="#">@s.name</a></li>
-    }
-</ul>
-<ul>
-    <li id="searchTo">
-        to:<input type="text" id="statTo" name="arr" onkeydown="ListStationTo()" />
-    </li>
-    @foreach (Station s in stat)
-    {
-        <li class="stationTo" style="display:none" onclick="SelectStation('@s.name','to')"><a href="#">@s.name</a></li>
-    }
-</ul>
-<input type="submit" value="submit" />
+    <ul>
+        <li id="searchFrom">
+            From:<input type="text" id="statFrom" name="dep" onkeydown="ListStationFrom()" />
+        </li>
+        @foreach (Station s in stat)
+        {
+            <li class="stationFrom" style="display:none" onclick="SelectStation('@s.name','from')"><a href="#">@s.name</a></li>
+        }
+    </ul>
+    <ul>
+        <li id="searchTo">
+            to:<input type="text" id="statTo" name="arr" onkeydown="ListStationTo()" />
+        </li>
+        @foreach (Station s in stat)
+        {
+            <li class="stationTo" style="display:none" onclick="SelectStation('@s.name','to')"><a href="#">@s.name</a></li>
+        }
+    </ul>
+    <input type="submit" value="submit" />
 }
 

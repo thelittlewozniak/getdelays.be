@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace getdelays.be.Models
+namespace SNCBAPI
 {
     public class DepartureArrival
     {

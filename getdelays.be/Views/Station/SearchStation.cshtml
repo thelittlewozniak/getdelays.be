@@ -1,4 +1,6 @@
-﻿@using getdelays.be.Models;
+﻿@using GoogleAPI;
+@using SNCBAPI;
+@using GETDELAYSAPI;
 @{
     ViewBag.Title = "SearchStation";
     List<SelectListItem> stations = ViewBag.Stations;
@@ -12,6 +14,6 @@
     </li>
     @foreach (Station s in stat)
     {
-    <li class="station" style="display:none">@Html.ActionLink(s.name, "GetStationsByName", "Station", routeValues: new { station = s.name }, htmlAttributes: null)</li>
+        <li class="station" style="display:none">@Html.ActionLink(s.name, "GetStationsByName", "Station", routeValues: new { station = s.name }, htmlAttributes: null)</li>
     }
 </ul>

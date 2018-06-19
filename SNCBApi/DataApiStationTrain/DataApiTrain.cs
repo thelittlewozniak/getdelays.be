@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace getdelays.be.Models
+namespace SNCBAPI
 {
     public class DataApiTrain
     {

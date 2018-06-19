@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace ApiGetDElays
+namespace APIGetDelays
 {
     public class BundleConfig
     {

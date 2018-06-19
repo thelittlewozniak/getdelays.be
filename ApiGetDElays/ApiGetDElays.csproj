@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C696A98D-D1AE-4CC1-84B8-E7F9E4884586}</ProjectGuid>
+    <ProjectGuid>{8915E467-1F4F-4D7E-9AF8-B12ABE146E69}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ApiGetDElays</RootNamespace>
-    <AssemblyName>ApiGetDElays</AssemblyName>
+    <RootNamespace>APIGetDelays</RootNamespace>
+    <AssemblyName>APIGetDelays</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>

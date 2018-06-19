@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ApiGetDElays")]
+[assembly: AssemblyTitle("APIGetDelays")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ApiGetDElays")]
+[assembly: AssemblyProduct("APIGetDelays")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3c3352fb-1a86-4644-9d29-c19bea42e23b")]
+[assembly: Guid("a9646fd0-5ec0-49ac-8504-e5775ff4cbf1")]
 
 // Version information for an assembly consists of the following four values:
 //

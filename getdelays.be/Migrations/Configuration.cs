@@ -16,12 +16,6 @@ namespace getdelays.be.Migrations
 
         protected override void Seed(getdelays.be.Models.DAL.Context context)
         {
-            //var u = new List<User>
-            //{
-            //    new User { name = "Nathan", surname="Pire",email="nathan.pire@gmail.com",password="azerty"},
-            //};
-            //u.ForEach(s => context.Users.AddOrUpdate(p => p.surname, s));
-            //context.SaveChanges();
             //var d = new List<Day>
             //{
             //    new Day {dayName="Lundi"},

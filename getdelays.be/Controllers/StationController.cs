@@ -52,7 +52,7 @@ namespace getdelays.be.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Login", "User");
             }
         }
         public ActionResult DeleteFollowStationProfile(string station)
@@ -65,11 +65,11 @@ namespace getdelays.be.Controllers
                 followedStation.DeleteFollowedStation(f);
                 u.followedStations.Remove(f);
                 Session["user"] = u;
-                return RedirectToAction("Index", "Profil", new { station });
+                return RedirectToAction("Index", "User", new { station });
             }
             else
             {
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Login", "User");
             }
         }
         public ActionResult DeleteFollowStationStation(string station)
@@ -86,7 +86,7 @@ namespace getdelays.be.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Login", "User");
             }
         }
     }

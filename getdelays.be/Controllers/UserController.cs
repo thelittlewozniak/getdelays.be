@@ -8,12 +8,12 @@ using System.Web.Mvc;
 
 namespace getdelays.be.Controllers
 {
-    public class LoginController : Controller
+    public class UserController : Controller
     {
         // GET: Login
         public ActionResult Index()
         {
-            if(Session["user"]==null)
+            if(Session["user"]!=null)
             {
                 return View();
             }
@@ -21,6 +21,10 @@ namespace getdelays.be.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
+        public ActionResult ConnectionPage()
+        {
+            return View("Login");
         }
         [HttpPost]
         public ActionResult Login(string email,string password)
@@ -30,7 +34,7 @@ namespace getdelays.be.Controllers
             if (testUserInformation==null)
             {
                 ViewBag.error = "Email or password incorrect.";
-                return View("Index");
+                return View("Login");
             }
             else
             {
@@ -56,7 +60,7 @@ namespace getdelays.be.Controllers
                 User user = new User { name = name, surname = surname, email = email, password = password, phoneNumber = Convert.ToInt32(phoneNumber) };
                 userDAL.AddUser(user);
                 Session["user"] = userDAL.GetUser(user.email);
-                return RedirectToAction("Index", "Login");
+                return View("Login");
             }
             else
             {
@@ -64,5 +68,50 @@ namespace getdelays.be.Controllers
                 return View("CreateAccount");
             }
         }
+        public ActionResult DeleteUser()
+        {
+            IUser userDAL = new DALUser();
+            User user = (User)Session["user"];
+            if (user == null)
+            {
+                return View("Login");
+            }
+            else
+            {
+                userDAL.DeleteUser(user);
+                Session["user"] = null;
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        public ActionResult MakeChangeInformation()
+        {
+            User user = (User)Session["user"];
+            if (user == null)
+            {
+                return View("Login");
+            }
+            else
+            {
+                ViewBag.user = user;
+                return View();
+            }
+        }
+        [HttpPost]
+        public ActionResult MakeChange(string email, string name, string surname, string phoneNumber)
+        {
+            IUser userDAL = new DALUser();
+            User user = (User)Session["user"];
+            if (user == null)
+            {
+                return View("Login");
+            }
+            else
+            {
+                User newUser = new User { name = name, surname = surname, email = email, phoneNumber = Convert.ToInt32(phoneNumber) };
+                userDAL.UpdateUser(user, newUser);
+                return View("Index");
+            }
+        }
+
     }
 }

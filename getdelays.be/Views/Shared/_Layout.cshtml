@@ -34,17 +34,17 @@
                         @if (Session["user"] == null)
                         {
                             <li>
-                                @Html.ActionLink("Log in", "Index", "Login")
+                                @Html.ActionLink("Log in", "ConnectionPage", "User")
                             </li>
                         }
                         else
                         {
                             <li>
-                                @Html.ActionLink("Profile", "Index","Profil")
+                                @Html.ActionLink("Profile", "Index","User")
 
                             </li>
                             <li>
-                                @Html.ActionLink("Log off", "Disconnect", "Login")
+                                @Html.ActionLink("Log off", "Disconnect", "User")
                             </li>
                         }
                     </li>

@@ -15,7 +15,6 @@ namespace GetDelaysAPI
         public List<string> opening_hours { get; set; }
         public double rating { get; set; }
         public List<Review> reviews { get; set; }
-        public string place_id { get; set; }
         public StationData()
         {
             opening_hours = new List<string>();

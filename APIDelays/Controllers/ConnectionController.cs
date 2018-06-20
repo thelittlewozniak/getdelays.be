@@ -12,7 +12,12 @@ namespace api.getdelays.be.Controllers
 {
     public class ConnectionController : ApiController
     {
-        // GET: Connection
+        //// GET: Connection
+        ///<summary>
+        /// you pass in params the departure station and the arrival station and the API send you the Connection 
+        ///</summary>
+        /// <param name="dep">The departure Station.</param>
+        /// <param name="arr">The arrival Station.</param>
         [HttpGet]
         public string GetConnection(string dep, string arr)
         {
@@ -22,6 +27,8 @@ namespace api.getdelays.be.Controllers
                 {
                     IGetAll newaccessapi = GetAll.Instance();
                     DataApiConnection s = newaccessapi.GetConnection(dep, arr);
+                    ///<returns>
+                    ///</returns>
                     return JsonConvert.SerializeObject(s);
                 }
                 else

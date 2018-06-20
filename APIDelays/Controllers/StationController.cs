@@ -16,6 +16,13 @@ namespace getdelays.be.Controllers
     public class StationController : ApiController
     {
         // GET: Station
+        ///<summary>
+        /// The API send you just the name, the location and the id of all stations inside the network
+        ///</summary>
+        /// <returns>
+        /// It return an object StationData in wich you have a data from the SNCB. You will receive the name, the location,the id of the station
+        /// <seealso cref="StationData"/>
+        /// </returns>
         [HttpGet]
         public IEnumerable<StationData> SearchStation()
         {
@@ -29,8 +36,16 @@ namespace getdelays.be.Controllers
             }
             return stats;
         }
+        ///<summary>
+        /// The API send you the name, the location,the id, opening hours, the rating, the reviews, the arrivals and the departures of the station from the param
+        ///</summary>
+        /// <param name="station">it's the station for which we want information</param>
+        /// <returns>
+        /// It return an object Station in wich you have a full of data from the SNCB and Google. You will receive the name, the location,the id, opening hours, the rating, the reviews, the arrivals and the departures of the station
+        /// <seealso cref="GetDelaysAPI.Station"/>
+        /// </returns>
         [HttpGet]
-        public GetDelaysAPI.Station GetStationsByName(string station)
+        public GetDelaysAPI.Station GetStationsByName(string station) 
         {
             if (station !=null)
             {
@@ -44,7 +59,6 @@ namespace getdelays.be.Controllers
                 stat.stationinfo.locationY = s.stationinfo.locationY;
                 stat.stationinfo.name = s.stationinfo.name;
                 stat.stationinfo.opening_hours = n.result.opening_hours.weekday_text;
-                stat.stationinfo.place_id = n.result.place_id;
                 stat.stationinfo.rating = n.result.rating;
                 foreach (GoogleAPI.Review r in n.result.reviews)
                 {
@@ -58,7 +72,6 @@ namespace getdelays.be.Controllers
                 {
                     stat.departures.Add(new ArrivalDeparture { delay = arrdep.delay, id = arrdep.id, station = arrdep.station, time = arrdep.tForView, vehicle = arrdep.vehicle });
                 }
-                // à finir, y mettre les data de google avec pour simplifier
                 return stat;
             }
             else

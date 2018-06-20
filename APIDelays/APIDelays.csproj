@@ -302,6 +302,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GetDelaysAPI\GetDelaysAPI.csproj">
+      <Project>{0e992c2b-9b38-4363-a3c5-1f471d1c4609}</Project>
+      <Name>GetDelaysAPI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GoogleApi\GoogleApi.csproj">
       <Project>{b252b352-b9ef-45f8-bbd9-a30a388eec0f}</Project>
       <Name>GoogleApi</Name>

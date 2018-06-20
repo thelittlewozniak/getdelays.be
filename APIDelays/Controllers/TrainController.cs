@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SNCBAPI;
+using GetDelaysAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,18 +14,30 @@ namespace getdelays.be.Controllers
     {
         // GET: Train
         [HttpGet]
-        public string GetTrain(string idTrain)
+        public Train GetTrain(string idTrain)
         {
             IGetAll newaccessapi = GetAll.Instance();
             DataApiTrain s = newaccessapi.GetTrain(idTrain);
-            return JsonConvert.SerializeObject(s);
+            Train train = new Train();
+            train.vehicle = s.vehicle;
+            foreach (SNCBAPI.Stop st in s.stops.stop)
+            {
+                train.stops.Add(new GetDelaysAPI.Stop { delay = st.delay, id = st.id, station = st.station, platform = st.platform, time = st.tForView });
+            }
+            return train;
         }
         [HttpGet]
-        public string GetTrainFromStation(string idTrain,string StationName)
+        public Train GetTrainFromStation(string idTrain,string StationName)
         {
             IGetAll newaccessapi = GetAll.Instance();
             DataApiTrain s = newaccessapi.GetTrain(idTrain,StationName);
-            return JsonConvert.SerializeObject(s);
+            Train train = new Train();
+            train.vehicle = s.vehicle;
+            foreach (SNCBAPI.Stop st in s.stops.stop)
+            {
+                train.stops.Add(new GetDelaysAPI.Stop { delay = st.delay, id = st.id, station = st.station, platform = st.platform, time = st.tForView });
+            }
+            return train;
         }
 
     }

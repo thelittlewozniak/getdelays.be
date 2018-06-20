@@ -43,19 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Day.cs" />
-    <Compile Include="FollowedConnection.cs" />
-    <Compile Include="FollowedStation.cs" />
+    <Compile Include="StationData\ArrivalDeparture.cs" />
+    <Compile Include="StationData\Review.cs" />
+    <Compile Include="StationData\Station.cs" />
+    <Compile Include="StationData\StationData.cs" />
+    <Compile Include="TrainData\Stop.cs" />
+    <Compile Include="TrainData\Train.cs" />
+    <Compile Include="UserData\Day.cs" />
+    <Compile Include="UserData\FollowedConnection.cs" />
+    <Compile Include="UserData\FollowedStation.cs" />
     <Compile Include="GetAll.cs" />
     <Compile Include="IAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\getdelays.be\getdelays.be.csproj">
-      <Project>{F95FDE40-2A6A-4EB0-A54B-6E8D74F8E731}</Project>
-      <Name>getdelays.be</Name>
-    </ProjectReference>
+    <Compile Include="UserData\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

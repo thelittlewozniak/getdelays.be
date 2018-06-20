@@ -10,7 +10,6 @@ namespace SNCBAPI
         public string id { get; set; }
         public double locationX { get; set; }
         public double locationY { get; set; }
-        public string standardname { get; set; }
         public string name { get; set; }
     }
 }

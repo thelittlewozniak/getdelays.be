@@ -13,32 +13,32 @@ namespace APIGetDelays.Controllers
     public class UserController : ApiController
     {
         [HttpGet]
-        public string Login(string email, string password)
+        public User Login(string email, string password)
         {
             IUser user = new DALUser();
             User testUserInformation = user.Login(email, password);
             if (testUserInformation == null)
             {
-                return JsonConvert.SerializeObject("Email or password incorrect.");
+                return null;
             }
             else
             {
-                return JsonConvert.SerializeObject(testUserInformation);
+                return testUserInformation;
             }
         }
         [HttpGet]
-        public string MakeAccount(string email, string name, string surname, string password, string phoneNumber)
+        public User MakeAccount(string email, string name, string surname, string password, string phoneNumber)
         {
             IUser userDAL = new DALUser();
             if (userDAL.GetUser(email) == null)
             {
                 User user = new User { name = name, surname = surname, email = email, password = password, phoneNumber = Convert.ToInt32(phoneNumber) };
                 userDAL.AddUser(user);
-                return JsonConvert.SerializeObject(user);
+                return user;
             }
             else
             {
-                return JsonConvert.SerializeObject("An account is already link to this email.");
+                return null;
             }
         }
         [HttpGet]
@@ -56,7 +56,7 @@ namespace APIGetDelays.Controllers
             }
         }
         [HttpGet]
-        public string UpdateUser(string email, string name, string surname, string phoneNumber,User user)
+        public User UpdateUser(string email, string name, string surname, string phoneNumber,User user)
         {
             IUser userDAL = new DALUser();
             if (user == null)
@@ -67,18 +67,18 @@ namespace APIGetDelays.Controllers
             {
                 User newUser = new User { name = name, surname = surname, email = email, phoneNumber = Convert.ToInt32(phoneNumber) };
                 userDAL.UpdateUser(user, newUser);
-                return JsonConvert.SerializeObject(newUser);
+                return newUser;
             }
         }
         [HttpGet]
-        public string FollowStation(string station, User u)
+        public User FollowStation(string station, User u)
         {
             IFollowedStation followedStation = new DALFollowedStation();
             if (u != null)
             {
                 followedStation.AddFollowedStation(new FollowedStation { stationName = station, user = u });
                 u.followedStations=followedStation.GetFollowedStations();
-                return JsonConvert.SerializeObject(u);
+                return u;
             }
             else
             {
@@ -86,7 +86,7 @@ namespace APIGetDelays.Controllers
             }
         }
         [HttpGet]
-        public string DeleteFollowStation(string station,User u)
+        public User DeleteFollowStation(string station,User u)
         {
             IFollowedStation followedStation = new DALFollowedStation();
             if (u != null)
@@ -94,7 +94,7 @@ namespace APIGetDelays.Controllers
                 FollowedStation f = followedStation.GetFollowedStation(station, u);
                 followedStation.DeleteFollowedStation(f);
                 u.followedStations = followedStation.GetFollowedStations();
-                return JsonConvert.SerializeObject(u);
+                return u;
             }
             else
             {

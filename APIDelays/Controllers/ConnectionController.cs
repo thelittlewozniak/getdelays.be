@@ -20,7 +20,6 @@ namespace api.getdelays.be.Controllers
             {
                 if(dep!="" && arr!="")
                 {
-                    IGetAPIGoogle googleApi = new SearchPlaceAPI();
                     IGetAll newaccessapi = GetAll.Instance();
                     DataApiConnection s = newaccessapi.GetConnection(dep, arr);
                     return JsonConvert.SerializeObject(s);

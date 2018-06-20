@@ -488,14 +488,43 @@
              <param name="dep">The departure Station.</param>
              <param name="arr">The arrival Station.</param>
         </member>
+        <member name="M:getdelays.be.Controllers.StationController.SearchStation">
+            <summary>
+             The API send you just the name, the location and the id of all stations inside the network
+            </summary>
+             <returns>
+             It return an object StationData in wich you have a data from the SNCB. You will receive the name, the location,the id of the station
+             <seealso cref="T:GetDelaysAPI.StationData"/>
+             </returns>
+        </member>
+        <member name="M:getdelays.be.Controllers.StationController.GetStationsByName(System.String)">
+            <summary>
+             The API send you the name, the location,the id, opening hours, the rating, the reviews, the arrivals and the departures of the station from the param
+            </summary>
+             <param name="station">it's the station for which we want information</param>
+             <returns>
+             It return an object Station in wich you have a full of data from the SNCB and Google. You will receive the name, the location,the id, opening hours, the rating, the reviews, the arrivals and the departures of the station
+             <seealso cref="T:GetDelaysAPI.Station"/>
+             </returns>
+        </member>
         <member name="M:getdelays.be.Controllers.TrainController.GetTrain(System.String)">
             <summary>
              You pass in param the id of the train and the API send to you the information of this train like all the stops of the train 
             </summary>
-            <seealso cref="M:getdelays.be.Controllers.StationController.SearchStation"/>
              <param name="idTrain">It's the id of the train. You can find it in the arrivals and departures of Station</param>
              <returns>
-             It return an object Train in wich you have a list of stops
+             It return an object Train in wich you have a list of stops and the ID of the train
+             <seealso cref="T:GetDelaysAPI.Train"/>
+             </returns>
+        </member>
+        <member name="M:getdelays.be.Controllers.TrainController.GetTrainFromStation(System.String,System.String)">
+            <summary>
+             You pass in param the id of the train and the station from where you want to have the data so the api send you from this station all stops of the train
+            </summary>
+             <param name="idTrain">It's the id of the train. You can find it in the arrivals and departures of Station</param>
+             <param name="StationName">It's the sttion name from where you want to have the data</param>
+             <returns>
+             It return an object Train in wich you have a list of stops and the ID of the train
              <seealso cref="T:GetDelaysAPI.Train"/>
              </returns>
         </member>

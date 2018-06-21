@@ -156,6 +156,8 @@ namespace SNCBAPI
                 DateTime dateDep = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
                 dateDep = dateDep.AddSeconds(c.departure.time).ToLocalTime();
                 c.departure.tForView = dateDep.ToLongTimeString();
+                c.arrival.delay = c.arrival.delay / 60;
+                c.departure.delay = c.departure.delay / 60;
                 if (c.vias != null)
                 {
                     foreach (ViaInfo v in c.vias.via)

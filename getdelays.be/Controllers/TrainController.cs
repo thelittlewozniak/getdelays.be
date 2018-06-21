@@ -1,4 +1,4 @@
-﻿using getdelays.be.Models;
+﻿using GetDelaysAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +17,9 @@ namespace getdelays.be.Controllers
         }
         public ActionResult GetTrain(string idTrain)
         {
-            IGetAll newaccessapi = GetAll.Instance();
-            DataApiTrain s = newaccessapi.GetTrain(idTrain);
-            ViewBag.stops = s;
+            IAPI data = new GetAll();
+            Train train = data.GetTrain(idTrain);
+            ViewBag.train = train;
             return View("GetTrain");
         }
         public ActionResult GetTrainFromStation(string idTrain,string StationName)

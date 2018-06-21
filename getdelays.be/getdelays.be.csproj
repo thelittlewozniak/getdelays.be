@@ -210,17 +210,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\APIDelays\APIDelays.csproj">
-      <Project>{ad63097a-836b-43ab-aa58-b18d98aee37e}</Project>
-      <Name>APIDelays</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GoogleApi\GoogleApi.csproj">
-      <Project>{b252b352-b9ef-45f8-bbd9-a30a388eec0f}</Project>
-      <Name>GoogleApi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SNCBApi\SNCBApi.csproj">
-      <Project>{B6B7EF2D-9F49-46E0-A3B9-F1DC8F3349B1}</Project>
-      <Name>SNCBApi</Name>
+    <ProjectReference Include="..\GetDelaysAPI\GetDelaysAPI.csproj">
+      <Project>{0e992c2b-9b38-4363-a3c5-1f471d1c4609}</Project>
+      <Name>GetDelaysAPI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

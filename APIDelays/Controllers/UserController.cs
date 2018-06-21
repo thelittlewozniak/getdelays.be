@@ -12,7 +12,7 @@ namespace APIGetDelays.Controllers
 {
     public class UserController : ApiController
     {
-        [HttpGet]
+        [HttpPost]
         public User Login(string email, string password)
         {
             IUser user = new DALUser();
@@ -26,7 +26,7 @@ namespace APIGetDelays.Controllers
                 return testUserInformation;
             }
         }
-        [HttpGet]
+        [HttpPost]
         public User MakeAccount(string email, string name, string surname, string password, string phoneNumber)
         {
             IUser userDAL = new DALUser();
@@ -41,10 +41,11 @@ namespace APIGetDelays.Controllers
                 return null;
             }
         }
-        [HttpGet]
-        public bool DeleteUser(User user)
+        [HttpPost]
+        public bool DeleteUser(string userid)
         {
             IUser userDAL = new DALUser();
+            User user = userDAL.GetUser(Convert.ToInt32(userid));
             if (user == null)
             {
                 return false;
@@ -55,10 +56,11 @@ namespace APIGetDelays.Controllers
                 return true;
             }
         }
-        [HttpGet]
-        public User UpdateUser(string email, string name, string surname, string phoneNumber,User user)
+        [HttpPost]
+        public User UpdateUser(string email, string name, string surname, string phoneNumber,string userid)
         {
             IUser userDAL = new DALUser();
+            User user = userDAL.GetUser(Convert.ToInt32(userid));
             if (user == null)
             {
                 return null;
@@ -70,10 +72,12 @@ namespace APIGetDelays.Controllers
                 return newUser;
             }
         }
-        [HttpGet]
-        public User FollowStation(string station, User u)
+        [HttpPost]
+        public User FollowStation(string station, string userid)
         {
             IFollowedStation followedStation = new DALFollowedStation();
+            IUser userDAL = new DALUser();
+            User u = userDAL.GetUser(Convert.ToInt32(userid));
             if (u != null)
             {
                 followedStation.AddFollowedStation(new FollowedStation { stationName = station, user = u });
@@ -85,10 +89,12 @@ namespace APIGetDelays.Controllers
                 return null;
             }
         }
-        [HttpGet]
-        public User DeleteFollowStation(string station,User u)
+        [HttpPost]
+        public User DeleteFollowStation(string station,string userid)
         {
             IFollowedStation followedStation = new DALFollowedStation();
+            IUser userDAL = new DALUser();
+            User u = userDAL.GetUser(Convert.ToInt32(userid));
             if (u != null)
             {
                 FollowedStation f = followedStation.GetFollowedStation(station, u);

@@ -27,7 +27,7 @@ namespace getdelays.be.Controllers
         public IEnumerable<StationData> SearchStation()
         {
             
-            IGetAll newaccessapi = GetAll.Instance();
+            IGetAll newaccessapi = SNCBAPI.GetAll.Instance();
             List<SNCBAPI.Station> stations = newaccessapi.GetStations();
             List<StationData> stats = new List<StationData>();
             foreach (SNCBAPI.Station s in stations)
@@ -50,7 +50,7 @@ namespace getdelays.be.Controllers
             if (station !=null)
             {
                 IGetAPIGoogle googleApi = new SearchPlaceAPI();
-                IGetAll newaccessapi = GetAll.Instance();
+                IGetAll newaccessapi = SNCBAPI.GetAll.Instance();
                 DataApiPerStations s = newaccessapi.GetDelaysForStation(station);
                 DetailsPlace n = googleApi.GetInfo(string.Concat(s.stationinfo.locationY + "," + s.stationinfo.locationX));
                 GetDelaysAPI.Station stat = new GetDelaysAPI.Station();

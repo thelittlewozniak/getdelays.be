@@ -24,7 +24,7 @@ namespace getdelays.be.Controllers
         [HttpGet]
         public Train GetTrain(string idTrain)
         {
-            IGetAll newaccessapi = GetAll.Instance();
+            IGetAll newaccessapi = SNCBAPI.GetAll.Instance();
             DataApiTrain s = newaccessapi.GetTrain(idTrain);
             Train train = new Train();
             train.vehicle = s.vehicle;
@@ -46,7 +46,7 @@ namespace getdelays.be.Controllers
         [HttpGet]
         public Train GetTrainFromStation(string idTrain,string StationName) 
         {
-            IGetAll newaccessapi = GetAll.Instance();
+            IGetAll newaccessapi = SNCBAPI.GetAll.Instance();
             DataApiTrain s = newaccessapi.GetTrain(idTrain,StationName);
             Train train = new Train();
             train.vehicle = s.vehicle;

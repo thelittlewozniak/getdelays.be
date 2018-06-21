@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionData\Connection.cs" />
     <Compile Include="StationData\ArrivalDeparture.cs" />
     <Compile Include="StationData\Review.cs" />
     <Compile Include="StationData\Station.cs" />
@@ -56,9 +57,11 @@
     <Compile Include="IAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserData\User.cs" />
+    <Compile Include="ConnectionData\Via.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -487,6 +487,10 @@
             </summary>
              <param name="dep">The departure Station.</param>
              <param name="arr">The arrival Station.</param>
+             ///<returns>
+             it returns a list of Connection
+             <seealso cref="T:GetDelaysAPI.Connection"/>
+            </returns>
         </member>
         <member name="M:getdelays.be.Controllers.StationController.SearchStation">
             <summary>

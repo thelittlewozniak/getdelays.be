@@ -4,7 +4,7 @@
     ViewBag.Title = t.vehicle;
 }
 
-<h2>@s.vehicle</h2>
+<h2>@t.vehicle</h2>
 <p>stops:</p>
 <table>
     <thead>
@@ -15,7 +15,7 @@
             <td>Platform:</td>
         </tr>
     </thead>
-    @foreach (Stop a in s.stops)
+    @foreach (Stop a in t.stops)
     {
         <tr>
             <td>@a.station</td>

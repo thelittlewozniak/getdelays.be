@@ -15,7 +15,7 @@ namespace GetDelaysAPI
         User UpdateUser(string email, string name, string surname, string phoneNumber, User user);
         User FollowStation(string station, User user);
         User DeleteFollowStation(string station, User user);
-        List<Station> SearchStation();
+        List<StationData> SearchStation();
         Station GetStationsByName(string station);
         Train GetTrain(string idTrain);
         Train GetTrainFromStation(string idTrain, string StationName);

@@ -58,7 +58,10 @@ namespace getdelays.be.Controllers
                 stat.stationinfo.locationX = s.stationinfo.locationX;
                 stat.stationinfo.locationY = s.stationinfo.locationY;
                 stat.stationinfo.name = s.stationinfo.name;
-                stat.stationinfo.opening_hours = n.result.opening_hours.weekday_text;
+                if(n.result.opening_hours!=null)
+                {
+                    stat.stationinfo.opening_hours = n.result.opening_hours.weekday_text;
+                }
                 stat.stationinfo.rating = n.result.rating;
                 foreach (GoogleAPI.Review r in n.result.reviews)
                 {

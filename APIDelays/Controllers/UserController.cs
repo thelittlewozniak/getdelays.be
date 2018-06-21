@@ -28,7 +28,7 @@ namespace APIGetDelays.Controllers
         }
 
         [HttpPost]
-        public User Login(string email, string password)
+        public User Login([FromBody]string email, [FromBody]string password)
         {
             IUser user = new DALUser();
             User testUserInformation = user.Login(email, password);

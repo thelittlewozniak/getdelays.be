@@ -1,7 +1,7 @@
 ﻿@using GetDelaysAPI;
 @{
     ViewBag.Title = "SearchStation";
-    List<Station> stat = ViewBag.s;
+    List<StationData> stat = ViewBag.s;
 }
 
 <h2>Search a Station</h2>
@@ -9,8 +9,8 @@
     <li id="search">
         <input type="text" id="stat" onkeydown="ListStation()" />
     </li>
-    @foreach (Station s in stat)
+    @foreach (StationData s in stat)
     {
-        <li class="station" style="display:none">@Html.ActionLink(s.stationinfo.name, "GetStationsByName", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)</li>
+        <li class="station" style="display:none">@Html.ActionLink(s.name, "GetStationsByName", "Station", routeValues: new { station = s.name }, htmlAttributes: null)</li>
     }
 </ul>

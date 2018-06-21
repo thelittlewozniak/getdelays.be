@@ -30,7 +30,7 @@ namespace getdelays.be.Controllers
         {
             password = EncryptPassword(password);
             IAPI api = new GetAll();
-            User testUserInformation = IAPI.Login(email, password);
+            User testUserInformation = api.Login(email, password);
             if (testUserInformation==null)
             {
                 ViewBag.error = "Email or password incorrect.";
@@ -54,13 +54,13 @@ namespace getdelays.be.Controllers
         [HttpPost]
         public ActionResult MakeAccount(string email,string name,string surname,string password,string phoneNumber)
         {
-            IUser userDAL = new DALUser();
+            IAPI api = new GetAll();
             password = EncryptPassword(password);
-            if (userDAL.GetUser(email)==null)
+            User u = api.GetUser(email);
+            if (u==null)
             {
-                User user = new User { name = name, surname = surname, email = email, password = password, phoneNumber = Convert.ToInt32(phoneNumber) };
-                userDAL.AddUser(user);
-                Session["user"] = userDAL.GetUser(user.email);
+                api.MakeAccount(email,name,surname,password,phoneNumber);
+                Session["user"] = api.GetUser(email);
                 return View("Login");
             }
             else
@@ -71,7 +71,7 @@ namespace getdelays.be.Controllers
         }
         public ActionResult DeleteUser()
         {
-            IUser userDAL = new DALUser();
+            IAPI api = new GetAll();
             User user = (User)Session["user"];
             if (user == null)
             {
@@ -79,7 +79,7 @@ namespace getdelays.be.Controllers
             }
             else
             {
-                userDAL.DeleteUser(user);
+                api.DeleteUser(user);
                 Session["user"] = null;
                 return RedirectToAction("Index", "Home");
             }
@@ -100,7 +100,7 @@ namespace getdelays.be.Controllers
         [HttpPost]
         public ActionResult MakeChange(string email, string name, string surname, string phoneNumber)
         {
-            IUser userDAL = new DALUser();
+            IAPI api = new GetAll();
             User user = (User)Session["user"];
             if (user == null)
             {
@@ -108,8 +108,7 @@ namespace getdelays.be.Controllers
             }
             else
             {
-                User newUser = new User { name = name, surname = surname, email = email, phoneNumber = Convert.ToInt32(phoneNumber) };
-                userDAL.UpdateUser(user, newUser);
+                api.UpdateUser(email,name,surname,phoneNumber, user);
                 return View("Index");
             }
         }

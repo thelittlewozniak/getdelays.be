@@ -24,9 +24,8 @@ namespace getdelays.be.Controllers
         }
         public ActionResult GetTrainFromStation(string idTrain,string StationName)
         {
-            IGetAll newaccessapi = GetAll.Instance();
-            DataApiTrain s = newaccessapi.GetTrain(idTrain,StationName);
-            ViewBag.stops = s;
+            IAPI api = new GetAll();
+            ViewBag.train = api.GetTrainFromStation(idTrain,StationName);
             return View("GetTrain");
         }
 

@@ -1,11 +1,8 @@
-﻿@using GoogleAPI;
-@using SNCBAPI;
-@using GETDELAYSAPI;
+﻿@using GetDelaysAPI;
 
 @{
     ViewBag.Title = "GetStationsByName";
-    DataApiPerStations s = ViewBag.station;
-    DetailsPlace p = ViewBag.InfoStation;
+    Station s = ViewBag.station;
     User u = (User)Session["user"];
 }
 <h2>@s.stationinfo.name</h2>
@@ -35,7 +32,7 @@ else
 {
     @Html.ActionLink("Follow this station", "FollowStation", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
 }
-<p>Rating : @p.result.rating</p>
+<p>Rating : @s.stationinfo.rating</p>
 <div id="map"></div>
 <script>
 function initMap() {
@@ -48,22 +45,15 @@ function initMap() {
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjpoXXWhFi4r1D5d5_1tF-bzeeFRpmfG0&callback=initMap">
 </script>
-<p>
-    Address:
-    @foreach (ComponentAddress a in p.result.address_components)
-    {
-        @a.long_name
-    }
-</p>
 <a id="linkInfo" href="#" onclick="ChangeVisibility('InfoStation')">See more...</a>
 <div id="InfoStation">
-    @if (p.result.opening_hours != null)
+    @if (s.stationinfo.opening_hours != null)
     {
         <table>
             <caption>
                 <p>Opening Hour</p>
             </caption>
-            @foreach (string h in p.result.opening_hours.weekday_text)
+            @foreach (string h in s.stationinfo.opening_hours)
             {
                 <tr>
                     <td>@h</td>
@@ -71,14 +61,14 @@ function initMap() {
             }
         </table>
     }
-    @if (p.result.reviews != null)
+    @if (s.stationinfo.reviews != null)
     {
         <table id="Reviews">
             <caption>
                 <p>Reviews</p>
             </caption>
             <tbody>
-                @foreach (Review r in p.result.reviews)
+                @foreach (Review r in s.stationinfo.reviews)
                 {
                     <tr>
                         <td>Author:</td>
@@ -107,24 +97,24 @@ function initMap() {
             <td>Train:</td>
         </tr>
     </thead>
-    @for (int i = 0; i < s.arrivals.arrival.Count; i++)
+    @for (int i = 0; i < s.arrivals.Count; i++)
     {
         if (i < 35)
         {
             <tr class="Arrival" style="display:none">
-                <td>@s.arrivals.arrival[i].station</td>
-                <td>@s.arrivals.arrival[i].tForView</td>
-                <td>@s.arrivals.arrival[i].delay minutes</td>
-                <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrainFromStation", "Train", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle, StationName = s.stationinfo.name }, htmlAttributes: null)</td>
+                <td>@s.arrivals[i].station</td>
+                <td>@s.arrivals[i].time</td>
+                <td>@s.arrivals[i].delay minutes</td>
+                <td>@Html.ActionLink(s.arrivals[i].vehicle, "GetTrainFromStation", "Train", routeValues: new { idTrain = s.arrivals[i].vehicle, StationName = s.stationinfo.name }, htmlAttributes: null)</td>
             </tr>
         }
         else
         {
             <tr class="Arrival">
-                <td>@s.arrivals.arrival[i].station</td>
-                <td>@s.arrivals.arrival[i].tForView</td>
-                <td>@s.arrivals.arrival[i].delay minutes</td>
-                <td>@Html.ActionLink(s.arrivals.arrival[i].vehicle, "GetTrainFromStation", "Train", routeValues: new { idTrain = s.arrivals.arrival[i].vehicle, StationName = s.stationinfo.name }, htmlAttributes: null)</td>
+                <td>@s.arrivals[i].station</td>
+                <td>@s.arrivals[i].time</td>
+                <td>@s.arrivals[i].delay minutes</td>
+                <td>@Html.ActionLink(s.arrivals[i].vehicle, "GetTrainFromStation", "Train", routeValues: new { idTrain = s.arrivals[i].vehicle, StationName = s.stationinfo.name }, htmlAttributes: null)</td>
             </tr>
 
         }
@@ -148,24 +138,24 @@ function initMap() {
         </tr>
     </thead>
     <tbody>
-        @for (int i = 0; i < s.departures.departure.Count; i++)
+        @for (int i = 0; i < s.departures.Count; i++)
         {
             if (i < 35)
             {
                 <tr class="Departure" style="display:none">
-                    <td>@s.departures.departure[i].station</td>
-                    <td>@s.departures.departure[i].tForView</td>
-                    <td>@s.departures.departure[i].delay minutes</td>
-                    <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Train", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
+                    <td>@s.departures[i].station</td>
+                    <td>@s.departures[i].time</td>
+                    <td>@s.departures[i].delay minutes</td>
+                    <td>@Html.ActionLink(s.departures[i].vehicle, "GetTrain", "Train", routeValues: new { idTrain = s.departures[i].vehicle }, htmlAttributes: null)</td>
                 </tr>
             }
             else
             {
                 <tr class="Departure">
-                    <td>@s.departures.departure[i].station</td>
-                    <td>@s.departures.departure[i].tForView</td>
-                    <td>@s.departures.departure[i].delay minutes</td>
-                    <td>@Html.ActionLink(s.departures.departure[i].vehicle, "GetTrain", "Train", routeValues: new { idTrain = s.departures.departure[i].vehicle }, htmlAttributes: null)</td>
+                    <td>@s.departures[i].station</td>
+                    <td>@s.departures[i].tForView</td>
+                    <td>@s.departures[i].delay minutes</td>
+                    <td>@Html.ActionLink(s.departures[i].vehicle, "GetTrain", "Train", routeValues: new { idTrain = s.departures[i].vehicle }, htmlAttributes: null)</td>
                 </tr>
 
             }

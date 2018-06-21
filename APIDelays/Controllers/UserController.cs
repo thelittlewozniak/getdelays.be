@@ -13,6 +13,21 @@ namespace APIGetDelays.Controllers
     public class UserController : ApiController
     {
         [HttpPost]
+        public User GetUser(string email)
+        {
+            IUser user = new DALUser();
+            User testUserInformation = user.GetUser(email);
+            if (testUserInformation == null)
+            {
+                return null;
+            }
+            else
+            {
+                return testUserInformation;
+            }
+        }
+
+        [HttpPost]
         public User Login(string email, string password)
         {
             IUser user = new DALUser();

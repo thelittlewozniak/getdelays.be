@@ -1,11 +1,10 @@
-﻿using GoogleAPI;
-using SNCBAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using GetDelaysAPI;
 
 namespace getdelays.be.Controllers
 {
@@ -18,9 +17,8 @@ namespace getdelays.be.Controllers
         }
         public ActionResult SearchConnection()
         {
-            IGetAll newaccessapi = GetAll.Instance();
-            List<Station> stations = newaccessapi.GetStations();
-            ViewBag.s = stations;
+            IAPI api = new GetAll();
+            ViewBag.s = api.SearchStation();
             return View();
         }
         [HttpPost]
@@ -30,10 +28,8 @@ namespace getdelays.be.Controllers
             {
                 if(dep!="" && arr!="")
                 {
-                    IGetAPIGoogle googleApi = new SearchPlaceAPI();
-                    IGetAll newaccessapi = GetAll.Instance();
-                    DataApiConnection s = newaccessapi.GetConnection(dep, arr);
-                    ViewBag.Connection = s;
+                    IAPI api = new GetAll();
+                    ViewBag.Connections = api.GetConnection(dep,arr);
                     return View();
                 }
                 else

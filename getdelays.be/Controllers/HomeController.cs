@@ -1,4 +1,4 @@
-﻿using SNCBAPI;
+﻿using GetDelaysAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +12,8 @@ namespace getdelays.be.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            IGetAll newaccessapi = GetAll.Instance();
-            ViewBag.CountStation = newaccessapi.GetStations().Count();
+            IAPI api = new GetAll();
+            ViewBag.CountStation = api.SearchStation().Count();
             return View();
         }
         public ActionResult error()

@@ -1,9 +1,7 @@
-﻿@using GoogleAPI;
-@using SNCBAPI;
-@using GETDELAYSAPI;
+﻿@using GetDelaysAPI;
 @{
-    ViewBag.Title = ViewBag.stops.vehicle;
-    DataApiTrain s = ViewBag.stops;
+    Train t = ViewBag.train;
+    ViewBag.Title = t.vehicle;
 }
 
 <h2>@s.vehicle</h2>
@@ -17,11 +15,11 @@
             <td>Platform:</td>
         </tr>
     </thead>
-    @foreach (Stop a in s.stops.stop)
+    @foreach (Stop a in s.stops)
     {
         <tr>
             <td>@a.station</td>
-            <td>@a.tForView</td>
+            <td>@a.time</td>
             <td>@a.delay</td>
             <td>@a.platform</td>
         </tr>

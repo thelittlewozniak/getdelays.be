@@ -210,12 +210,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GetDelaysAPI\GetDelaysAPI.csproj">
-      <Project>{0e992c2b-9b38-4363-a3c5-1f471d1c4609}</Project>
-      <Name>GetDelaysAPI</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201806152323103_Confiuration.resx">
       <DependentUpon>201806152323103_Confiuration.cs</DependentUpon>
     </EmbeddedResource>
@@ -237,6 +231,12 @@
     <EmbeddedResource Include="Migrations\201806192208407_COnfiguration.resx">
       <DependentUpon>201806192208407_COnfiguration.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GetDelaysAPI\GetDelaysAPI.csproj">
+      <Project>{0e992c2b-9b38-4363-a3c5-1f471d1c4609}</Project>
+      <Name>GetDelaysAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -4,6 +4,7 @@
     ViewBag.Title = "GetStationsByName";
     Station s = ViewBag.station;
     User u = (User)Session["user"];
+    bool seen = true;
 }
 <h2>@s.stationinfo.name</h2>
 @if (u != null)
@@ -15,13 +16,15 @@
             if (fo.stationName == s.stationinfo.name)
             {
                 @Html.ActionLink("Unfollow this station", "DeleteFollowStationStation", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
+                seen=false;
 
             }
-            else
-            {
-                @Html.ActionLink("Follow this station", "FollowStation", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
-            }
         }
+        if (seen)
+        {
+            @Html.ActionLink("Follow this station", "FollowStation", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
+        }
+
     }
     else
     {

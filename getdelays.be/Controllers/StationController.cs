@@ -40,7 +40,7 @@ namespace getdelays.be.Controllers
             IAPI api = new GetAll();
             if (u != null)
             {
-                api.FollowStation(station, u);
+                Session["user"] = api.FollowStation(station, u);
                 return RedirectToAction("GetStationsByName", "Station", new { station });
             }
             else

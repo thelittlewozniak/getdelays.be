@@ -12,7 +12,7 @@ namespace APIGetDelays.Controllers
 {
     public class UserController : ApiController
     {
-        [HttpPost]
+        [HttpGet]
         public User GetUser(string email)
         {
             IUser user = new DALUser();
@@ -26,8 +26,24 @@ namespace APIGetDelays.Controllers
                 return testUserInformation;
             }
         }
-
-        [HttpPost]
+        [HttpGet]
+        public List<User> GetUsers()
+        {
+            IUser user = new DALUser();
+            List<User> users = user.GetUsers();
+            foreach (User u in users)
+            {
+                u.followedConnections = null;
+                u.followedStations = null;
+                u.Id = 0;
+                u.name = "";
+                u.password = "";
+                u.phoneNumber = 0;
+                u.surname = "";
+            }
+            return users;
+        }
+        [HttpGet]
         public User Login(string email, string password)
         {
             IUser user = new DALUser();
@@ -41,7 +57,7 @@ namespace APIGetDelays.Controllers
                 return testUserInformation;
             }
         }
-        [HttpPost]
+        [HttpGet]
         public User MakeAccount(string email, string name, string surname, string password, string phoneNumber)
         {
             IUser userDAL = new DALUser();
@@ -56,7 +72,7 @@ namespace APIGetDelays.Controllers
                 return null;
             }
         }
-        [HttpPost]
+        [HttpGet]
         public bool DeleteUser(string userid)
         {
             IUser userDAL = new DALUser();
@@ -71,7 +87,7 @@ namespace APIGetDelays.Controllers
                 return true;
             }
         }
-        [HttpPost]
+        [HttpGet]
         public User UpdateUser(string email, string name, string surname, string phoneNumber,string userid)
         {
             IUser userDAL = new DALUser();
@@ -87,7 +103,8 @@ namespace APIGetDelays.Controllers
                 return newUser;
             }
         }
-        [HttpPost]
+        [Route("api/User/FollowStation")]
+        [HttpGet]
         public User FollowStation(string station, string userid)
         {
             IFollowedStation followedStation = new DALFollowedStation();
@@ -104,8 +121,9 @@ namespace APIGetDelays.Controllers
                 return null;
             }
         }
-        [HttpPost]
-        public User DeleteFollowStation(string station,string userid)
+        [Route("api/User/DeleteFollowStation")]
+        [HttpGet]
+        public User DeleteFollowStation(string userid, string station)
         {
             IFollowedStation followedStation = new DALFollowedStation();
             IUser userDAL = new DALUser();

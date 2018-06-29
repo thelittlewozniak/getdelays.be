@@ -49,6 +49,8 @@ namespace getdelays.be.Controllers
         {
             if (station !=null)
             {
+                DateTime now = DateTime.UtcNow;
+                now = now.AddHours(2);
                 IGetAPIGoogle googleApi = new SearchPlaceAPI();
                 IGetAll newaccessapi = SNCBAPI.GetAll.Instance();
                 DataApiPerStations s = newaccessapi.GetDelaysForStation(station);
@@ -58,7 +60,7 @@ namespace getdelays.be.Controllers
                 stat.stationinfo.locationX = s.stationinfo.locationX;
                 stat.stationinfo.locationY = s.stationinfo.locationY;
                 stat.stationinfo.name = s.stationinfo.name;
-                if(n.result.opening_hours!=null)
+                if (n.result.opening_hours!=null)
                 {
                     stat.stationinfo.opening_hours = n.result.opening_hours.weekday_text;
                 }
@@ -69,11 +71,23 @@ namespace getdelays.be.Controllers
                 }
                 foreach (SNCBAPI.ArrDep arrdep in s.arrivals.arrival)
                 {
-                    stat.arrivals.Add(new ArrivalDeparture { delay = arrdep.delay, id = arrdep.id, station = arrdep.station, time = arrdep.tForView, vehicle = arrdep.vehicle });
+                    DateTime hourTrain = new DateTime();
+                    hourTrain=hourTrain.AddSeconds(arrdep.time);
+                    hourTrain=hourTrain.AddMinutes(arrdep.delay);
+                    if(now.TimeOfDay<hourTrain.TimeOfDay)
+                    {
+                        stat.arrivals.Add(new ArrivalDeparture { delay = arrdep.delay, id = arrdep.id, station = arrdep.station, time = arrdep.tForView, vehicle = arrdep.vehicle });
+                    }
                 }
                 foreach (SNCBAPI.ArrDep arrdep in s.departures.departure)
                 {
-                    stat.departures.Add(new ArrivalDeparture { delay = arrdep.delay, id = arrdep.id, station = arrdep.station, time = arrdep.tForView, vehicle = arrdep.vehicle });
+                    DateTime hourTrain = new DateTime();
+                    hourTrain = hourTrain.AddSeconds(arrdep.time);
+                    hourTrain = hourTrain.AddMinutes(arrdep.delay);
+                    if (now.TimeOfDay < hourTrain.TimeOfDay)
+                    {
+                        stat.departures.Add(new ArrivalDeparture { delay = arrdep.delay, id = arrdep.id, station = arrdep.station, time = arrdep.tForView, vehicle = arrdep.vehicle });
+                    }
                 }
                 return stat;
             }

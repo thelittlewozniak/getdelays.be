@@ -140,5 +140,24 @@ namespace APIGetDelays.Controllers
                 return null;
             }
         }
+        [Route("api/User/FollowConnection")]
+        [HttpGet]
+        public User FollowConnection(string arrival,string departure,string time, string userid,string repeat)
+        {
+            IFollowedConnection followedConnection = new DALFollowedConnection();
+            IUser userDAL = new DALUser();
+            User u = userDAL.GetUser(Convert.ToInt32(userid));
+            if (u != null)
+            {
+                followedConnection.AddFollowedConnection(new FollowedConnection { departure = arrival,arrival=arrival,DateTime=Convert.ToDateTime(time),repeat=Convert.ToBoolean(repeat), user = u });
+                u.followedConnections = followedConnection.GetFollowedConnections();
+                return u;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

@@ -35,10 +35,7 @@ namespace SNCBAPI
         }
         public DataApiPerStations GetDelaysForStation(string station)
         {
-            DateTime timenow = DateTime.Now;
-            DateTime realnow = DateTime.Now;
-            realnow = realnow.AddHours(+2);
-            timenow=timenow.AddHours(+1);
+            DateTime timenow = DateTime.UtcNow;
             string date = timenow.ToString("ddMMy");
             string time = timenow.ToString("HHmm");
             string url = addressAPI + "liveboard?format=json&lang=eng&date=" + date + "&time=" + time + "&arrdep=arrival&station=" + station;
@@ -50,42 +47,24 @@ namespace SNCBAPI
             dataAPI.departures = dataAPI2.departures;
             byte[] b = Encoding.Default.GetBytes(dataAPI.stationinfo.name);
             dataAPI.stationinfo.name = Encoding.UTF8.GetString(b);
-            List<ArrDep> arriv = new List<ArrDep>();
             foreach (ArrDep a in dataAPI.arrivals.arrival)
             {
-                DateTime now = realnow;
                 byte[] by = Encoding.Default.GetBytes(a.station);
                 a.station = Encoding.UTF8.GetString(by);
                 DateTime date1 = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
                 date1 = date1.AddSeconds(a.time).ToLocalTime();
                 a.tForView = date1.ToLongTimeString();
                 a.delay = a.delay / 60;
-                now = now.AddSeconds(a.time).ToLocalTime();
-                now = now.AddMinutes(a.delay);
-                if(now>realnow)
-                {
-                    arriv.Add(a);
-                }
             }
-            dataAPI.arrivals.arrival = arriv;
-            List<ArrDep> depart = new List<ArrDep>();
             foreach (ArrDep a in dataAPI.departures.departure)
             {
-                DateTime now = realnow;
                 byte[] by = Encoding.Default.GetBytes(a.station);
                 a.station = Encoding.UTF8.GetString(by);
                 DateTime date2 = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
                 date2 = date2.AddSeconds(a.time).ToLocalTime();
                 a.tForView = date2.ToLongTimeString();
                 a.delay = a.delay / 60;
-                now = now.AddSeconds(a.time).ToLocalTime();
-                now = now.AddMinutes(a.delay);
-                if (now > realnow)
-                {
-                    depart.Add(a);
-                }
             }
-            dataAPI.departures.departure = depart;
             return dataAPI;
 
         }

@@ -102,9 +102,9 @@ function initMap() {
     </thead>
     @for (int i = 0; i < s.arrivals.Count; i++)
     {
-        if (i < 35)
+        if (i < 15)
         {
-            <tr class="Arrival" style="display:none">
+            <tr class="Arrival">
                 <td>@s.arrivals[i].station</td>
                 <td>@s.arrivals[i].time</td>
                 <td>@s.arrivals[i].delay minutes</td>
@@ -113,7 +113,7 @@ function initMap() {
         }
         else
         {
-            <tr class="Arrival">
+            <tr class="Arrival" style="display:none">
                 <td>@s.arrivals[i].station</td>
                 <td>@s.arrivals[i].time</td>
                 <td>@s.arrivals[i].delay minutes</td>
@@ -143,9 +143,9 @@ function initMap() {
     <tbody>
         @for (int i = 0; i < s.departures.Count; i++)
         {
-            if (i < 35)
+            if (i < 15)
             {
-                <tr class="Departure" style="display:none">
+                <tr class="Departure">
                     <td>@s.departures[i].station</td>
                     <td>@s.departures[i].time</td>
                     <td>@s.departures[i].delay minutes</td>
@@ -154,7 +154,7 @@ function initMap() {
             }
             else
             {
-                <tr class="Departure">
+                <tr class="Departure" style="display:none">
                     <td>@s.departures[i].station</td>
                     <td>@s.departures[i].time</td>
                     <td>@s.departures[i].delay minutes</td>

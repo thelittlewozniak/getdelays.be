@@ -117,7 +117,9 @@
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <None Include="Properties\PublishProfiles\GetDelays - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\GetDelays - FTP1.pubxml" />
+    <None Include="Properties\PublishProfiles\GetDelays - FTP2.pubxml" />
     <None Include="Properties\PublishProfiles\GetDelays - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\GetDelays - Web Deploy1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\latinise.js" />
     <Content Include="Scripts\ListConnection.js" />

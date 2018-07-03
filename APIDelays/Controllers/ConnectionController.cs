@@ -38,6 +38,7 @@ namespace api.getdelays.be.Controllers
                     foreach (SNCBAPI.Connection c in s.connection)
                     {
                         DateTime hourConnection = new DateTime();
+                        hourConnection = hourConnection.AddHours(2);
                         hourConnection = hourConnection.AddSeconds(c.departure.time);
                         hourConnection = hourConnection.AddMinutes(c.departure.delay);
                         if(now.TimeOfDay<hourConnection.TimeOfDay)

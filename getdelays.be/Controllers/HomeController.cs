@@ -14,6 +14,7 @@ namespace getdelays.be.Controllers
         {
             IAPI api = new GetAll();
             ViewBag.CountStation = api.SearchStation().Count();
+            ViewBag.s = api.SearchStation();
             return View();
         }
         public ActionResult error()

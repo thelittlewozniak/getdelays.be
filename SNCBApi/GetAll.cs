@@ -36,7 +36,7 @@ namespace SNCBAPI
         public DataApiPerStations GetDelaysForStation(string station)
         {
             DateTime timenow = DateTime.UtcNow;
-            timenow = timenow.AddHours(2);
+            timenow = timenow.AddHours(1);
             string date = timenow.ToString("ddMMy");
             string time = timenow.ToString("HHmm");
             string url = addressAPI + "liveboard?format=json&lang=eng&date=" + date + "&time=" + time + "&arrdep=arrival&station=" + station;

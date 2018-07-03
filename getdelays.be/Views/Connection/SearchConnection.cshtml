@@ -5,12 +5,16 @@
     List<StationData> stat = ViewBag.s;
 }
 
-<h2>Search a connection</h2>
 @using (Html.BeginForm("GetConnection", "Connection"))
 {
+<fieldset>
+    <legend>Search a connection</legend>
     <ul>
         <li id="searchFrom">
-            From:<input type="text" id="statFrom" name="dep" onkeydown="ListStationFrom()" />
+            <div class="form-group">
+                <label>From</label>
+                <input type="text" id="statFrom" name="dep" onkeydown="ListStationFrom()" placeholder="Enter a station" />
+            </div>
         </li>
         @foreach (StationData s in stat)
         {
@@ -19,13 +23,17 @@
     </ul>
     <ul>
         <li id="searchTo">
-            to:<input type="text" id="statTo" name="arr" onkeydown="ListStationTo()" />
+            <div class="form-group">
+                <label>To</label>
+                <input type="text" id="statTo" name="arr" onkeydown="ListStationTo()" placeholder="Enter a station" />
+            </div>
         </li>
         @foreach (StationData s in stat)
         {
             <li class="stationTo" style="display:none" onclick="SelectStation('@s.name','to')"><a href="#">@s.name</a></li>
         }
     </ul>
-    <input type="submit" value="submit" />
+    <button type="submit" id='submit' class="btn btn-primary">Submit</button>
+</fieldset>
 }
 

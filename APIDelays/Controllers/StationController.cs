@@ -72,6 +72,7 @@ namespace getdelays.be.Controllers
                 foreach (SNCBAPI.ArrDep arrdep in s.arrivals.arrival)
                 {
                     DateTime hourTrain = new DateTime();
+                    hourTrain = hourTrain.AddHours(2);
                     hourTrain=hourTrain.AddSeconds(arrdep.time);
                     hourTrain=hourTrain.AddMinutes(arrdep.delay);
                     if(now.TimeOfDay<hourTrain.TimeOfDay)
@@ -82,6 +83,7 @@ namespace getdelays.be.Controllers
                 foreach (SNCBAPI.ArrDep arrdep in s.departures.departure)
                 {
                     DateTime hourTrain = new DateTime();
+                    hourTrain = hourTrain.AddHours(2);
                     hourTrain = hourTrain.AddSeconds(arrdep.time);
                     hourTrain = hourTrain.AddMinutes(arrdep.delay);
                     if (now.TimeOfDay < hourTrain.TimeOfDay)

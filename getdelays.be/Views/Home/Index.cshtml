@@ -1,8 +1,48 @@
-﻿
+﻿@using GetDelaysAPI;
 @{
     ViewBag.Title = "Index";
+    List<StationData> stat = ViewBag.s;
 }
-
-<p>Getdelays.be helps people to see which trains or other(in the futur) are in delays</p>
+<h6>Getdelays.be helps people to see which trains or other(in the futur) are in delays</h6>
 <br /><p>There are @ViewBag.CountStation stations in the system.</p>
-
+@using (Html.BeginForm("GetConnection", "Connection"))
+{
+    <fieldset>
+        <legend>Search a connection</legend>
+        <ul>
+            <li id="searchFrom">
+                <div class="form-group">
+                    <label>From</label>
+                    <input type="text" id="statFrom" name="dep" onkeydown="ListStationFrom()" placeholder="Enter a station" />
+                </div>
+            </li>
+            @foreach (StationData s in stat)
+            {
+                <li class="stationFrom" style="display:none" onclick="SelectStation('@s.name','from')"><a href="#">@s.name</a></li>
+            }
+        </ul>
+        <ul>
+            <li id="searchTo">
+                <div class="form-group">
+                    <label>To</label>
+                    <input type="text" id="statTo" name="arr" onkeydown="ListStationTo()" placeholder="Enter a station" />
+                </div>
+            </li>
+            @foreach (StationData s in stat)
+            {
+                <li class="stationTo" style="display:none" onclick="SelectStation('@s.name','to')"><a href="#">@s.name</a></li>
+            }
+        </ul>
+        <button type="submit" id='submit' class="btn btn-primary">Submit</button>
+    </fieldset>
+}
+<h2>Search a Station</h2>
+<ul>
+    <li id="search">
+        <input type="text" id="stat" onkeydown="ListStation()" />
+    </li>
+    @foreach (StationData s in stat)
+    {
+        <li class="station" style="display:none">@Html.ActionLink(s.name, "GetStationsByName", "Station", routeValues: new { station = s.name }, htmlAttributes: null)</li>
+    }
+</ul>

@@ -8,37 +8,40 @@
 
 <h2>@t.vehicle</h2>
 <p>stops:</p>
-<table>
+<table class="table table-hover">
     <thead>
         <tr>
-            <td>Stop Station:</td>
-            <td>ETA:</td>
-            <td>Delay:</td>
-            <td>Platform:</td>
+            <th scope="col">Stop Station:</th>
+            <th scope="col">ETA:</th>
+            <th scope="col">Delay:</th>
+            <th scope="col">Platform:</th>
         </tr>
     </thead>
-    @foreach (Stop a in t.stops)
-    {
-        DateTime trainHour = new DateTime();
-        trainHour = trainHour.AddSeconds(Convert.ToInt32(a.time));
-        TimeSpan delay = new TimeSpan(0, a.delay, 0);
-        if (trainHour.TimeOfDay + delay < now.TimeOfDay)
+    <tbody>
+        @foreach (Stop a in t.stops)
         {
-            <tr style="background-color:lightblue">
-                <td>@a.station</td>
-                <td>@trainHour</td>
-                <td>@a.delay</td>
-                <td>@a.platform</td>
-            </tr>
+            DateTime trainHour = new DateTime();
+            trainHour = trainHour.AddHours(2);
+            trainHour = trainHour.AddSeconds(Convert.ToInt32(a.time));
+            TimeSpan delay = new TimeSpan(0, a.delay, 0);
+            if (trainHour.TimeOfDay + delay < now.TimeOfDay)
+            {
+                <tr class="table-danger">
+                    <td>@a.station</td>
+                    <td>@trainHour</td>
+                    <td>@a.delay</td>
+                    <td>@a.platform</td>
+                </tr>
+            }
+            else
+            {
+                <tr class="table-success">
+                    <td>@a.station</td>
+                    <td>@trainHour</td>
+                    <td>@a.delay</td>
+                    <td>@a.platform</td>
+                </tr>
+            }
         }
-        else
-        {
-            <tr>
-                <td>@a.station</td>
-                <td>@trainHour</td>
-                <td>@a.delay</td>
-                <td>@a.platform</td>
-            </tr>
-        }
-    }
+    </tbody>
 </table>

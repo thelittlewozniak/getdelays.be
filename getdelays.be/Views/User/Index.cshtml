@@ -4,25 +4,40 @@
     User u = (User)Session["user"];
 }
 
-<h2>Profile</h2>
-<p>Name: @u.name</p>
-<p>Firstname: @u.surname</p>
-<p>Email: @u.email</p>
-<p>Phone Number: @u.phoneNumber</p>
+<h1>Profile</h1>
+<h3>Your informations</h3>
+<table class="table table-hover">
+    <tr>
+        <th scope="row">Name</th>
+        <td>@u.name</td>
+    </tr>
+    <tr>
+        <th scope="row">Firstname</th>
+        <td>@u.surname</td>
+    </tr>
+    <tr>
+        <th scope="row">Email</th>
+        <td>@u.email</td>
+    </tr>
+    <tr>
+        <th scope="row">Phone Number</th>
+        <td>@u.phoneNumber</td>
+    </tr>
+</table>
+<h3>Followed Stations</h3>
 @if (u.followedStations != null && u.followedStations.Count >= 1)
 {
-    <table>
-        <caption>Followed Stations: </caption>
+    <table class="table table-hover">
         <thead>
             <tr>
-                <td>Station Name:</td>
-                <td>Edits:</td>
+                <th scope="col">Station Name:</th>
+                <th scope="col">Edits:</th>
             </tr>
         </thead>
         <tbody>
             @foreach (FollowedStation fs in u.followedStations)
             {
-                <tr>
+                <tr class="table-primary">
                     <td> @Html.ActionLink(fs.stationName, "GetStationsByName", "Station", routeValues: new { station = fs.stationName }, htmlAttributes: null)</td>
                     <td>@Html.ActionLink("Delete", "DeleteFollowStationProfile", "Station", routeValues: new { station = fs.stationName }, htmlAttributes: null)</td>
                 </tr>
@@ -52,9 +67,6 @@
         }
     </table>
 }
-<br />
-<br />
-<br />
 <p>@Html.ActionLink("Edit Your Information", "MakeChangeInformation", "User")</p>
 <p>@Html.ActionLink("Delete Your Profile", "DeleteUser", "User")</p>
 

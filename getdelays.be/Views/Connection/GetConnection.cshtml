@@ -8,49 +8,100 @@
 @if (connections.Count > 0)
 {
     <h2> From @connections[0].departure.station to @connections[0].arrival.station</h2>
-    <p>Connections:</p>
+    <h3>Connections:</h3>
     <div>
-        <table class="tableco">
+        <table class="table table-hover">
             <thead>
                 <tr>
-                    <td>Station</td>
-                    <td>Time</td>
-                    <td>Delay</td>
-                    <td>Number of changes</td>
-                    <td>Train</td>
+                    <th scope="col">Station</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Delay</th>
+                    <th scope="col">Number of changes</th>
+                    <th scope="col">Train</th>
                 </tr>
             </thead>
-            @foreach (Connection c in connections)
-            {
-                int nbr;
-                DateTime trainHourArr = new DateTime();
-                trainHourArr = trainHourArr.AddSeconds(Convert.ToInt32(c.arrival.time));
-                DateTime trainHourDep = new DateTime();
-                trainHourDep = trainHourDep.AddSeconds(Convert.ToInt32(c.departure.time));
-                if (c.vias == null)
+            <tbody>
+                @for (int i = 0; i < connections.Count; i++)
                 {
-                    nbr = 0;
+                    int nbr;
+                    DateTime trainHourArr = new DateTime();
+                    trainHourArr = trainHourArr.AddHours(2);
+                    trainHourArr = trainHourArr.AddSeconds(Convert.ToInt32(connections[i].arrival.time));
+                    DateTime trainHourDep = new DateTime();
+                    trainHourDep = trainHourDep.AddHours(2);
+                    trainHourDep = trainHourDep.AddSeconds(Convert.ToInt32(connections[i].departure.time));
+                    if (connections[i].vias == null)
+                    {
+                        nbr = 0;
+                    }
+                    else
+                    {
+                        nbr = connections[i].vias.Count();
+                    }
+                    if (i % 2 == 0)
+                    {
+                        <tr class="table-primary">
+                            <td>
+                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
+                                    <li>From: @Html.ActionLink(connections[i].departure.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].departure.station }, htmlAttributes: null)</li>
+                                    <li>To: @Html.ActionLink(connections[i].arrival.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].arrival.station }, htmlAttributes: null)</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
+                                    <li>@trainHourDep.TimeOfDay</li>
+                                    <li>@trainHourArr.TimeOfDay</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
+                                    <li>@connections[i].departure.delay minutes</li>
+                                    <li>@connections[i].arrival.delay minutes</li>
+                                </ul>
+                            </td>
+                            <td>@nbr</td>
+                            <td>
+                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
+                                    <li>@Html.ActionLink(connections[i].departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].departure.vehicle }, htmlAttributes: null)</li>
+                                    <li>@Html.ActionLink(connections[i].arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].arrival.vehicle }, htmlAttributes: null)</li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
+                                    <li>From: @Html.ActionLink(connections[i].departure.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].departure.station }, htmlAttributes: null)</li>
+                                    <li>To: @Html.ActionLink(connections[i].arrival.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].arrival.station }, htmlAttributes: null)</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
+                                    <li>@trainHourDep.TimeOfDay</li>
+                                    <li>@trainHourArr.TimeOfDay</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
+                                    <li>@connections[i].departure.delay minutes</li>
+                                    <li>@connections[i].arrival.delay minutes</li>
+                                </ul>
+                            </td>
+                            <td>@nbr</td>
+                            <td>
+                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
+                                    <li>@Html.ActionLink(connections[i].departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].departure.vehicle }, htmlAttributes: null)</li>
+                                    <li>@Html.ActionLink(connections[i].arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].arrival.vehicle }, htmlAttributes: null)</li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                    }
                 }
-                else
-                {
-                    nbr = c.vias.Count();
-                }
-                <tbody>
-                    <tr>
-                        <td>From: @Html.ActionLink(c.departure.station, "GetStationsByName", "Station", routeValues: new { station = c.departure.station }, htmlAttributes: null)</td>
-                        <td>@trainHourDep.TimeOfDay</td>
-                        <td>@c.departure.delay minutes</td>
-                        <td rowspan="2">@nbr</td>
-                        <td>@Html.ActionLink(c.departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = c.departure.vehicle }, htmlAttributes: null)</td>
-                    </tr>
-                    <tr>
-                        <td>To: @Html.ActionLink(c.arrival.station, "GetStationsByName", "Station", routeValues: new { station = c.arrival.station }, htmlAttributes: null)</td>
-                        <td>@trainHourArr.TimeOfDay</td>
-                        <td>@c.arrival.delay minutes</td>
-                        <td>@Html.ActionLink(c.arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = c.arrival.vehicle }, htmlAttributes: null)</td>
-                    </tr>
-                </tbody>
-            }
+            </tbody>
         </table>
     </div>
 }

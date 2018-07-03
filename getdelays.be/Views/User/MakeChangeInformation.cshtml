@@ -4,16 +4,28 @@
     User u = ViewBag.user;
 }
 
-<h2>Change your information</h2>
 @using (Html.BeginForm("MakeChange", "profil", FormMethod.Post))
 {
-    <p>
-        Name:<input type="text" id="name" name="name" value="@u.name" /><br />
-        Firstname:<input type="text" id="surname" name="surname" value="@u.surname" /><br />
-        Email:<input type="text" id="email" name="email" value="@u.email" /><br />
-        Phone Number:<input type="tel" id="phoneNumber" name="phoneNumber" value="@u.phoneNumber" /><br />
-        <input type="submit" value="submit" />
-    </p>
+    <fieldset>
+        <legend>Change your information</legend>
+        <div class="form-group">
+            <label>Email address</label>
+            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="@u.email">
+        </div>
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" class="form-control" name="name" id="name" value="@u.name">
+        </div>
+        <div class="form-group">
+            <label>FirstName:</label>
+            <input type="text" class="form-control" name="surname" id="surname" value="@u.surname">
+        </div>
+        <div class="form-group">
+            <label>Phone Number:</label>
+            <input type="tel" class="form-control" name="phoneNumber" id="phoneNumber" value="@u.phoneNumber">
+        </div>
+        <button type="submit" id='submit' class="btn btn-primary">Submit</button>
+    </fieldset>
 }
 
 

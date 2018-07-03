@@ -2,6 +2,8 @@
 @{
     Train t = ViewBag.train;
     ViewBag.Title = t.vehicle;
+    DateTime now = DateTime.UtcNow;
+    now = now.AddHours(2);
 }
 
 <h2>@t.vehicle</h2>
@@ -17,11 +19,26 @@
     </thead>
     @foreach (Stop a in t.stops)
     {
-        <tr>
-            <td>@a.station</td>
-            <td>@a.time</td>
-            <td>@a.delay</td>
-            <td>@a.platform</td>
-        </tr>
+        DateTime trainHour = new DateTime();
+        trainHour = trainHour.AddSeconds(Convert.ToInt32(a.time));
+        TimeSpan delay = new TimeSpan(0, a.delay, 0);
+        if (trainHour.TimeOfDay + delay < now.TimeOfDay)
+        {
+            <tr style="background-color:lightblue">
+                <td>@a.station</td>
+                <td>@trainHour</td>
+                <td>@a.delay</td>
+                <td>@a.platform</td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>@a.station</td>
+                <td>@trainHour</td>
+                <td>@a.delay</td>
+                <td>@a.platform</td>
+            </tr>
+        }
     }
 </table>

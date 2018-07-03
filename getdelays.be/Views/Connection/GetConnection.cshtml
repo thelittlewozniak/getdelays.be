@@ -1,48 +1,60 @@
 ﻿@using GetDelaysAPI;
 
 @{
-     List<Connection> connections = ViewBag.Connections;
-}
+                /**/
 
-<h2> From @connections.First().departure.station to @connections.First().arrival.station</h2>
-<p>Connections:</p>
-<div>
-    <table class="tableco">
-        <thead>
-            <tr>
-                <td>Station</td>
-                <td>Time</td>
-                <td>Delay</td>
-                <td>Number of changes</td>
-                <td>Train</td>
-            </tr>
-        </thead>
-        @foreach (Connection c in connections)
-        {
-            int nbr;
-            if (c.vias == null)
-            {
-                nbr = 0;
-            }
-            else
-            {
-                nbr = c.vias.Count();
-            }
-            <tbody>
+                List<Connection> connections = ViewBag.Connections;
+}
+@if (connections.Count > 0)
+{
+    <h2> From @connections[0].departure.station to @connections[0].arrival.station</h2>
+    <p>Connections:</p>
+    <div>
+        <table class="tableco">
+            <thead>
                 <tr>
-                    <td>From: @Html.ActionLink(c.departure.station, "GetStationsByName", "Station", routeValues: new { station = c.departure.station }, htmlAttributes: null)</td>
-                    <td>@c.departure.time</td>
-                    <td>@c.departure.delay minutes</td>
-                    <td rowspan="2">@nbr</td>
-                    <td>@Html.ActionLink(c.departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = c.departure.vehicle }, htmlAttributes: null)</td>
+                    <td>Station</td>
+                    <td>Time</td>
+                    <td>Delay</td>
+                    <td>Number of changes</td>
+                    <td>Train</td>
                 </tr>
-                <tr>
-                    <td>To: @Html.ActionLink(c.arrival.station, "GetStationsByName", "Station", routeValues: new { station = c.arrival.station }, htmlAttributes: null)</td>
-                    <td>@c.arrival.time</td>
-                    <td>@c.arrival.delay minutes</td>
-                    <td>@Html.ActionLink(c.arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = c.arrival.vehicle }, htmlAttributes: null)</td>
-                </tr>
-            </tbody>
-        }
-    </table>
-</div>
+            </thead>
+            @foreach (Connection c in connections)
+            {
+                int nbr;
+                DateTime trainHourArr = new DateTime();
+                trainHourArr = trainHourArr.AddSeconds(Convert.ToInt32(c.arrival.time));
+                DateTime trainHourDep = new DateTime();
+                trainHourDep = trainHourDep.AddSeconds(Convert.ToInt32(c.departure.time));
+                if (c.vias == null)
+                {
+                    nbr = 0;
+                }
+                else
+                {
+                    nbr = c.vias.Count();
+                }
+                <tbody>
+                    <tr>
+                        <td>From: @Html.ActionLink(c.departure.station, "GetStationsByName", "Station", routeValues: new { station = c.departure.station }, htmlAttributes: null)</td>
+                        <td>@trainHourDep.TimeOfDay</td>
+                        <td>@c.departure.delay minutes</td>
+                        <td rowspan="2">@nbr</td>
+                        <td>@Html.ActionLink(c.departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = c.departure.vehicle }, htmlAttributes: null)</td>
+                    </tr>
+                    <tr>
+                        <td>To: @Html.ActionLink(c.arrival.station, "GetStationsByName", "Station", routeValues: new { station = c.arrival.station }, htmlAttributes: null)</td>
+                        <td>@trainHourArr.TimeOfDay</td>
+                        <td>@c.arrival.delay minutes</td>
+                        <td>@Html.ActionLink(c.arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = c.arrival.vehicle }, htmlAttributes: null)</td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+}
+else
+{
+    <p>Sorry, no results found for this connection at this day.</p>
+}

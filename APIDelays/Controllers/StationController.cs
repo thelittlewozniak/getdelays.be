@@ -76,7 +76,7 @@ namespace getdelays.be.Controllers
                     hourTrain=hourTrain.AddMinutes(arrdep.delay);
                     if(now.TimeOfDay<hourTrain.TimeOfDay)
                     {
-                        stat.arrivals.Add(new ArrivalDeparture { delay = arrdep.delay, id = arrdep.id, station = arrdep.station, time = arrdep.tForView, vehicle = arrdep.vehicle });
+                        stat.arrivals.Add(new ArrivalDeparture { delay = arrdep.delay, id = arrdep.id, station = arrdep.station, time = arrdep.time.ToString(), vehicle = arrdep.vehicle });
                     }
                 }
                 foreach (SNCBAPI.ArrDep arrdep in s.departures.departure)
@@ -86,7 +86,7 @@ namespace getdelays.be.Controllers
                     hourTrain = hourTrain.AddMinutes(arrdep.delay);
                     if (now.TimeOfDay < hourTrain.TimeOfDay)
                     {
-                        stat.departures.Add(new ArrivalDeparture { delay = arrdep.delay, id = arrdep.id, station = arrdep.station, time = arrdep.tForView, vehicle = arrdep.vehicle });
+                        stat.departures.Add(new ArrivalDeparture { delay = arrdep.delay, id = arrdep.id, station = arrdep.station, time = arrdep.time.ToString(), vehicle = arrdep.vehicle });
                     }
                 }
                 return stat;

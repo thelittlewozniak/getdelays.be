@@ -3,18 +3,22 @@
     ViewBag.Title = "CreateAccount";
     string error = ViewBag.error;
 }
-
+<script type="text/javascript"
+        src='https://www.google.com/recaptcha/api.js'></script>
 <h2>Create Account</h2>
 <p>@error</p><br />
-@using (Html.BeginForm("MakeAccount", "Login", FormMethod.Post))
+@using (Html.BeginForm("MakeAccount", "User", FormMethod.Post))
 {
-<p>
-    Name:<input type="text" id="name" name="name" /><br />
-    Firstname:<input type="text" id="surname" name="surname" /><br />
-    Email:<input type="text" id="email" name="email" /><br />
-    Password:<input type="password" id="password" name="password" /><br />
-    Phone Number:<input type="tel" id="phoneNumber" name="phoneNumber" /><br />
-    <input type="submit" value="submit" />
-</p>
+    <p>
+        Name:<input type="text" id="name" name="name" /><br />
+        Firstname:<input type="text" id="surname" name="surname" /><br />
+        Email:<input type="text" id="email" name="email" /><br />
+        Password:<input type="password" id="password" name="password" /><br />
+        Phone Number:<input type="tel" id="phoneNumber" name="phoneNumber" /><br />
+        <div class="g-recaptcha" data-sitekey="6Le9eGEUAAAAAAaEJNZ-eQfCUkfr6iw0pYsW4gen"></div>
+        <input type="submit" id='submit'/>
+    </p>
 }
+<script>onload();</script>
+
 

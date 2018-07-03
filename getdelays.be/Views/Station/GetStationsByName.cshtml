@@ -102,22 +102,25 @@ function initMap() {
     </thead>
     @for (int i = 0; i < s.arrivals.Count; i++)
     {
+        DateTime trainHour = new DateTime();
+        trainHour = trainHour.AddSeconds(Convert.ToInt32(s.arrivals[i].time));
+
         if (i < 15)
         {
             <tr class="Arrival">
                 <td>@s.arrivals[i].station</td>
-                <td>@s.arrivals[i].time</td>
+                <td>@trainHour.TimeOfDay</td>
                 <td>@s.arrivals[i].delay minutes</td>
-                <td>@Html.ActionLink(s.arrivals[i].vehicle, "GetTrainFromStation", "Train", routeValues: new { idTrain = s.arrivals[i].vehicle, StationName = s.stationinfo.name }, htmlAttributes: null)</td>
+                <td>@Html.ActionLink(s.arrivals[i].vehicle, "GetTrain", "Train", routeValues: new { idTrain = s.arrivals[i].vehicle }, htmlAttributes: null)</td>
             </tr>
         }
         else
         {
             <tr class="Arrival" style="display:none">
                 <td>@s.arrivals[i].station</td>
-                <td>@s.arrivals[i].time</td>
+                <td>@trainHour.TimeOfDay</td>
                 <td>@s.arrivals[i].delay minutes</td>
-                <td>@Html.ActionLink(s.arrivals[i].vehicle, "GetTrainFromStation", "Train", routeValues: new { idTrain = s.arrivals[i].vehicle, StationName = s.stationinfo.name }, htmlAttributes: null)</td>
+                <td>@Html.ActionLink(s.arrivals[i].vehicle, "GetTrain", "Train", routeValues: new { idTrain = s.arrivals[i].vehicle }, htmlAttributes: null)</td>
             </tr>
 
         }
@@ -143,11 +146,13 @@ function initMap() {
     <tbody>
         @for (int i = 0; i < s.departures.Count; i++)
         {
+            DateTime trainHour = new DateTime();
+            trainHour = trainHour.AddSeconds(Convert.ToInt32(s.departures[i].time));
             if (i < 15)
             {
                 <tr class="Departure">
                     <td>@s.departures[i].station</td>
-                    <td>@s.departures[i].time</td>
+                    <td>@trainHour.TimeOfDay</td>
                     <td>@s.departures[i].delay minutes</td>
                     <td>@Html.ActionLink(s.departures[i].vehicle, "GetTrain", "Train", routeValues: new { idTrain = s.departures[i].vehicle }, htmlAttributes: null)</td>
                 </tr>
@@ -156,7 +161,7 @@ function initMap() {
             {
                 <tr class="Departure" style="display:none">
                     <td>@s.departures[i].station</td>
-                    <td>@s.departures[i].time</td>
+                    <td>@trainHour.TimeOfDay</td>
                     <td>@s.departures[i].delay minutes</td>
                     <td>@Html.ActionLink(s.departures[i].vehicle, "GetTrain", "Train", routeValues: new { idTrain = s.departures[i].vehicle }, htmlAttributes: null)</td>
                 </tr>

@@ -36,6 +36,7 @@ namespace SNCBAPI
         public DataApiPerStations GetDelaysForStation(string station)
         {
             DateTime timenow = DateTime.UtcNow;
+            timenow = timenow.AddHours(2);
             string date = timenow.ToString("ddMMy");
             string time = timenow.ToString("HHmm");
             string url = addressAPI + "liveboard?format=json&lang=eng&date=" + date + "&time=" + time + "&arrdep=arrival&station=" + station;
@@ -70,7 +71,7 @@ namespace SNCBAPI
         }
         public DataApiTrain GetTrain(string idTrain)
         {
-            DateTime datenow = DateTime.Now;
+            DateTime datenow = DateTime.UtcNow;
             string date = datenow.ToString("ddMMy");
             string url = addressAPI + "vehicle/?format=json&lang=eng&date=" + date + "&id=" + idTrain;
             var json = new WebClient().DownloadString(url);
@@ -88,7 +89,7 @@ namespace SNCBAPI
         }
         public DataApiTrain GetTrain(string idTrain,string StationName)
         {
-            DateTime datenow = DateTime.Now;
+            DateTime datenow = DateTime.UtcNow;
             string date = datenow.ToString("ddMMy");
             string url = addressAPI + "vehicle/?format=json&lang=eng&date=" + date + "&id=" + idTrain;
             var json = new WebClient().DownloadString(url);
@@ -117,10 +118,11 @@ namespace SNCBAPI
         }
         public DataApiConnection GetConnection(string dep,string arr)
         {
-            DateTime datenow = DateTime.Now;
+            DateTime datenow = DateTime.UtcNow;
+            datenow = datenow.AddHours(2);
             string time = datenow.ToString("HHmm");
             string date = datenow.ToString("ddMMy");
-            string url = addressAPI + "connections/?format=json&lang=eng&date=" + date + "&from="+ dep +"&to="+ arr +"&time="+time+"&timesel=departure"+ "&typeOfTransport=trains&alerts=false&results=6";
+            string url = addressAPI + "connections/?format=json&lang=eng&date=" + date + "&from="+ dep +"&to="+ arr +"&time="+time+"&timesel=departure"+ "&typeOfTransport=trains&alerts=false&results=10";
             var json = new WebClient().DownloadString(url);
             var dataAPI = JsonConvert.DeserializeObject<DataApiConnection>(json);
             foreach (Connection c in dataAPI.connection)

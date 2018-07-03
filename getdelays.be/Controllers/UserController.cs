@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using GetDelaysAPI;
+using Newtonsoft.Json;
 
 namespace getdelays.be.Controllers
 {
     public class UserController : Controller
     {
+        private static readonly HttpClient client = new HttpClient();
         // GET: Login
         public ActionResult Index()
         {
@@ -52,20 +56,31 @@ namespace getdelays.be.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult MakeAccount(string email,string name,string surname,string password,string phoneNumber)
+        public ActionResult MakeAccount(string email, string name, string surname, string password, string phoneNumber)
         {
-            IAPI api = new GetAll();
-            password = EncryptPassword(password);
-            User u = api.GetUser(email);
-            if (u==null)
+            string response = Request["g-recaptcha-response"];
+            var json = new WebClient().DownloadString("https://www.google.com/recaptcha/api/siteverify?secret=6Le9eGEUAAAAAJt22PAEWs18klrzAqzEeRnYTlJp&response=" + response);
+            var success = JsonConvert.DeserializeObject<GoogleResponseCaptcha>(json);
+            if(success.success)
             {
-                api.MakeAccount(email,name,surname,password,phoneNumber);
-                Session["user"] = api.GetUser(email);
-                return View("Login");
+                IAPI api = new GetAll();
+                password = EncryptPassword(password);
+                User u = api.GetUser(email);
+                if (u == null)
+                {
+                    api.MakeAccount(email, name, surname, password, phoneNumber);
+                    Session["user"] = api.GetUser(email);
+                    return View("Index");
+                }
+                else
+                {
+                    ViewBag.error = "An account is already link to this email.";
+                    return View("CreateAccount");
+                }
             }
             else
             {
-                ViewBag.error = "An account is already link to this email.";
+                ViewBag.error = "Captcha error";
                 return View("CreateAccount");
             }
         }

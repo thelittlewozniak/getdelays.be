@@ -30,7 +30,7 @@ namespace getdelays.be.Controllers
             train.vehicle = s.vehicle;
             foreach (SNCBAPI.Stop st in s.stops.stop)
             {
-                train.stops.Add(new GetDelaysAPI.Stop { delay = st.delay, id = st.id, station = st.station, platform = st.platform, time = st.tForView });
+                train.stops.Add(new GetDelaysAPI.Stop { delay = st.delay, id = st.id, station = st.station, platform = st.platform, time = st.time.ToString() });
             }
             return train;
         }

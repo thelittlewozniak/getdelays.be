@@ -123,8 +123,22 @@ namespace getdelays.be.Controllers
             }
             else
             {
-                api.UpdateUser(email,name,surname,phoneNumber, user);
+                Session["user"]=api.UpdateUser(email,name,surname,phoneNumber, user);
                 return View("Index");
+            }
+        }
+        public ActionResult Notification()
+        {
+            IAPI api = new GetAll();
+            User user = (User)Session["user"];
+            if (user == null)
+            {
+                return View("Login");
+            }
+            else
+            {
+                ViewBag.Notifications = api.GetNotificationStations(user);
+                return View();
             }
         }
         private string EncryptPassword(string password)
@@ -133,6 +147,5 @@ namespace getdelays.be.Controllers
             bytePassword = new System.Security.Cryptography.SHA256Managed().ComputeHash(bytePassword);
             return System.Text.Encoding.ASCII.GetString(bytePassword);
         }
-
     }
 }

@@ -20,5 +20,6 @@ namespace GetDelaysAPI
         Train GetTrain(string idTrain);
         Train GetTrainFromStation(string idTrain, string StationName);
         List<Connection> GetConnection(string dep, string arr);
+        List<NotificationStation> GetNotificationStations(User user);
     }
 }

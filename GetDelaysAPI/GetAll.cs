@@ -136,6 +136,13 @@ namespace GetDelaysAPI
             }
             return dataAPI;
         }
+        public List<NotificationStation> GetNotificationStations(User user)
+        {
+            string url = "http://apigetdelays.azurewebsites.net/api/user/GetNotificationStations?userid=" + user.Id;
+            var json = new WebClient().DownloadString(url);
+            var dataAPI = JsonConvert.DeserializeObject<List<NotificationStation>>(json);
+            return dataAPI;
+        }
         private string Encoder(string s)
         {
             byte[] bytes = Encoding.Default.GetBytes(s);

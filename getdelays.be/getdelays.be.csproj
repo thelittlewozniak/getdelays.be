@@ -198,6 +198,7 @@
     <Content Include="Views\User\CreateAccount.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\MakeChangeInformation.cshtml" />
+    <Content Include="Views\User\Notification.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

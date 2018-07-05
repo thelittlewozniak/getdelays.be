@@ -1,0 +1,38 @@
+﻿@using GetDelaysAPI;
+@{
+    ViewBag.Title = "Notifications";
+    List<NotificationStation> n = ViewBag.Notifications;
+}
+
+<h2>Notifications</h2>
+@if (n != null && n.Count >= 1)
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Station Name:</th>
+                <th scope="col">Delays:</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (NotificationStation s in n)
+            {
+                if(s.Priority=="normal")
+                {
+                    <tr class="table-success">
+                        <td>@Html.ActionLink(s.StationName, "GetStationsByName", "Station", routeValues: new { station = s.StationName }, htmlAttributes: null)</td>
+                        <td>@s.Delays minute</td>
+                    </tr>
+                }
+                if(s.Priority=="warning")
+                {
+                    <tr class="table-danger">
+                        <td>@Html.ActionLink(s.StationName, "GetStationsByName", "Station", routeValues: new { station = s.StationName }, htmlAttributes: null)</td>
+                        <td>@s.Delays minute</td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+}

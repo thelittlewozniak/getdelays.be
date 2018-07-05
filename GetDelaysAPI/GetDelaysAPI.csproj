@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionData\Connection.cs" />
+    <Compile Include="UserData\NotificationStation.cs" />
     <Compile Include="StationData\ArrivalDeparture.cs" />
     <Compile Include="StationData\Review.cs" />
     <Compile Include="StationData\Station.cs" />

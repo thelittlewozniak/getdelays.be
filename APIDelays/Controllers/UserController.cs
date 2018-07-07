@@ -90,7 +90,7 @@ namespace APIGetDelays.Controllers
             }
         }
         [HttpGet]
-        public api.getdelays.POCO.User UpdateUser(string email, string name, string surname, string phoneNumber, string userid)
+        public api.getdelays.POCO.User UpdateUser(string name, string surname, string phoneNumber, string userid)
         {
             IUser userDAL = new DALUser();
             api.getdelays.POCO.User user = userDAL.GetUser(Convert.ToInt32(userid));
@@ -100,7 +100,7 @@ namespace APIGetDelays.Controllers
             }
             else
             {
-                api.getdelays.POCO.User newUser = new api.getdelays.POCO.User { name = name, surname = surname, email = email, phoneNumber = Convert.ToInt32(phoneNumber) };
+                api.getdelays.POCO.User newUser = new api.getdelays.POCO.User { name = name, surname = surname, email = user.email, phoneNumber = Convert.ToInt32(phoneNumber) };
                 userDAL.UpdateUser(user, newUser);
                 return newUser;
             }
@@ -151,8 +151,27 @@ namespace APIGetDelays.Controllers
             api.getdelays.POCO.User u = userDAL.GetUser(Convert.ToInt32(userid));
             if (u != null)
             {
-                followedConnection.AddFollowedConnection(new api.getdelays.POCO.FollowedConnection { departure = arrival, arrival = arrival, DateTime = Convert.ToDateTime(time), repeat = Convert.ToBoolean(repeat), user = u });
-                u.followedConnections = followedConnection.GetFollowedConnections();
+                followedConnection.AddFollowedConnection(new api.getdelays.POCO.FollowedConnection { departure = departure, arrival = arrival, DateTime = Convert.ToDateTime(time), repeat = Convert.ToBoolean(repeat), user = u });
+                u.followedConnections = followedConnection.GetFollowedConnections(u);
+                return u;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        [Route("api/User/DeleteFollowConnection")]
+        [HttpGet]
+        public api.getdelays.POCO.User DeleteFollowConnection(string userid, string idConnection)
+        {
+            IFollowedConnection followedConnection = new DALFollowedConnection();
+            IUser userDAL = new DALUser();
+            api.getdelays.POCO.User u = userDAL.GetUser(Convert.ToInt32(userid));
+            if (u != null)
+            {
+                api.getdelays.POCO.FollowedConnection f = followedConnection.GetFollowedConnection(Convert.ToInt32(idConnection));
+                followedConnection.DeleteFollowedConnection(f);
+                u.followedConnections = followedConnection.GetFollowedConnections(u);
                 return u;
             }
             else
@@ -198,13 +217,17 @@ namespace APIGetDelays.Controllers
                             delays += arrdep.delay;
                         }
                     }
-                    if (delays > 0)
+                    if (delays >= 15 && delays <30)
                     {
                         listS.Add(new NotificationStation { StationName = s.stationName, Delays = delays, Priority = "warning" });
                     }
-                    else
+                    else if(delays<15 && delays>0)
                     {
                         listS.Add(new NotificationStation { StationName = s.stationName, Delays = delays, Priority = "normal" });
+                    }
+                    else if(delays>=30)
+                    {
+                        listS.Add(new NotificationStation { StationName = s.stationName, Delays = delays, Priority = "danger" });
                     }
                 }
             }

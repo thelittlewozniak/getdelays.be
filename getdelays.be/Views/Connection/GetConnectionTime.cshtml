@@ -1,0 +1,69 @@
+﻿@using GetDelaysAPI;
+
+@{
+    Connection connection = ViewBag.Connection;
+}
+@if (connection!=null)
+{
+    <h2> From @connection.departure.station to @connection.arrival.station</h2>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Station</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Delay</th>
+                    <th scope="col">Changes</th>
+                    <th scope="col">Train</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int nbr;
+                    DateTime trainHourArr = new DateTime();
+                    trainHourArr = trainHourArr.AddHours(2);
+                    trainHourArr = trainHourArr.AddSeconds(Convert.ToInt32(connection.arrival.time));
+                    DateTime trainHourDep = new DateTime();
+                    trainHourDep = trainHourDep.AddHours(2);
+                    trainHourDep = trainHourDep.AddSeconds(Convert.ToInt32(connection.departure.time));
+                    if (connection.vias == null)
+                    {
+                        nbr = 0;
+                    }
+                    else
+                    {
+                        nbr = connection.vias.Count();
+                    }
+                    <tr class="table-active">
+                        <td>
+                            From: @Html.ActionLink(connection.departure.station, "GetStationsByName", "Station", routeValues: new { station = connection.departure.station }, htmlAttributes: null)<br />
+                            To: @Html.ActionLink(connection.arrival.station, "GetStationsByName", "Station", routeValues: new { station = connection.arrival.station }, htmlAttributes: null)
+                        </td>
+                        <td>
+                            @trainHourDep.TimeOfDay<br />
+                            @trainHourArr.TimeOfDay
+                        </td>
+                        <td>
+                            @connection.departure.delay minutes<br />
+                            @connection.arrival.delay minutes
+                        </td>
+                        <td>@nbr</td>
+                        <td>
+                            @Html.ActionLink(connection.departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connection.departure.vehicle }, htmlAttributes: null)<br />
+                            @Html.ActionLink(connection.arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connection.arrival.vehicle }, htmlAttributes: null)
+                        </td>
+                    </tr>
+                    }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+}
+else
+{
+    <p>Sorry, no results found for this connection at this day.</p>
+}

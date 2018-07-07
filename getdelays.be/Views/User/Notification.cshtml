@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Notifications";
     List<NotificationStation> n = ViewBag.Notifications;
+    ViewBag.Number = n.Count;
 }
 
 <h2>Notifications</h2>
@@ -17,14 +18,21 @@
         <tbody>
             @foreach (NotificationStation s in n)
             {
-                if(s.Priority=="normal")
+                if (s.Priority == "normal")
                 {
                     <tr class="table-success">
                         <td>@Html.ActionLink(s.StationName, "GetStationsByName", "Station", routeValues: new { station = s.StationName }, htmlAttributes: null)</td>
                         <td>@s.Delays minute</td>
                     </tr>
                 }
-                if(s.Priority=="warning")
+                if (s.Priority == "warning")
+                {
+                    <tr class="table-warning">
+                        <td>@Html.ActionLink(s.StationName, "GetStationsByName", "Station", routeValues: new { station = s.StationName }, htmlAttributes: null)</td>
+                        <td>@s.Delays minute</td>
+                    </tr>
+                }
+                if (s.Priority == "danger")
                 {
                     <tr class="table-danger">
                         <td>@Html.ActionLink(s.StationName, "GetStationsByName", "Station", routeValues: new { station = s.StationName }, htmlAttributes: null)</td>

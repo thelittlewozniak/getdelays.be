@@ -16,7 +16,7 @@
                     <th scope="col">Station</th>
                     <th scope="col">Time</th>
                     <th scope="col">Delay</th>
-                    <th scope="col">Number of changes</th>
+                    <th scope="col">Changes</th>
                     <th scope="col">Train</th>
                 </tr>
             </thead>
@@ -40,68 +40,64 @@
                     }
                     if (i % 2 == 0)
                     {
-                        <tr class="table-primary">
-                            <td>
-                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
-                                    <li>From: @Html.ActionLink(connections[i].departure.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].departure.station }, htmlAttributes: null)</li>
-                                    <li>To: @Html.ActionLink(connections[i].arrival.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].arrival.station }, htmlAttributes: null)</li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
-                                    <li>@trainHourDep.TimeOfDay</li>
-                                    <li>@trainHourArr.TimeOfDay</li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
-                                    <li>@connections[i].departure.delay minutes</li>
-                                    <li>@connections[i].arrival.delay minutes</li>
-                                </ul>
-                            </td>
-                            <td>@nbr</td>
-                            <td>
-                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
-                                    <li>@Html.ActionLink(connections[i].departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].departure.vehicle }, htmlAttributes: null)</li>
-                                    <li>@Html.ActionLink(connections[i].arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].arrival.vehicle }, htmlAttributes: null)</li>
-                                </ul>
-                            </td>
-                        </tr>
+                <tr class="table-active">
+                    <td>
+                        From: @Html.ActionLink(connections[i].departure.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].departure.station }, htmlAttributes: null)<br />
+                        To: @Html.ActionLink(connections[i].arrival.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].arrival.station }, htmlAttributes: null)
+                    </td>
+                    <td>
+                        @trainHourDep.TimeOfDay<br />
+                        @trainHourArr.TimeOfDay
+                    </td>
+                    <td>
+                        @connections[i].departure.delay minutes<br />
+                        @connections[i].arrival.delay minutes
+                    </td>
+                    <td>@nbr</td>
+                    <td>
+                        @Html.ActionLink(connections[i].departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].departure.vehicle }, htmlAttributes: null)<br />
+                        @Html.ActionLink(connections[i].arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].arrival.vehicle }, htmlAttributes: null)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/FollowConnection?arrival=@connections[i].arrival.station&departure=@connections[i].departure.station&time=@connections[i].departure.time';">Follow This Station</button>
+                    </td>
+                </tr>
 
                     }
                     else
                     {
                         <tr>
                             <td>
-                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
-                                    <li>From: @Html.ActionLink(connections[i].departure.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].departure.station }, htmlAttributes: null)</li>
-                                    <li>To: @Html.ActionLink(connections[i].arrival.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].arrival.station }, htmlAttributes: null)</li>
-                                </ul>
+                                From: @Html.ActionLink(connections[i].departure.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].departure.station }, htmlAttributes: null)<br />
+                                To: @Html.ActionLink(connections[i].arrival.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].arrival.station }, htmlAttributes: null)
                             </td>
                             <td>
-                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
-                                    <li>@trainHourDep.TimeOfDay</li>
-                                    <li>@trainHourArr.TimeOfDay</li>
-                                </ul>
+                                @trainHourDep.TimeOfDay<br />
+                                @trainHourArr.TimeOfDay
                             </td>
                             <td>
-                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
-                                    <li>@connections[i].departure.delay minutes</li>
-                                    <li>@connections[i].arrival.delay minutes</li>
-                                </ul>
+                                @connections[i].departure.delay minutes<br />
+                                @connections[i].arrival.delay minutes
                             </td>
                             <td>@nbr</td>
                             <td>
-                                <ul style="list-style-type: none;margin-left:0;padding-left:0;">
-                                    <li>@Html.ActionLink(connections[i].departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].departure.vehicle }, htmlAttributes: null)</li>
-                                    <li>@Html.ActionLink(connections[i].arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].arrival.vehicle }, htmlAttributes: null)</li>
-                                </ul>
+                                @Html.ActionLink(connections[i].departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].departure.vehicle }, htmlAttributes: null)<br />
+                                @Html.ActionLink(connections[i].arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].arrival.vehicle }, htmlAttributes: null)
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/FollowConnection?arrival=@connections[i].arrival.station&departure=@connections[i].departure.station&time=@connections[i].departure.time';">Follow This Station</button>
                             </td>
                         </tr>
 
                     }
                 }
             </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 }

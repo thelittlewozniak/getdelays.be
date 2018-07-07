@@ -37,7 +37,7 @@
         <tbody>
             @foreach (FollowedStation fs in u.followedStations)
             {
-                <tr class="table-primary">
+                <tr class="table-active">
                     <td> @Html.ActionLink(fs.stationName, "GetStationsByName", "Station", routeValues: new { station = fs.stationName }, htmlAttributes: null)</td>
                     <td>@Html.ActionLink("Delete", "DeleteFollowStationProfile", "Station", routeValues: new { station = fs.stationName }, htmlAttributes: null)</td>
                 </tr>
@@ -46,23 +46,26 @@
         </tbody>
     </table>
 }
+<h3>Followed Connections</h3>
 @if (u.followedConnections != null && u.followedConnections.Count >= 1)
 {
-    <table>
-        <caption>Followed Connections:</caption>
+    <table class="table table-hover">
         <thead>
             <tr>
-                <td>Departure Station</td>
-                <td>Arrival Station</td>
+                <td scope="col">Departure Station</td>
+                <td scope="col">Arrival Station</td>
+                <td scope="col">Time</td>
+                <td scope="col">Edits</td>
             </tr>
         </thead>
         @foreach (FollowedConnection fc in u.followedConnections)
         {
-            <tr class="Arrival">
-                <td> @Html.ActionLink(fc.departure, "GetStationsByName", "Station", routeValues: new { station = fc.departure }, htmlAttributes: null))</td>
-                <td> @Html.ActionLink(fc.arrival, "GetStationsByName", "Station", routeValues: new { station = fc.arrival }, htmlAttributes: null))</td>
+            <tr class="table-active">
+                <td> @Html.ActionLink(fc.departure, "GetStationsByName", "Station", routeValues: new { station = fc.departure }, htmlAttributes: null)</td>
+                <td> @Html.ActionLink(fc.arrival, "GetStationsByName", "Station", routeValues: new { station = fc.arrival }, htmlAttributes: null)</td>
                 <td> @fc.DateTime</td>
-                <td> Edit</td>
+                <td><button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/GetConnectionTime?arr=@fc.arrival&dep=@fc.departure&time=@fc.DateTime';">Details</button></td>
+                <td> @Html.ActionLink("Delete", "DeleteFollowConnectionProfile", "Connection", routeValues: new { ConnectionId = fc.Id }, htmlAttributes: null)</td>
             </tr>
         }
     </table>

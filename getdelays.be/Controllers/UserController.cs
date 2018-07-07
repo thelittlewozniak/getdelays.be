@@ -27,7 +27,14 @@ namespace getdelays.be.Controllers
         }
         public ActionResult ConnectionPage()
         {
-            return View("Login");
+            if(Session["user"]==null)
+            {
+                return View("Login");
+            }
+            else
+            {
+                return View("Index");
+            }
         }
         [HttpPost]
         public ActionResult Login(string email,string password)
@@ -113,7 +120,7 @@ namespace getdelays.be.Controllers
             }
         }
         [HttpPost]
-        public ActionResult MakeChange(string email, string name, string surname, string phoneNumber)
+        public ActionResult MakeChange(string name, string surname, string phoneNumber)
         {
             IAPI api = new GetAll();
             User user = (User)Session["user"];
@@ -123,7 +130,7 @@ namespace getdelays.be.Controllers
             }
             else
             {
-                Session["user"]=api.UpdateUser(email,name,surname,phoneNumber, user);
+                Session["user"]=api.UpdateUser(name,surname,phoneNumber, user);
                 return View("Index");
             }
         }

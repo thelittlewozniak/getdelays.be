@@ -13,5 +13,6 @@ namespace SNCBAPI
         DataApiTrain GetTrain(string idTrain);
         DataApiTrain GetTrain(string idTrain, string StationName);
         DataApiConnection GetConnection(string dep, string arr);
+        DataApiConnection GetConnection(string dep, string arr, DateTime datetime);
     }
 }

@@ -12,9 +12,6 @@ namespace getdelays.be.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            IAPI api = new GetAll();
-            ViewBag.CountStation = api.SearchStation().Count();
-            ViewBag.s = api.SearchStation();
             return View();
         }
         public ActionResult error()

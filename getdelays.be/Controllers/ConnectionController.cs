@@ -21,7 +21,7 @@ namespace getdelays.be.Controllers
             ViewBag.s = api.SearchStation();
             return View();
         }
-        [HttpPost]
+        [HttpGet]
         public ActionResult GetConnection(string dep, string arr)
         {
             if(dep!=null && arr!=null)
@@ -42,5 +42,70 @@ namespace getdelays.be.Controllers
                 return RedirectToAction("SearchConnection", "Connection");
             }
         }
+        [HttpGet]
+        public ActionResult GetConnectionTime(string dep, string arr,string time)
+        {
+            if (dep != null && arr != null)
+            {
+                if (dep != "" && arr != "")
+                {
+                    IAPI api = new GetAll();
+                    ViewBag.Connection = api.GetConnection(dep, arr,Convert.ToDateTime(time));
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("SearchConnection", "Connection");
+                }
+            }
+            else
+            {
+                return RedirectToAction("SearchConnection", "Connection");
+            }
+        }
+
+        public ActionResult FollowConnection(string arrival,string departure,string time)
+        {
+            User u = (User)Session["user"];
+            IAPI api = new GetAll();
+            if (u != null)
+            {
+                Session["user"] = api.FollowConnection(arrival,departure,time,"true",u);
+                return RedirectToAction("GetConnection", "Connection", new { dep=departure, arr=arrival });
+            }
+            else
+            {
+                return RedirectToAction("ConnectionPage", "User");
+            }
+        }
+        public ActionResult DeleteFollowConnectionProfile(string ConnectionId)
+        {
+            User u = (User)Session["user"];
+            IAPI api = new GetAll();
+            if (u != null)
+            {
+                Session["user"] = api.DeleteFollowConnection(ConnectionId,u);
+                return RedirectToAction("Index", "User");
+            }
+            else
+            {
+                return RedirectToAction("ConnectionPage", "User");
+            }
+        }
+        public ActionResult DeleteFollowConnectionCOnnection(string ConnectionId)
+        {
+            User u = (User)Session["user"];
+            IAPI api = new GetAll();
+            if (u != null)
+            {
+                Session["user"] = api.DeleteFollowConnection(ConnectionId, u);
+                return RedirectToAction("SearchConnection", "Connection");
+            }
+            else
+            {
+                return RedirectToAction("ConnectionPage", "User");
+            }
+        }
+
     }
 }

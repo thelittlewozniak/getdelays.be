@@ -5,12 +5,12 @@
 }
 
 <h2>Search a Station</h2>
-<ul>
+<ul class="list-group">
     <li id="search">
-        <input type="text" id="stat" onkeydown="ListStation()" />
+        <input type="text" id="stat" onkeyup="ListStation()" />
     </li>
     @foreach (StationData s in stat)
     {
-        <li class="station" style="display:none">@Html.ActionLink(s.name, "GetStationsByName", "Station", routeValues: new { station = s.name }, htmlAttributes: null)</li>
+        <li class="station list-group-item list-group-item-action">@Html.ActionLink(s.name, "GetStationsByName", "Station", routeValues: new { station = s.name }, htmlAttributes: null)</li>
     }
 </ul>

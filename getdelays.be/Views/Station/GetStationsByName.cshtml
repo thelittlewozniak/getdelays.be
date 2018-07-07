@@ -5,6 +5,8 @@
     Station s = ViewBag.station;
     User u = (User)Session["user"];
     bool seen = true;
+    double nbrfrom = Math.Ceiling(Convert.ToDouble(s.arrivals.Count) / 8.0);
+    double nbrto = Math.Ceiling(Convert.ToDouble(s.departures.Count) / 8.0);
 }
 <h2>@s.stationinfo.name</h2>
 @if (u != null)
@@ -15,25 +17,25 @@
         {
             if (fo.stationName == s.stationinfo.name)
             {
-                @Html.ActionLink("Unfollow this station", "DeleteFollowStationStation", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
-                seen=false;
+                <button type="button" class="btn btn-primary" onclick="window.location.href = '/Station/DeleteFollowStationStation?station=@s.stationinfo.name';">Unfollow This Station</button>
+                seen = false;
 
             }
         }
         if (seen)
         {
-            @Html.ActionLink("Follow this station", "FollowStation", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
+            <button type="button" class="btn btn-primary" onclick="window.location.href = '/Station/FollowStation?station=@s.stationinfo.name';">Follow This Station</button>
         }
 
     }
     else
     {
-        @Html.ActionLink("Follow this station", "FollowStation", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
+        <button type="button" class="btn btn-primary" onclick="window.location.href = '/Station/FollowStation?station=@s.stationinfo.name';">Follow This Station</button>
     }
 }
 else
 {
-    @Html.ActionLink("Follow this station", "FollowStation", "Station", routeValues: new { station = s.stationinfo.name }, htmlAttributes: null)
+    <button type="button" class="btn btn-primary" onclick="window.location.href = '/Station/FollowStation?station=@s.stationinfo.name';">Follow This Station</button>
 }
 <p>Rating : @s.stationinfo.rating</p>
 <div id="map"></div>
@@ -48,9 +50,10 @@ function initMap() {
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjpoXXWhFi4r1D5d5_1tF-bzeeFRpmfG0&callback=initMap">
 </script>
-<a id="linkInfo" href="#" onclick="ChangeVisibility('InfoStation')">See more...</a>
+<br />
+<button type="button" id="linkInfo" class="btn btn-primary btn-lg btn-block" onclick="ChangeVisibility('InfoStation')">See more...</button>
 <div id="InfoStation">
-    @if (s.stationinfo.opening_hours != null)
+    @if (s.stationinfo.opening_hours != null && s.stationinfo.opening_hours.Count > 1)
     {
         <table class="table table-hover">
             <thead>
@@ -61,14 +64,14 @@ function initMap() {
             <tbody>
                 @foreach (string h in s.stationinfo.opening_hours)
                 {
-                    <tr>
+                    <tr class="table-active">
                         <td>@h</td>
                     </tr>
                 }
             </tbody>
         </table>
     }
-    @if (s.stationinfo.reviews != null)
+    @if (s.stationinfo.reviews != null && s.stationinfo.reviews.Count > 1)
     {
         <table class="table table-hover">
             <thead>
@@ -82,13 +85,13 @@ function initMap() {
                     {
                         if (i % 2 == 0)
                         {
-                            <tr class="table-primary">
+                            <tr class="table-active">
                                 <th scope="row">Author:</th>
                                 <td colspan="2">@s.stationinfo.reviews[i].author_name</td>
                                 <th scope="row" style="text-align:right">Rating:</th>
                                 <td>@s.stationinfo.reviews[i].rating</td>
                             </tr>
-                            <tr class="table-primary">
+                            <tr class="table-active">
                                 <th scope="row">Description:</th>
                                 <td colspan="4">@s.stationinfo.reviews[i].text</td>
                             </tr>
@@ -131,11 +134,11 @@ function initMap() {
         trainHour = trainHour.AddHours(2);
         trainHour = trainHour.AddSeconds(Convert.ToInt32(s.arrivals[i].time));
 
-        if (i < 15)
+        if (i < 8)
         {
             if (i % 2 == 0)
             {
-                <tr class="table-primary">
+                <tr class="table-active">
                     <td>@s.arrivals[i].station</td>
                     <td>@trainHour.TimeOfDay</td>
                     <td>@s.arrivals[i].delay minutes</td>
@@ -156,7 +159,7 @@ function initMap() {
         {
             if (i % 2 == 0)
             {
-                <tr class="table-primary Arrival" style="display:none">
+                <tr class="table-active Arrival" style="display:none">
                     <td>@s.arrivals[i].station</td>
                     <td>@trainHour.TimeOfDay</td>
                     <td>@s.arrivals[i].delay minutes</td>
@@ -176,8 +179,8 @@ function initMap() {
     }
     <tfoot>
         <tr>
-            <td colspan="4">
-                <a href="#" id="arr" onclick="Display('Arrival','0')">See more...</a>
+            <td>
+                <button type="button" id="arr" class="btn btn-primary" onclick="Display('Arrival','0')">See more...</button>
             </td>
         </tr>
     </tfoot>
@@ -197,11 +200,11 @@ function initMap() {
             DateTime trainHour = new DateTime();
             trainHour = trainHour.AddHours(2);
             trainHour = trainHour.AddSeconds(Convert.ToInt32(s.departures[i].time));
-            if (i < 15)
+            if (i < 8)
             {
                 if (i % 2 == 0)
                 {
-                    <tr class="table-primary">
+                    <tr class="table-active">
                         <td>@s.departures[i].station</td>
                         <td>@trainHour.TimeOfDay</td>
                         <td>@s.departures[i].delay minutes</td>
@@ -222,7 +225,7 @@ function initMap() {
             {
                 if (i % 2 == 0)
                 {
-                    <tr class="table-primary Departure" style="display:none">
+                    <tr class="table-active Departure" style="display:none">
                         <td>@s.departures[i].station</td>
                         <td>@trainHour.TimeOfDay</td>
                         <td>@s.departures[i].delay minutes</td>
@@ -244,7 +247,7 @@ function initMap() {
     <tfoot>
         <tr>
             <td colspan="4">
-                <a href="#" id="dep" onclick="Display('Departure','1')">See more...</a>
+                <button type="button" id="dep" class="btn btn-primary" onclick="Display('Departure','1')">See more...</button>
             </td>
         </tr>
     </tfoot>

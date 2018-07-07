@@ -23,8 +23,10 @@
             DateTime trainHour = new DateTime();
             trainHour = trainHour.AddHours(2);
             trainHour = trainHour.AddSeconds(Convert.ToInt32(a.time));
-            TimeSpan delay = new TimeSpan(0, a.delay, 0);
-            if (trainHour.TimeOfDay + delay < now.TimeOfDay)
+            int year = DateTime.Now.Year - trainHour.Year;
+            trainHour = trainHour.AddYears(year);
+            trainHour = trainHour.AddSeconds(a.delay);
+            if (trainHour < now)
             {
                 <tr class="table-danger">
                     <td>@a.station</td>

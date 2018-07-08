@@ -92,14 +92,14 @@ namespace getdelays.be.Controllers
                 return RedirectToAction("ConnectionPage", "User");
             }
         }
-        public ActionResult DeleteFollowConnectionCOnnection(string ConnectionId)
+        public ActionResult DeleteFollowConnectionConnection(string ConnectionId,string departure,string arrival)
         {
             User u = (User)Session["user"];
             IAPI api = new GetAll();
             if (u != null)
             {
                 Session["user"] = api.DeleteFollowConnection(ConnectionId, u);
-                return RedirectToAction("SearchConnection", "Connection");
+                return RedirectToAction("GetConnection", "Connection", new { dep = departure, arr = arrival });
             }
             else
             {

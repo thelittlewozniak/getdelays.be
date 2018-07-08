@@ -24,5 +24,6 @@ namespace GetDelaysAPI
         List<Connection> GetConnection(string dep, string arr);
         Connection GetConnection(string dep, string arr, DateTime date);
         List<NotificationStation> GetNotificationStations(User user);
+        List<NotificationConnection> GetNotificationConnections(User user);
     }
 }

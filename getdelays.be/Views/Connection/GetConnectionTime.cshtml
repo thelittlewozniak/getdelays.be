@@ -13,7 +13,6 @@
                     <th scope="col">Station</th>
                     <th scope="col">Time</th>
                     <th scope="col">Delay</th>
-                    <th scope="col">Changes</th>
                     <th scope="col">Train</th>
                 </tr>
             </thead>
@@ -26,14 +25,6 @@
                     DateTime trainHourDep = new DateTime();
                     trainHourDep = trainHourDep.AddHours(2);
                     trainHourDep = trainHourDep.AddSeconds(Convert.ToInt32(connection.departure.time));
-                    if (connection.vias == null)
-                    {
-                        nbr = 0;
-                    }
-                    else
-                    {
-                        nbr = connection.vias.Count();
-                    }
                     <tr class="table-active">
                         <td>
                             From: @Html.ActionLink(connection.departure.station, "GetStationsByName", "Station", routeValues: new { station = connection.departure.station }, htmlAttributes: null)<br />
@@ -47,7 +38,6 @@
                             @connection.departure.delay minutes<br />
                             @connection.arrival.delay minutes
                         </td>
-                        <td>@nbr</td>
                         <td>
                             @Html.ActionLink(connection.departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connection.departure.vehicle }, htmlAttributes: null)<br />
                             @Html.ActionLink(connection.arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connection.arrival.vehicle }, htmlAttributes: null)

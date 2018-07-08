@@ -144,7 +144,8 @@ namespace getdelays.be.Controllers
             }
             else
             {
-                ViewBag.Notifications = api.GetNotificationStations(user);
+                ViewBag.NotificationStations = api.GetNotificationStations(user);
+                ViewBag.NotificationConnections = api.GetNotificationConnections(user);
                 return View();
             }
         }

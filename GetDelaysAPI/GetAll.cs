@@ -260,7 +260,7 @@ namespace GetDelaysAPI
         }
         public List<NotificationStation> GetNotificationStations(User user)
         {
-            if(user!=null)
+            if (user != null)
             {
                 string url = "http://apigetdelays.azurewebsites.net/api/user/GetNotificationStations?userid=" + user.Id;
                 var json = new WebClient().DownloadString(url);
@@ -268,6 +268,25 @@ namespace GetDelaysAPI
                 foreach (NotificationStation s in dataAPI)
                 {
                     s.StationName = Encoder(s.StationName);
+                }
+                return dataAPI;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public List<NotificationConnection> GetNotificationConnections(User user)
+        {
+            if (user != null)
+            {
+                string url = "http://apigetdelays.azurewebsites.net/api/user/GetNotificationConnection?userid=" + user.Id;
+                var json = new WebClient().DownloadString(url);
+                var dataAPI = JsonConvert.DeserializeObject<List<NotificationConnection>>(json);
+                foreach (NotificationConnection s in dataAPI)
+                {
+                    s.Arrival = Encoder(s.Arrival);
+                    s.Departure = Encoder(s.Departure);
                 }
                 return dataAPI;
             }

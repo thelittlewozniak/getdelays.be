@@ -24,9 +24,9 @@
         <td>@u.phoneNumber</td>
     </tr>
 </table>
-<h3>Followed Stations</h3>
 @if (u.followedStations != null && u.followedStations.Count >= 1)
 {
+    <h3>Followed Stations</h3>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -46,14 +46,13 @@
         </tbody>
     </table>
 }
-<h3>Followed Connections</h3>
 @if (u.followedConnections != null && u.followedConnections.Count >= 1)
 {
+    <h3>Followed Connections</h3>
     <table class="table table-hover">
         <thead>
             <tr>
-                <td scope="col">Departure Station</td>
-                <td scope="col">Arrival Station</td>
+                <td scope="col">Connection</td>
                 <td scope="col">Time</td>
                 <td scope="col">Edits</td>
             </tr>
@@ -61,10 +60,8 @@
         @foreach (FollowedConnection fc in u.followedConnections)
         {
             <tr class="table-active">
-                <td> @Html.ActionLink(fc.departure, "GetStationsByName", "Station", routeValues: new { station = fc.departure }, htmlAttributes: null)</td>
-                <td> @Html.ActionLink(fc.arrival, "GetStationsByName", "Station", routeValues: new { station = fc.arrival }, htmlAttributes: null)</td>
+                <td> @Html.ActionLink("from " + fc.departure + " to " + fc.arrival, "GetConnectionTime", "Connection", routeValues: new { dep = fc.departure, arr = fc.arrival, time = fc.DateTime }, htmlAttributes: null)</td>
                 <td> @fc.DateTime</td>
-                <td><button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/GetConnectionTime?arr=@fc.arrival&dep=@fc.departure&time=@fc.DateTime';">Details</button></td>
                 <td> @Html.ActionLink("Delete", "DeleteFollowConnectionProfile", "Connection", routeValues: new { ConnectionId = fc.Id }, htmlAttributes: null)</td>
             </tr>
         }

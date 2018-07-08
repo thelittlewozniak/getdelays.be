@@ -1,9 +1,9 @@
 ﻿@using GetDelaysAPI;
 
 @{
-                /**/
-
-                List<Connection> connections = ViewBag.Connections;
+    List<Connection> connections = ViewBag.Connections;
+    User u = (User)Session["user"];
+    bool seen = true;
 }
 @if (connections.Count > 0)
 {
@@ -27,46 +27,16 @@
                     DateTime trainHourArr = new DateTime();
                     trainHourArr = trainHourArr.AddHours(2);
                     trainHourArr = trainHourArr.AddSeconds(Convert.ToInt32(connections[i].arrival.time));
+                    int yearArr = DateTime.Now.Year - trainHourArr.Year;
+                    trainHourArr = trainHourArr.AddYears(yearArr);
                     DateTime trainHourDep = new DateTime();
                     trainHourDep = trainHourDep.AddHours(2);
                     trainHourDep = trainHourDep.AddSeconds(Convert.ToInt32(connections[i].departure.time));
-                    if (connections[i].vias == null)
-                    {
-                        nbr = 0;
-                    }
-                    else
-                    {
-                        nbr = connections[i].vias.Count();
-                    }
+                    int yearDep = DateTime.Now.Year - trainHourDep.Year;
+                    trainHourDep = trainHourDep.AddYears(yearDep);
                     if (i % 2 == 0)
                     {
-                <tr class="table-active">
-                    <td>
-                        From: @Html.ActionLink(connections[i].departure.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].departure.station }, htmlAttributes: null)<br />
-                        To: @Html.ActionLink(connections[i].arrival.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].arrival.station }, htmlAttributes: null)
-                    </td>
-                    <td>
-                        @trainHourDep.TimeOfDay<br />
-                        @trainHourArr.TimeOfDay
-                    </td>
-                    <td>
-                        @connections[i].departure.delay minutes<br />
-                        @connections[i].arrival.delay minutes
-                    </td>
-                    <td>@nbr</td>
-                    <td>
-                        @Html.ActionLink(connections[i].departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].departure.vehicle }, htmlAttributes: null)<br />
-                        @Html.ActionLink(connections[i].arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].arrival.vehicle }, htmlAttributes: null)
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/FollowConnection?arrival=@connections[i].arrival.station&departure=@connections[i].departure.station&time=@connections[i].departure.time';">Follow This Station</button>
-                    </td>
-                </tr>
-
-                    }
-                    else
-                    {
-                        <tr>
+                        <tr class="table-active">
                             <td>
                                 From: @Html.ActionLink(connections[i].departure.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].departure.station }, htmlAttributes: null)<br />
                                 To: @Html.ActionLink(connections[i].arrival.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].arrival.station }, htmlAttributes: null)
@@ -79,18 +49,94 @@
                                 @connections[i].departure.delay minutes<br />
                                 @connections[i].arrival.delay minutes
                             </td>
-                            <td>@nbr</td>
                             <td>
                                 @Html.ActionLink(connections[i].departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].departure.vehicle }, htmlAttributes: null)<br />
                                 @Html.ActionLink(connections[i].arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].arrival.vehicle }, htmlAttributes: null)
                             </td>
                             <td>
-                                <button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/FollowConnection?arrival=@connections[i].arrival.station&departure=@connections[i].departure.station&time=@connections[i].departure.time';">Follow This Station</button>
+                                @if (u != null)
+                                {
+                                    seen = true;
+                                    if (u.followedConnections != null && u.followedConnections.Count > 1)
+                                    {
+                                        foreach (FollowedConnection f in u.followedConnections)
+                                        {
+                                            if (trainHourDep == f.DateTime && connections[i].departure.station == f.departure && connections[i].arrival.station == f.arrival)
+                                            {
+                                                <button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/DeleteFollowConnectionConnection?ConnectionId=@f.Id&departure=@f.departure&arrival=@f.arrival';">Unfollow</button>
+                                                seen = false;
+                                            }
+                                        }
+                                        if (seen)
+                                        {
+                                            <button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/FollowConnection?arrival=@connections[i].arrival.station&departure=@connections[i].departure.station&time=@connections[i].departure.time';">Follow</button>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/FollowConnection?arrival=@connections[i].arrival.station&departure=@connections[i].departure.station&time=@connections[i].departure.time';">Follow</button>
+                                    }
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/FollowConnection?arrival=@connections[i].arrival.station&departure=@connections[i].departure.station&time=@connections[i].departure.time';">Follow</button>
+                                }
                             </td>
-                        </tr>
+                            </tr>
 
-                    }
-                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>
+                                        From: @Html.ActionLink(connections[i].departure.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].departure.station }, htmlAttributes: null)<br />
+                                        To: @Html.ActionLink(connections[i].arrival.station, "GetStationsByName", "Station", routeValues: new { station = connections[i].arrival.station }, htmlAttributes: null)
+                                    </td>
+                                    <td>
+                                        @trainHourDep.TimeOfDay<br />
+                                        @trainHourArr.TimeOfDay
+                                    </td>
+                                    <td>
+                                        @connections[i].departure.delay minutes<br />
+                                        @connections[i].arrival.delay minutes
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink(connections[i].departure.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].departure.vehicle }, htmlAttributes: null)<br />
+                                        @Html.ActionLink(connections[i].arrival.vehicle, "GetTrain", "Train", routeValues: new { idTrain = connections[i].arrival.vehicle }, htmlAttributes: null)
+                                    </td>
+                                    <td>
+                                        @if (u != null)
+                                        {
+                                            seen=true;
+                                            if (u.followedConnections != null && u.followedConnections.Count > 1)
+                                            {
+                                                foreach (FollowedConnection f in u.followedConnections)
+                                                {
+                                                    if (trainHourDep == f.DateTime && connections[i].departure.station == f.departure && connections[i].arrival.station == f.arrival)
+                                                    {
+                                                        <button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/DeleteFollowConnectionConnection?ConnectionId=@f.Id&departure=@f.departure&arrival=@f.arrival';">Unfollow</button>
+                                                        seen = false;
+                                                    }
+                                                }
+                                                if (seen)
+                                                {
+                                                    <button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/FollowConnection?arrival=@connections[i].arrival.station&departure=@connections[i].departure.station&time=@connections[i].departure.time';">Follow</button>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/FollowConnection?arrival=@connections[i].arrival.station&departure=@connections[i].departure.station&time=@connections[i].departure.time';">Follow</button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="btn btn-primary" onclick="window.location.href = '/Connection/FollowConnection?arrival=@connections[i].arrival.station&departure=@connections[i].departure.station&time=@connections[i].departure.time';">Follow</button>
+                                        }
+                                    </td>
+                                </tr>
+
+                            }
+                        }
             </tbody>
             <tfoot>
                 <tr>

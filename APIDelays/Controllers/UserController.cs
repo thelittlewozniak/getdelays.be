@@ -100,7 +100,7 @@ namespace APIGetDelays.Controllers
             }
             else
             {
-                api.getdelays.POCO.User newUser = new api.getdelays.POCO.User { name = name, surname = surname, email = user.email, phoneNumber = Convert.ToInt32(phoneNumber) };
+                api.getdelays.POCO.User newUser = new api.getdelays.POCO.User {Id=Convert.ToInt32(userid), name = name, surname = surname, email = user.email, phoneNumber = Convert.ToInt32(phoneNumber),followedConnections=user.followedConnections,followedStations=user.followedStations };
                 userDAL.UpdateUser(user, newUser);
                 return newUser;
             }
@@ -230,8 +230,63 @@ namespace APIGetDelays.Controllers
                         listS.Add(new NotificationStation { StationName = s.stationName, Delays = delays, Priority = "danger" });
                     }
                 }
+                return listS;
             }
-            return listS;
+            else
+            {
+                return null;
+            }
         }
+        [Route("api/User/GetNotificationConnection")]
+        [HttpGet]
+        public List<NotificationConnection> GetNotificationConnections(string userid)
+        {
+            IUser userDAL = new DALUser();
+            api.getdelays.POCO.User u = userDAL.GetUser(Convert.ToInt32(userid));
+            List<NotificationConnection> listS = new List<NotificationConnection>();
+            IGetAll newaccessapi = SNCBAPI.GetAll.Instance();
+            DateTime now = DateTime.UtcNow;
+            now = now.AddHours(2);
+            if (u != null)
+            {
+                foreach (api.getdelays.POCO.FollowedConnection s in u.followedConnections)
+                {
+                    DataApiConnection stat = newaccessapi.GetConnection(s.departure,s.arrival,s.DateTime);
+                    foreach (SNCBAPI.Connection c in stat.connection)
+                    {
+                        DateTime hourTrain = new DateTime();
+                        hourTrain = hourTrain.AddHours(2);
+                        hourTrain = hourTrain.AddSeconds(c.departure.time);
+                        int year = DateTime.Now.Year - hourTrain.Year;
+                        hourTrain = hourTrain.AddYears(year);
+                        if (s.DateTime.TimeOfDay == hourTrain.TimeOfDay)
+                        {
+                            hourTrain = hourTrain.AddMinutes(c.departure.delay);
+                            if(hourTrain.TimeOfDay>now.TimeOfDay)
+                            {
+                                if (c.departure.delay >= 15 && c.departure.delay < 30)
+                                {
+                                    listS.Add(new NotificationConnection { Arrival = s.arrival, Departure = s.departure, DelaysArrival = Convert.ToInt32(c.arrival.delay), DelaysDeparture = Convert.ToInt32(c.departure.delay), Time = hourTrain, Priority = "warning" });
+                                }
+                                else if (c.departure.delay < 15 && c.departure.delay >= 0)
+                                {
+                                    listS.Add(new NotificationConnection { Arrival = s.arrival, Departure = s.departure, DelaysArrival = Convert.ToInt32(c.arrival.delay), DelaysDeparture = Convert.ToInt32(c.departure.delay), Time = hourTrain, Priority = "normal" });
+                                }
+                                else if (c.departure.delay >= 30)
+                                {
+                                    listS.Add(new NotificationConnection { Arrival = s.arrival, Departure = s.departure, DelaysArrival = Convert.ToInt32(c.arrival.delay), DelaysDeparture = Convert.ToInt32(c.departure.delay), Priority = "danger" });
+                                }
+                            }
+                        }
+                    }
+                }
+                return listS;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

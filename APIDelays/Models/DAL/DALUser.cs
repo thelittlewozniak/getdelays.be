@@ -47,7 +47,7 @@ namespace api.getdelays.DAL
             context.Users.SingleOrDefault(us => us.Id == u.Id).name = newu.name;
             context.Users.SingleOrDefault(us => us.Id == u.Id).surname = newu.surname;
             context.Users.SingleOrDefault(us => us.Id == u.Id).email = newu.email;
-            context.Users.SingleOrDefault(us => us.Id == u.Id).email = newu.email;
+            context.Users.SingleOrDefault(us => us.Id == u.Id).phoneNumber = newu.phoneNumber;
             context.SaveChanges();
         }
         private string EncryptPassword(string password)

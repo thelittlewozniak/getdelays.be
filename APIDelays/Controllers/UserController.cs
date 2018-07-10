@@ -264,6 +264,7 @@ namespace APIGetDelays.Controllers
                             hourTrain = hourTrain.AddMinutes(c.departure.delay);
                             if(hourTrain.TimeOfDay>now.TimeOfDay)
                             {
+                                hourTrain = hourTrain.AddMinutes(-c.departure.delay);
                                 if (c.departure.delay >= 15 && c.departure.delay < 30)
                                 {
                                     listS.Add(new NotificationConnection { Arrival = s.arrival, Departure = s.departure, DelaysArrival = Convert.ToInt32(c.arrival.delay), DelaysDeparture = Convert.ToInt32(c.departure.delay), Time = hourTrain, Priority = "warning" });

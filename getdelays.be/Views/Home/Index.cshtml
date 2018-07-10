@@ -8,6 +8,9 @@
 <h2>Search Connection</h2>
 <p class="text-muted">Searh Connection will help you to find quickly a traject between two stations. You will receive data about the train number, the delays for the departure and the arrival. You already can see the traject of each train by clicking on the number of this one.</p>
 <button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location.href = '/Connection/SearchConnection';">Search a Connection</button>
-<h2>Log In</h2>
-<p class="text-muted">Log in will help you to check delays, or specific details of each station and connection you want follow by creating an account or connect to yours to stock these informations.</p>
-<button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location.href = '/User/ConnectionPage';">Log In</button>
+@if (Session["user"] == null)
+{
+    <h2>Log In</h2>
+    <p class="text-muted">Log in will help you to check delays, or specific details of each station and connection you want follow by creating an account or connect to yours to stock these informations.</p>
+    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location.href = '/User/ConnectionPage';">Log In</button>
+}

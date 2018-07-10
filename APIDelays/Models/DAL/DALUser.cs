@@ -39,6 +39,20 @@ namespace api.getdelays.DAL
         }
         public void DeleteUser(User u)
         {
+            if(u.followedConnections!=null)
+            {
+                foreach (FollowedConnection c in u.followedConnections)
+                {
+                    context.FollowedConnections.Remove(c);
+                }
+            }
+            if(u.followedStations!=null)
+            {
+                foreach (FollowedStation s in u.followedStations)
+                {
+                    context.FollowedStations.Remove(s);
+                }
+            }
             context.Users.Remove(u);
             context.SaveChanges();
         }

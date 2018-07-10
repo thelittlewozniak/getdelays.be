@@ -51,7 +51,7 @@
                     if (c.Priority == "normal")
                     {
                         <tr class="table-success">
-                            <td>@Html.ActionLink("from"+c.Departure+" to"+c.Arrival, "GetConnectionTime", "Connection", routeValues: new { dep=c.Departure,arr=c.Arrival,time=c.Time}, htmlAttributes: null)</td>
+                            <td>@Html.ActionLink("from "+c.Departure+" to "+c.Arrival, "GetConnectionTime", "Connection", routeValues: new { dep=c.Departure,arr=c.Arrival,time=c.Time}, htmlAttributes: null)</td>
                             <td>@c.DelaysDeparture minutes</td>
                         </tr>
                     }

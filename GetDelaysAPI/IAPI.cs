@@ -11,7 +11,7 @@ namespace GetDelaysAPI
         User GetUser(string email);
         User Login(string email, string password);
         User MakeAccount(string email, string name, string surname, string password, string phoneNumber);
-        bool DeleteUser(User user);
+        //bool DeleteUser(User user);
         User UpdateUser(string name, string surname, string phoneNumber, User user);
         User FollowStation(string station, User user);
         User DeleteFollowStation(string station, User user);

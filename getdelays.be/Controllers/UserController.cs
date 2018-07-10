@@ -91,21 +91,23 @@ namespace getdelays.be.Controllers
                 return View("CreateAccount");
             }
         }
-        public ActionResult DeleteUser()
-        {
-            IAPI api = new GetAll();
-            User user = (User)Session["user"];
-            if (user == null)
-            {
-                return View("Login");
-            }
-            else
-            {
-                api.DeleteUser(user);
-                Session["user"] = null;
-                return RedirectToAction("Index", "Home");
-            }
-        }
+        //public ActionResult DeleteUser()
+        //{
+        //    IAPI api = new GetAll();
+        //    User user = (User)Session["user"];
+        //    if (user == null)
+        //    {
+        //        return View("Login");
+        //    }
+        //    else
+        //    {
+        //        if (api.DeleteUser(user))
+        //        {
+        //            Session["user"] = null;
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //    }
+        //}
         public ActionResult MakeChangeInformation()
         {
             User user = (User)Session["user"];

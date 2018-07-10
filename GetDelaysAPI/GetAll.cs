@@ -16,14 +16,14 @@ namespace GetDelaysAPI
             string url = "http://apigetdelays.azurewebsites.net/api/User/GetUser?email="+email;
             var json = new WebClient().DownloadString(url);
             var dataAPI = JsonConvert.DeserializeObject<User>(json);
-            if(dataAPI!=null && dataAPI.followedStations!=null && dataAPI.followedStations.Count>1)
+            if(dataAPI!=null && dataAPI.followedStations!=null && dataAPI.followedStations.Count>= 1)
             {
                 foreach (FollowedStation s in dataAPI.followedStations)
                 {
                     s.stationName = Encoder(s.stationName);
                 }
             }
-            if (dataAPI != null && dataAPI.followedConnections != null && dataAPI.followedConnections.Count > 1)
+            if (dataAPI != null && dataAPI.followedConnections != null && dataAPI.followedConnections.Count >= 1)
             {
                 foreach (FollowedConnection s in dataAPI.followedConnections)
                 {
@@ -38,14 +38,14 @@ namespace GetDelaysAPI
             string url = "http://apigetdelays.azurewebsites.net/api/User/Login?email="+email+"&password="+password;
             var json = new WebClient().DownloadString(url);
             var dataAPI = JsonConvert.DeserializeObject<User>(json);
-            if(dataAPI!=null && dataAPI.followedStations!=null && dataAPI.followedStations.Count>1)
+            if(dataAPI!=null && dataAPI.followedStations!=null && dataAPI.followedStations.Count>= 1)
             {
                 foreach (FollowedStation s in dataAPI.followedStations)
                 {
                     s.stationName = Encoder(s.stationName);
                 }
             }
-            if (dataAPI != null && dataAPI.followedConnections != null && dataAPI.followedConnections.Count > 1)
+            if (dataAPI != null && dataAPI.followedConnections != null && dataAPI.followedConnections.Count >= 1)
             {
                 foreach (FollowedConnection s in dataAPI.followedConnections)
                 {
@@ -62,13 +62,13 @@ namespace GetDelaysAPI
             var dataAPI = JsonConvert.DeserializeObject<User>(json);
             return dataAPI;
         }
-        public bool DeleteUser(User user)
-        {
-            string url = "http://apigetdelays.azurewebsites.net/api/User/DeleteUser?userid="+user.Id;
-            var json = new WebClient().DownloadString(url);
-            var dataAPI = JsonConvert.DeserializeObject<bool>(json);
-            return dataAPI;
-        }
+        //public bool DeleteUser(User user)
+        //{
+        //    string url = "http://apigetdelays.azurewebsites.net/api/User/DeleteUser?userid="+user.Id;
+        //    var json = new WebClient().DownloadString(url);
+        //    var dataAPI = JsonConvert.DeserializeObject<bool>(json);
+        //    return dataAPI;
+        //}
         public User UpdateUser(string name, string surname, string phoneNumber, User user)
         {
             string url = string.Concat("http://apigetdelays.azurewebsites.net/api/User/UpdateUser?name="+name+"&surname="+surname+"&phoneNumber="+phoneNumber+"&userid="+user.Id);
@@ -81,14 +81,14 @@ namespace GetDelaysAPI
             string url = "http://apigetdelays.azurewebsites.net/api/User/FollowStation?station="+station+"&userid="+user.Id;
             var json = new WebClient().DownloadString(url);
             var dataAPI = JsonConvert.DeserializeObject<User>(json);
-            if (dataAPI != null && dataAPI.followedStations != null && dataAPI.followedStations.Count > 1)
+            if (dataAPI != null && dataAPI.followedStations != null && dataAPI.followedStations.Count >= 1)
             {
                 foreach (FollowedStation s in dataAPI.followedStations)
                 {
                     s.stationName = Encoder(s.stationName);
                 }
             }
-            if (dataAPI != null && dataAPI.followedConnections != null && dataAPI.followedConnections.Count > 1)
+            if (dataAPI != null && dataAPI.followedConnections != null && dataAPI.followedConnections.Count >= 1)
             {
                 foreach (FollowedConnection s in dataAPI.followedConnections)
                 {
@@ -103,14 +103,14 @@ namespace GetDelaysAPI
             string url = "http://apigetdelays.azurewebsites.net/api/User/DeleteFollowStation?station="+station+"&userid="+user.Id;
             var json = new WebClient().DownloadString(url);
             var dataAPI = JsonConvert.DeserializeObject<User>(json);
-            if (dataAPI != null && dataAPI.followedStations != null && dataAPI.followedStations.Count > 1)
+            if (dataAPI != null && dataAPI.followedStations != null && dataAPI.followedStations.Count >= 1)
             {
                 foreach (FollowedStation s in dataAPI.followedStations)
                 {
                     s.stationName = Encoder(s.stationName);
                 }
             }
-            if (dataAPI != null && dataAPI.followedConnections != null && dataAPI.followedConnections.Count > 1)
+            if (dataAPI != null && dataAPI.followedConnections != null && dataAPI.followedConnections.Count >= 1)
             {
                 foreach (FollowedConnection s in dataAPI.followedConnections)
                 {

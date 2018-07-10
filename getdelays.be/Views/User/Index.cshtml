@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <th scope="row">Phone Number</th>
-        <td>@u.phoneNumber</td>
+        <td>0 @u.phoneNumber</td>
     </tr>
 </table>
 @if (u.followedStations != null && u.followedStations.Count >= 1)
@@ -68,5 +68,5 @@
     </table>
 }
 <p>@Html.ActionLink("Edit Your Information", "MakeChangeInformation", "User")</p>
-<p>@Html.ActionLink("Delete Your Profile", "DeleteUser", "User")</p>
+@*<p>@Html.ActionLink("Delete Your Profile", "DeleteUser", "User")</p>*@
 

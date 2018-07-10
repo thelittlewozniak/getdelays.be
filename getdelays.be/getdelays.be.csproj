@@ -108,6 +108,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -125,6 +126,7 @@
     <Content Include="Scripts\latinise.js" />
     <Content Include="Scripts\ListConnection.js" />
     <Content Include="Scripts\ListStation.js" />
+    <Content Include="Scripts\Validation.js" />
     <Content Include="Scripts\Visiility.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

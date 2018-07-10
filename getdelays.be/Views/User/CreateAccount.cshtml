@@ -11,8 +11,7 @@
         <p class="mb-0">@error</p><br />
     </div>
 }
-@using (Html.BeginForm("MakeAccount", "User", FormMethod.Post))
-{
+<form action="/User/MakeAccount" method="post" onsubmit="return Verif();">
     <fieldset>
         <legend>Make Your Account</legend>
         <div class="form-group">
@@ -25,21 +24,59 @@
             <input type="password" class="form-control" name="password" id="password" placeholder="Password">
         </div>
         <div class="form-group">
+            <label>Rewrite your Password</label>
+            <input type="password" class="form-control" name="password" id="secondPassword" placeholder="Password">
+            <small id="PasswordError" class="form-text" style="display:none;color:red;">Please enter the same password.</small>
+        </div>
+        <div class="form-group">
             <label>Name:</label>
-            <input type="text" class="form-control" name="name" id="name" placeholder="Jhon">
+            <input onkeydown="Name()" type="text" class="form-control" name="name" id="name" placeholder="Smith">
+            <small id="NameError" class="form-text" style="display:none;color:red;">Please enter a name.</small>
         </div>
         <div class="form-group">
             <label>FirstName:</label>
-            <input type="text" class="form-control" name="surname" id="surname" placeholder="Smith">
+            <input type="text" class="form-control" name="surname" id="surname" placeholder="Jhon">
+            <small id="SurnameError" class="form-text" style="display:none;color:red;">Please enter a surname.</small>
         </div>
         <div class="form-group">
             <label>Phone Number:</label>
             <input type="tel" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="0471234567">
+            <small id="PhoneError" class="form-text" style="display:none;color:red;">Please enter a correct phone number.</small>
         </div>
         <div class="g-recaptcha" data-sitekey="6Le9eGEUAAAAAAaEJNZ-eQfCUkfr6iw0pYsW4gen"></div>
         <button type="submit" id='submit' class="btn btn-primary">Submit</button>
     </fieldset>
-}
+</form>
+<script>
+    function Verif() {
+        var test = true;
+        if (document.getElementById("name").value === "") {
+            document.getElementById("NameError").style.display = "block";
+            test = false;
+        }
+        if (document.getElementById("surname").value === "") {
+            document.getElementById("SurnameError").style.display = "block";
+            test = false;
+        }
+        if (document.getElementById("secondPassword").value != document.getElementById("password").value) {
+            document.getElementById("PasswordError").style.display = "block";
+            test = false;
+        }
+        if (document.getElementById("phoneNumber").value === "") {
+            document.getElementById("PhoneError").style.display = "block";
+            test = false;
+        }
+        if (test === true) {
+            var number = document.getElementById("phoneNumber").value;
+            var re2 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/;
+            if (!re2.test(number)) {
+                document.getElementById("PhoneError").style.display = "block";
+                test = false;
+            }
+        }
+        return test;
+    };
+</script>
 <script>onload();</script>
 
 

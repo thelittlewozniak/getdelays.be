@@ -57,7 +57,7 @@
                                 @if (u != null)
                                 {
                                     seen = true;
-                                    if (u.followedConnections != null && u.followedConnections.Count > 1)
+                                    if (u.followedConnections != null && u.followedConnections.Count >= 1)
                                     {
                                         foreach (FollowedConnection f in u.followedConnections)
                                         {

@@ -1,0 +1,119 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+select,
+textarea {
+    max-width: 280px;
+}
+#InfoStation {
+    visibility: hidden;
+    height:0;
+}
+#map {
+    height: 400px;
+    width: 100%;
+}
+#ArrivalTable {
+    display: inline;
+    width:50%;
+    height:auto;
+}
+#ArrivalTable > tbody > tr:nth-child(2n) {
+    background-color: lightgrey;
+    display: table-row;
+}
+#DepartureTable {
+    display: inline;
+    width: 50%;
+}
+#DepartureTable>tbody>tr:nth-child(2n) {
+    background-color:lightgrey;
+    display:table-row;
+}
+#linkInfo {
+    display:block;
+}
+#Reviews > tbody > tr:nth-child(1), #Reviews > tbody > tr:nth-child(2), #Reviews > tbody > tr:nth-child(5), #Reviews > tbody > tr:nth-child(6), #Reviews > tbody > tr:nth-child(9), #Reviews > tbody > tr:nth-child(10) {
+    background-color: lightgrey;
+}
+#stat {
+    width:100%;
+}
+#statFrom {
+    width: 100%;
+}
+#statTo {
+    width: 100%;
+}
+#search {
+    list-style-type: none;
+    width: 100%;
+    /*border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    /*background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    color: black;*/
+}
+#searchFrom {
+    list-style-type: none;
+    width: 100%;
+    /*border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    /*background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    color: black;*/
+}
+#searchTo {
+    list-style-type: none;
+    width: 100%;
+    /*border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    /*background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    color: black;*/
+}
+.station {
+    list-style-type: none;
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+}
+.stationTo {
+    list-style-type: none;
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+}
+.stationFrom {
+    list-style-type: none;
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+}
+.tableco {
+    width: 100%;
+}
+.tableco>tbody:nth-child(2n) {
+    background-color:lightgrey;
+}

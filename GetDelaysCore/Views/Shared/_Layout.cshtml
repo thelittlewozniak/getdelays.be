@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Getdelays</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/Site.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/modernizr-2.6.2.js"></script>
+    <script src="~/js/Visiility.js"></script>
+    <script src="~/js/ListStation.js"></script>
+    <script src="~/js/ListConnection.js"></script>
+    <script src="~/js/latinise.js"></script>
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#df691a">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        @Html.ActionLink("GetDelays", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="/Station/SearchStation/" class="nav-link">stations</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Connection/SearchConnection/" class="nav-link">Connection</a>
+                </li>
+                @if (Context.Session.GetString("email") == null)
+                {
+                    <li class="nav-item">
+                        <a href="/User/ConnectionPage/" class="nav-link">Log in</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a href="/User/Notification/" class="nav-link"> @ViewBag.Number Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/User/Index/" class="nav-link">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/User/Disconnect/" class="nav-link">Log off</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <br /><button onclick="window.location.href = 'javascript:history.go(-1)';" type="button" class="btn btn-secondary">Go Back to Previous Page</button>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year Nathan Pire- GetDelays</p>
+        </footer>
+    </div>
+    <script nws-csp-add-nonce="true">'serviceWorker' in navigator && navigator.serviceWorker.register('/serviceworker.js')</script>
+    <script src="~/js/jquery-1.10.2.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+
+</body>
+</html>

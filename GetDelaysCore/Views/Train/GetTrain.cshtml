@@ -1,0 +1,49 @@
+﻿@using GetDelaysAPI;
+@{
+    Train t = ViewBag.train;
+    ViewBag.Title = t.vehicle;
+    DateTime now = DateTime.UtcNow;
+    now = now.AddHours(2);
+}
+
+<h2>@t.vehicle</h2>
+<p>stops:</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Stop Station:</th>
+            <th scope="col">ETA:</th>
+            <th scope="col">Delay:</th>
+            <th scope="col">Platform:</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Stop a in t.stops)
+        {
+            DateTime trainHour = new DateTime();
+            trainHour = trainHour.AddHours(2);
+            trainHour = trainHour.AddSeconds(Convert.ToInt32(a.time));
+            int year = DateTime.Now.Year - trainHour.Year;
+            trainHour = trainHour.AddYears(year);
+            trainHour = trainHour.AddSeconds(a.delay);
+            if (trainHour < now)
+            {
+                <tr class="table-danger">
+                    <td>@a.station</td>
+                    <td>@trainHour</td>
+                    <td>@a.delay</td>
+                    <td>@a.platform</td>
+                </tr>
+            }
+            else
+            {
+                <tr class="table-success">
+                    <td>@a.station</td>
+                    <td>@trainHour</td>
+                    <td>@a.delay</td>
+                    <td>@a.platform</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

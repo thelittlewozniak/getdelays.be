@@ -1,0 +1,72 @@
+﻿@using GetDelaysAPI;
+@{
+    ViewBag.Title = "Profile";
+    User u = ViewBag.user;
+}
+
+<h1>Profile</h1>
+<h3>Your informations</h3>
+<table class="table table-hover">
+    <tr>
+        <th scope="row">Name</th>
+        <td>@u.name</td>
+    </tr>
+    <tr>
+        <th scope="row">Firstname</th>
+        <td>@u.surname</td>
+    </tr>
+    <tr>
+        <th scope="row">Email</th>
+        <td>@u.email</td>
+    </tr>
+    <tr>
+        <th scope="row">Phone Number</th>
+        <td>0 @u.phoneNumber</td>
+    </tr>
+</table>
+@if (u.followedStations != null && u.followedStations.Count >= 1)
+{
+    <h3>Followed Stations</h3>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Station Name:</th>
+                <th scope="col">Edits:</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (FollowedStation fs in u.followedStations)
+            {
+                <tr class="table-active">
+                    <td> @Html.ActionLink(fs.stationName, "GetStationsByName", "Station", routeValues: new { station = fs.stationName }, htmlAttributes: null)</td>
+                    <td>@Html.ActionLink("Delete", "DeleteFollowStationProfile", "Station", routeValues: new { station = fs.stationName }, htmlAttributes: null)</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+@if (u.followedConnections != null && u.followedConnections.Count >= 1)
+{
+    <h3>Followed Connections</h3>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td scope="col">Connection</td>
+                <td scope="col">Time</td>
+                <td scope="col">Edits</td>
+            </tr>
+        </thead>
+        @foreach (FollowedConnection fc in u.followedConnections)
+        {
+            <tr class="table-active">
+                <td> @Html.ActionLink("from " + fc.departure + " to " + fc.arrival, "GetConnectionTime", "Connection", routeValues: new { dep = fc.departure, arr = fc.arrival, time = fc.DateTime }, htmlAttributes: null)</td>
+                <td> @fc.DateTime</td>
+                <td> @Html.ActionLink("Delete", "DeleteFollowConnectionProfile", "Connection", routeValues: new { ConnectionId = fc.Id }, htmlAttributes: null)</td>
+            </tr>
+        }
+    </table>
+}
+<p>@Html.ActionLink("Edit Your Information", "MakeChangeInformation", "User")</p>
+@*<p>@Html.ActionLink("Delete Your Profile", "DeleteUser", "User")</p>*@
+

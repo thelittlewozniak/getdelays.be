@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIDelays", "APIDelays\APID
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetDelaysAPI", "GetDelaysAPI\GetDelaysAPI.csproj", "{0E992C2B-9B38-4363-A3C5-1F471D1C4609}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetDelaysCore", "GetDelaysCore\GetDelaysCore.csproj", "{317D42AF-76D3-433E-90B4-978567A2FA3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{0E992C2B-9B38-4363-A3C5-1F471D1C4609}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E992C2B-9B38-4363-A3C5-1F471D1C4609}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E992C2B-9B38-4363-A3C5-1F471D1C4609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{317D42AF-76D3-433E-90B4-978567A2FA3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{317D42AF-76D3-433E-90B4-978567A2FA3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{317D42AF-76D3-433E-90B4-978567A2FA3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{317D42AF-76D3-433E-90B4-978567A2FA3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

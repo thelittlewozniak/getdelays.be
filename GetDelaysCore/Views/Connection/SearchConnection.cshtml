@@ -1,0 +1,39 @@
+﻿@using GetDelaysAPI;
+
+@{
+    ViewBag.Title = "SearchConection";
+    List<StationData> stat = ViewBag.s;
+}
+
+@using (Html.BeginForm("GetConnection", "Connection",FormMethod.Get))
+{
+<fieldset>
+    <legend>Search a connection</legend>
+    <ul>
+        <li id="searchFrom">
+            <div class="form-group">
+                <label>From</label>
+                <input type="text" id="statFrom" name="dep" onkeyup="ListStationFrom()" placeholder="Enter a station" />
+            </div>
+        </li>
+        @foreach (StationData s in stat)
+        {
+            <li class="stationFrom list-group-item list-group-item-action" style="display:none" onclick="SelectStation('@s.name','from')"><a href="#">@s.name</a></li>
+        }
+    </ul>
+    <ul>
+        <li id="searchTo">
+            <div class="form-group">
+                <label>To</label>
+                <input type="text" id="statTo" name="arr" onkeyup="ListStationTo()" placeholder="Enter a station" />
+            </div>
+        </li>
+        @foreach (StationData s in stat)
+        {
+            <li class="stationTo list-group-item list-group-item-action" style="display:none" onclick="SelectStation('@s.name','to')"><a href="#">@s.name</a></li>
+        }
+    </ul>
+    <button type="submit" id='submit' class="btn btn-primary">Submit</button>
+</fieldset>
+}
+

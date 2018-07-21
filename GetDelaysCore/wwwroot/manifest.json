@@ -1,0 +1,18 @@
+﻿{
+  "name": "GetDelays",
+  "short_name": "GetDelays",
+  "description": "The most awesome application in the world",
+  "icons": [
+    {
+      "src": "/images/logo2.png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/logo1.png",
+      "sizes": "512x512"
+    }
+  ],
+  "background_color": "#2B3E50",
+  "display": "standalone",
+  "start_url": "/"
+}

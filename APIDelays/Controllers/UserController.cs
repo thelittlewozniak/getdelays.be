@@ -234,7 +234,7 @@ namespace APIGetDelays.Controllers
             }
             else
             {
-                return null;
+                return listS;
             }
         }
         [Route("api/User/GetNotificationConnection")]

@@ -1,0 +1,63 @@
+﻿@using GetDelaysAPI;
+@{
+    ViewBag.Title = "Change your informations";
+    User u = ViewBag.user;
+}
+
+<form action="/User/MakeChange" method="post" onsubmit="return Verif();">
+    <fieldset>
+        <legend>Change your information</legend>
+        <div class="form-group">
+            <label>Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" id="disabledInput" disabled="" placeholder="@u.email">
+        </div>
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" class="form-control" name="name" id="name" value="@u.name">
+            <small id="NameError" class="form-text" style="display:none;color:red;">Please enter a name.</small>
+        </div>
+        <div class="form-group">
+            <label>FirstName:</label>
+            <input type="text" class="form-control" name="surname" id="surname" value="@u.surname">
+            <small id="SurnameError" class="form-text" style="display:none;color:red;">Please enter a surname.</small>
+        </div>
+        <div class="form-group">
+            <label>Phone Number:</label>
+            <input type="tel" class="form-control" name="phoneNumber" id="phoneNumber" value="@u.phoneNumber">
+            <small id="PhoneError" class="form-text" style="display:none;color:red;">Please enter a correct phone number.</small>
+        </div>
+        <button type="submit" id='submit' class="btn btn-primary">Submit</button>
+    </fieldset>
+</form>
+<script>
+    function Verif() {
+        var test = true;
+        if (document.getElementById("name").value === "") {
+            document.getElementById("NameError").style.display = "block";
+            test = false;
+        }
+        if (document.getElementById("surname").value === "") {
+            document.getElementById("SurnameError").style.display = "block";
+            test = false;
+        }
+        if (document.getElementById("secondPassword").value != document.getElementById("password").value) {
+            document.getElementById("PasswordError").style.display = "block";
+            test = false;
+        }
+        if (document.getElementById("phoneNumber").value === "") {
+            document.getElementById("PhoneError").style.display = "block";
+            test = false;
+        }
+        if (test === true) {
+            var number = document.getElementById("phoneNumber").value;
+            var re2 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/;
+            if (!re2.test(number)) {
+                document.getElementById("PhoneError").style.display = "block";
+                test = false;
+            }
+        }
+        return test;
+    };
+</script>
+
+

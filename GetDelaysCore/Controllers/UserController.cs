@@ -62,7 +62,7 @@ namespace GetDelaysCore.Controllers
         }
         public IActionResult Disconnect()
         {
-            HttpContext.Session.SetString("email",null);
+            HttpContext.Session.SetString("email","");
             return RedirectToAction("Index", "Home");
         }
         public IActionResult CreateAccount()
@@ -70,9 +70,9 @@ namespace GetDelaysCore.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult MakeAccount(string email, string name, string surname, string password, string phoneNumber,string gRecaptchaResponse)
+        public IActionResult MakeAccount(string email, string name, string surname, string password, string phoneNumber)
         {
-            string response = gRecaptchaResponse;
+            string response = Request.Form["g-recaptcha-response"];
             var json = new WebClient().DownloadString("https://www.google.com/recaptcha/api/siteverify?secret=6Le9eGEUAAAAAJt22PAEWs18klrzAqzEeRnYTlJp&response=" + response);
             var success = JsonConvert.DeserializeObject<GoogleResponseCaptcha>(json);
             if (success.success)
@@ -143,6 +143,7 @@ namespace GetDelaysCore.Controllers
             else
             {
                 User user = api.GetUser(email);
+                api.UpdateUser(name, surname, phoneNumber, user);
                 ViewBag.user = user;
                 return View("Index");
             }

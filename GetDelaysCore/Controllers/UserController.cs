@@ -62,7 +62,7 @@ namespace GetDelaysCore.Controllers
         }
         public IActionResult Disconnect()
         {
-            HttpContext.Session.SetString("email","");
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
         public IActionResult CreateAccount()
@@ -144,7 +144,7 @@ namespace GetDelaysCore.Controllers
             {
                 User user = api.GetUser(email);
                 api.UpdateUser(name, surname, phoneNumber, user);
-                ViewBag.user = user;
+                ViewBag.user = api.GetUser(email);
                 return View("Index");
             }
         }
